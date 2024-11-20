@@ -1,0 +1,21 @@
+host	host_order	n_mags	metagenomic_data_gbp	n_samples
+Timon lepidus	squamata	266	66.37	11
+Sciurus vulgaris	rodentia	355	73.69	17
+Rattus rattus	rodentia	350	67.9	16
+Rattus lutreolus	rodentia	365	53.04	13
+Psammodromus manuelae	squamata	276	81.38	14
+Podarcis pityusensis	squamata	446	82.21	17
+Podarcis muralis	squamata	316	107.49	20
+Podarcis milensis	squamata	274	65.41	14
+Podarcis liolepis	squamata	189	40.27	10
+Podarcis gaigeae	squamata	318	68.91	16
+Podarcis filfolensis	squamata	223	48.82	11
+Peromyscus maniculatus	rodentia	359	78.8	16
+Myodes rufocanus	rodentia	138	24.93	9
+Myodes glareolus	rodentia	175	51.96	10
+Muscardinus avellanarius	rodentia	22	20.06	8
+Lacerta viridis	squamata	198	43.12	11
+Iberolacerta bonnali	squamata	143	52.38	10
+Iberolacerta aranica	squamata	114	37.83	11
+Apodemus sylvaticus	rodentia	318	53.06	14
+Apodemus flavicollis	rodentia	300	46.71	9
