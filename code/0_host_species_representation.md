@@ -10,6 +10,14 @@ Raphael Eisenhofer
 
 We have 20 different host taxa, 11 are squamates, 9 are rodents.
 
+Here’s a phylogeny of the hosts (estimated using timetree.og)
+
+![](images/timetree.svg)
+
+**Note**: *Rattus rattus* is not displayed here (timetree doesn’t seem
+to have sufficient info, or the *Rattus* genus is a mess?). Regardless,
+we can expect that it’s closest ancestor is *Rattus lutreolus.*
+
 How well represented are the host orders by metagenomic data and number
 of MAGs?
 
@@ -29,10 +37,17 @@ coassembly_df %>%
 
 ![](0_host_species_representation_files/figure-commonmark/unnamed-chunk-2-1.png)
 
+**My interpretation:** Looks like we have a decent number of MAGs to
+work with per host species, and there is not too much variation between
+either host class or species.
+
 ## DAMR estimates by host order and species
 
 Determining how representative the MAGs are of each host species using
-the Domain-Adjusted Mapping Rate (DAMR).
+the Domain-Adjusted Mapping Rate (DAMR):
+
+> **DAMR** = MAG catalogue mapping rate (%) / SingleM microbial fraction
+> (%)
 
 ``` r
 #Select the right view id
@@ -91,4 +106,11 @@ airtable_data_dmb %>%
 ![](0_host_species_representation_files/figure-commonmark/unnamed-chunk-3-1.png)
 
 Note I’ve filtered out both EHI01045 (no SMF value) and EHI01812 (only
-0.16% mapping).
+0.16% mapping), and removed *Muscardinus avellanarius* as we don’t have
+enough data for this species.
+
+**My interpretation:** There appears to be some slight overestimation of
+DAMR for squamates (database-related??). Regardless, most host species
+have DAMRs \>80% (i.e. MAGs capture \>80% of the estimated prokaryote
+reads). I think we can say that we have sufficient data to proceed with
+eco/evo questions.
