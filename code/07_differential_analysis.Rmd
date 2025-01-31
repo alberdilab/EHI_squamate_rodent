@@ -2,35 +2,19 @@
 # Differential abundance analysis
 
 ```{r load_data_mag_filtdamr_diffe, comment="", echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
-load("data/data.Rdata")
+load("../data/data.Rdata")
 ```
 
-```{r load_data_fil_functional, comment="", echo=FALSE, message=FALSE, warning=FALSE}
-load("data/data_host_filtered.Rdata")
-```
-
-```{r load_data_capwild, comment="", echo=FALSE, message=FALSE, warning=FALSE}
-load("data/ancombc_filtered_wild_captive.Rdata")
-load("data/ancombc_filtered_captive_diet.Rdata")
-```
-
-## Captive vs Wild
+## Squamata vs Rodentia
 ### Structural zeros
 ```{r struct_zero_capwild, comment="", echo=FALSE, message=FALSE, warning=FALSE}
-pre_samples <- sample_metadata %>% 
-  filter(diet == "Pre_grass") %>%
-  dplyr::select(sample) %>%
-  pull()
-
-wild_samples <- sample_metadata %>% 
-  filter(diet=="Wild") %>%
+samples <- sample_metadata %>% 
   dplyr::select(sample) %>% pull()
 
 structural_zeros <- genome_counts %>% 
    rowwise() %>% #compute for each row (genome)
-   mutate(all_zeros_pre = all(c_across(all_of(pre_samples)) == 0)) %>% # set true if all samples in pre have zeros
-   mutate(all_zeros_wild = all(c_across(all_of(wild_samples)) == 0)) %>% # set true if all samples in wild have zeros
-   mutate(average_pre = mean(c_across(all_of(pre_samples)), na.rm = TRUE)) %>% # get average genome counts across pre
+   mutate(all_zeros_pre = all(c_across(all_of(samples)) == 0)) %>% # set true if all samples in pre have zeros
+   mutate(average_pre = mean(c_across(all_of(samples)), na.rm = TRUE)) %>% # get average genome counts across pre
    mutate(average_wild = mean(c_across(all_of(wild_samples)), na.rm = TRUE)) %>% # get average genome counts across wild
    filter(all_zeros_pre == TRUE || all_zeros_wild==TRUE)  %>% # filter only genomes with structural zeros
    mutate(present = case_when(

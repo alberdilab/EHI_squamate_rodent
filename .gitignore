@@ -3,3 +3,5 @@ EHI_squamate_rodent.Rproj
 .Rhistory
 .RData
 .Ruserdata
+data/all_annotations.tsv.gz
+data/annotations.tsv.gz
