@@ -1,6 +1,6 @@
 ## Code for pulling EHI data outputs into a single .Rdata file 
 
-```{r load_read_counts, warning=FALSE, comments="", message=FALSE}
+```{r packs, warning=FALSE, comments="", message=FALSE}
 library(tidyverse)
 library(ape)
 ```
@@ -15,7 +15,9 @@ Load the original data files outputted by the bioinformatic pipeline.
 
 ```{r load_sample_metadata, warning=FALSE, comments="", message=FALSE}
 sample_metadata <- read_tsv("../data/DMB0173_metadata.tsv.gz") %>%
-  dplyr::rename(sample = EHI_plaintext) 
+  dplyr::rename(sample = EHI_plaintext,
+                host_order = order,
+                host_species = species)
 ```
 
 ### Read counts
@@ -83,7 +85,7 @@ genome_counts_filt <- read_counts_filt %>%
 
 ### Distill annotations into GIFTs 
 
-```{r distill_annotations, warning=FALSE, comments="", message=FALSE, eval=FALSE}
+```{r distill_annotations, warning=FALSE, comments="", message=FALSE}
 load("../data/genome_gifts_raw.Rdata")
 genome_counts_filt <- genome_counts_filt[genome_counts_filt$genome %in% rownames(genome_gifts_raw),] 
 rownames(genome_counts_filt) <- NULL

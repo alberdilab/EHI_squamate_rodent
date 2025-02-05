@@ -239,24 +239,6 @@ grid.arrange(grobs = list(genome_completeness,genome_biplot,genome_contamination
 
 ## Functional overview
 
-```{r annotation_stats, message=FALSE, warning=FALSE, fig.height=10, fig.width=10, fig.fullwidth=TRUE}
-genome_annotations <- read_tsv("../data/all_annotations.tsv.gz") %>%
-    rename(gene=1, genome=2, contig=3)
-
-# Predicted genes
-genome_annotations %>%
-  nrow()
-
-# Some annotation
-genome_annotations %>%
-  filter(if_any(c(kegg_id, pfam_hits, cazy_hits), ~ !is.na(.))) %>% 
-  nrow()
-
-# KEGG annotation
-genome_annotations %>%
-  filter(!is.na(kegg_id)) %>% 
-  nrow()
-```
 
 ```{r function_heatmap, message=FALSE, warning=FALSE, fig.height=10, fig.width=10, fig.fullwidth=TRUE}
 
@@ -277,7 +259,7 @@ function_tree <- gheatmap(function_tree, phylum_heatmap, offset=0, width=0.1, co
 function_tree <- function_tree + new_scale_fill()
 
 #Add functions heatmap
-function_tree <- gheatmap(function_tree, function_table, offset=0.5, width=3.5, colnames=FALSE) +
+function_tree <- gheatmap(function_tree, function_table, offset=0.5, width=3.5, colnames=FALSE, color = NA) +
             vexpand(.08) +
             coord_cartesian(clip = "off") +
             scale_fill_gradient(low = "#f4f4f4", high = "steelblue", na.value="white") +

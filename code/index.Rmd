@@ -49,6 +49,7 @@ The following R packages are required for the data analysis.
 
 ```{r load_libraries, warning=FALSE, comments="", message=FALSE}
 # Base
+library(rmarkdown)
 library(R.utils)
 library(knitr)
 library(tidyverse)
