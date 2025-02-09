@@ -2,11 +2,12 @@
 
 ```{r load_data_alpha, comment="", message=FALSE, warning=FALSE}
 load("../data/data.Rdata")
+load("../data/alpha.Rdata")
 ```
 
 ## Summary table
 
-```{r alpha_div, comment="", message=FALSE, warning=FALSE}
+```{r alpha_div, comment="", message=FALSE, warning=FALSE, eval=FALSE}
 # Calculate Hill numbers
 richness <- genome_counts_filt %>%
   column_to_rownames(var = "genome") %>%
@@ -67,6 +68,10 @@ alpha_div <- richness %>%
   full_join(phylogenetic, by = join_by(sample == sample))%>%
   full_join(functional, by = join_by(sample == sample))
 ```
+```{r wrap_alpha, warning=FALSE, comments="", message=FALSE, eval=FALSE}
+save(alpha_div, file = "../data/alpha.Rdata")
+```
+
 
 ```{r alpha_div_diets_summary_all, comment="",echo=FALSE, message=FALSE, warning=FALSE}
 alpha_div %>%
@@ -112,7 +117,7 @@ alpha_div %>%
   pivot_longer(-sample, names_to = "metric", values_to = "value") %>%
   left_join(., sample_metadata, by = join_by(sample == sample)) %>%
   filter(metric=="phylogenetic") %>% 
-  summarize(var.test_p_value_phylo = var.test(value ~ diet)$p.value) 
+  summarize(var.test_p_value_phylo = var.test(value ~ host_order)$p.value) 
 alpha_div %>%
   pivot_longer(-sample, names_to = "metric", values_to = "value") %>%
   left_join(., sample_metadata, by = join_by(sample == sample)) %>%
@@ -123,7 +128,7 @@ alpha_div %>%
   pivot_longer(-sample, names_to = "metric", values_to = "value") %>%
   left_join(., sample_metadata, by = join_by(sample == sample)) %>%
   filter(metric=="functional") %>% 
-  summarize(var.test_p_functional = var.test(value ~ diet)$p.value) 
+  summarize(var.test_p_functional = var.test(value ~ host_order)$p.value) 
 ```
 
 ### Plots
@@ -220,3 +225,104 @@ grid.arrange(arrangeGrob(plot2,plot3))
 ```
 
 
+```{r richness_species, comment="", echo=FALSE, message=FALSE, warning=FALSE, fig.height=8, fig.width=8, fig.fullwidth=TRUE}
+
+ggplotly(
+  
+alpha_div %>%
+  pivot_longer(-sample, names_to = "metric", values_to = "value") %>%
+  left_join(., sample_metadata, by = join_by(sample == sample)) %>%
+  filter(metric == "richness") %>%
+  ggplot(aes(x = host_species, y = value, colour = host_species,
+             label = sample, label2 = singlem_fraction, label3 = host_reads)) +
+  geom_jitter(size = 2, alpha = 0.5, height = 0, width = 0.1) +
+  stat_summary(fun = "mean", geom = "crossbar", colour = "black", width = 0.4) +
+  facet_wrap(~host_order, scales = "free") +
+  scale_colour_manual(values = species_colours) +
+  scale_y_continuous(limits = c(0, 250)) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(face = "italic", angle = 90, vjust = 0.5, hjust = 1)
+  ) +
+  labs(y = "Richness Hill diversity")
+
+) 
+
+```
+
+```{r phylo_species, comment="", echo=FALSE, message=FALSE, warning=FALSE, fig.height=8, fig.width=8, fig.fullwidth=TRUE}
+
+ggplotly(
+
+alpha_div %>%
+  pivot_longer(-sample, names_to = "metric", values_to = "value") %>%
+  left_join(., sample_metadata, by = join_by(sample == sample)) %>%
+  filter(metric == "phylogenetic") %>%
+  ggplot(aes(x = host_species, y = value, colour = host_species,
+             label = sample, label2 = singlem_fraction, label3 = host_reads)) +
+  geom_jitter(size = 2, alpha = 0.5, height = 0, width = 0.1) +
+  stat_summary(fun = "mean", geom = "crossbar", colour = "black", width = 0.4) +
+  facet_wrap(~host_order, scales = "free") +
+  scale_colour_manual(values = species_colours) +
+  scale_y_continuous(limits = c(0, 10)) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(face = "italic", angle = 90, vjust = 0.5, hjust = 1)
+  ) +
+  labs(y = "Phylogenetic Hill diversity")
+
+) 
+```
+
+```{r neutral_species, comment="", echo=FALSE, message=FALSE, warning=FALSE, fig.height=8, fig.width=8, fig.fullwidth=TRUE}
+
+ggplotly(
+
+alpha_div %>%
+  pivot_longer(-sample, names_to = "metric", values_to = "value") %>%
+  left_join(., sample_metadata, by = join_by(sample == sample)) %>%
+  filter(metric == "neutral") %>%
+  ggplot(aes(x = host_species, y = value, colour = host_species,
+             label = sample, label2 = singlem_fraction, label3 = host_reads)) +
+  geom_jitter(size = 2, alpha = 0.5, height = 0, width = 0.1) +
+  stat_summary(fun = "mean", geom = "crossbar", colour = "black", width = 0.4) +
+  facet_wrap(~host_order, scales = "free") +
+  scale_colour_manual(values = species_colours) +
+  scale_y_continuous(limits = c(0, 120)) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(face = "italic", angle = 90, vjust = 0.5, hjust = 1)
+  ) +
+  labs(y = "Neutral Hill diversity")
+
+) 
+```
+
+
+```{r func_species, comment="", echo=FALSE, message=FALSE, warning=FALSE, fig.height=8, fig.width=8, fig.fullwidth=TRUE}
+
+ggplotly(
+
+alpha_div %>%
+  pivot_longer(-sample, names_to = "metric", values_to = "value") %>%
+  left_join(., sample_metadata, by = join_by(sample == sample)) %>%
+  filter(metric == "functional") %>%
+  ggplot(aes(x = host_species, y = value, colour = host_species,
+             label = sample, label2 = singlem_fraction, label3 = host_reads)) +
+  geom_jitter(size = 2, alpha = 0.5, height = 0, width = 0.1) +
+  stat_summary(fun = "mean", geom = "crossbar", colour = "black", width = 0.4) +
+  facet_wrap(~host_order, scales = "free") +
+  scale_colour_manual(values = species_colours) +
+  scale_y_continuous(limits = c(0, 2)) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(face = "italic", angle = 90, vjust = 0.5, hjust = 1)
+  ) +
+  labs(y = "Functional Hill diversity")
+
+)
+```

@@ -1,5 +1,5 @@
 ---
-title: "AlberdiLab | "
+title: "AlberdiLab | EHI Squamate Rodent metagenomics"
 subtitle: "EHI Squamate Rodent"
 author:
   - Raphael Eisenhofer^[University of Copenhagen, raphael.eisenhofer@sund.ku.dk]
@@ -16,6 +16,9 @@ link-citations: yes
 github-repo: alberdilab/EHI_squamate_rodent
 ---
 
+# Introduction
+
+
 ```{r knitr_opts, echo=FALSE}
 knitr::opts_chunk$set(
     class.source = "script-source",
@@ -23,7 +26,6 @@ knitr::opts_chunk$set(
     comment = NA)
 ```
 
-# Introduction
 
 This webbook contains all the code used for data analysis in study on comparing squamate and rodent gut metagenomes from the Earth Hologenome Initiative.
 
@@ -65,6 +67,7 @@ library(phyloseq)
 library(phytools)
 
 # For plotting
+library(plotly)
 library(ggplot2)
 library(ggrepel)
 library(ggpubr)

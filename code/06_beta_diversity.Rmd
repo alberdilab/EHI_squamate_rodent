@@ -1,10 +1,11 @@
 # Beta diversity
 
-```{r load_data_beta, comment="", message=FALSE, warning=FALSE, eval=FALSE}
+```{r load_data_beta, comment="", message=FALSE, warning=FALSE, eval=TRUE}
 load("../data/data.Rdata")
 load("../data/beta.Rdata")
 ```
 
+#### Calculate beta Hill div
 
 ```{r beta_div, comment="", message=FALSE, warning=FALSE, eval=FALSE}
 beta_q0n <- genome_counts_filt %>%
@@ -56,7 +57,7 @@ dist <- genome_gifts1 %>%
 #   hillpair(., q = 1, dist = dist)
 
 ```
-
+#### Save outputs
 ```{r save_beta, comment="", message=FALSE,echo=FALSE,warning=FALSE, eval=FALSE}
 save(beta_q0n, 
      beta_q1n, 
@@ -76,7 +77,7 @@ save(beta_q0n,
 set.seed(1234)
 ```
 
-**Richness**
+#### Richness
 ```{r permanova_q0, comment="", message=FALSE, warning=FALSE}
 sample_metadata_row <- column_to_rownames(sample_metadata, "sample") 
 sample_metadata_row <- sample_metadata_row[labels(beta_q0n$S), ]
@@ -92,7 +93,7 @@ adonis2(beta_q0n$S ~ host_order,
         tt()
 ```
 
-**Neutral**
+#### Neutral
 ```{r permanova_wildcap_q1, comment="", message=FALSE, warning=FALSE}
 betadisper(beta_q1n$S, sample_metadata_row$host_order) %>% permutest(., pairwise = TRUE) 
 
@@ -103,7 +104,7 @@ adonis2(beta_q1n$S ~ host_order,
         tt()
 ```
 
-**Phylogenetic**
+#### Phylogenetic
 ```{r permanova_wildcap_qP, comment="", message=FALSE, warning=FALSE}
 # betadisper(beta_q1p$S, sample_metadata_row$host_order) %>% permutest(., pairwise = TRUE) 
 # adonis2(beta_q1p$S ~ host_order, 
@@ -113,7 +114,7 @@ adonis2(beta_q1n$S ~ host_order,
 #         tt()
 ```
 
-**Functional**
+#### Functional
 ```{r permanova_wildcap_qF, comment="", message=FALSE, warning=FALSE}
 # betadisper(beta_q1f$S, sample_metadata_row$host_order) %>% permutest(., pairwise = TRUE) 
 # adonis2(beta_q1f$S ~ host_order,
@@ -128,6 +129,9 @@ adonis2(beta_q1n$S ~ host_order,
 #### Richness
 
 ```{r beta_div_nmds_neutral_plot_median, comment="", message=FALSE, warning=FALSE, fig.height=7, fig.width=10, fig.fullwidth=TRUE, eval=FALSE}
+
+ggplotly(
+
 beta_q0n$S %>%
   vegan::metaMDS(., trymax = 500, k = 2, trace=0) %>%
   vegan::scores() %>%
@@ -137,7 +141,8 @@ beta_q0n$S %>%
   mutate(x_cen = mean(NMDS1, na.rm = TRUE)) %>%
   mutate(y_cen = mean(NMDS2, na.rm = TRUE)) %>%
   ungroup() %>%
-  ggplot(aes(x = NMDS1, y = NMDS2, color = host_order)) +
+  ggplot(aes(x = NMDS1, y = NMDS2, color = host_order,
+             label = sample, label1 = singlem_fraction)) +
     geom_point(size = 4) +
     #   stat_ellipse(aes(color = beta_q1n_nmds$Groups))+
     geom_segment(aes(x = x_cen, y = y_cen, xend = NMDS1, yend = NMDS2), alpha = 0.9, show.legend = FALSE) +
@@ -152,11 +157,16 @@ beta_q0n$S %>%
       legend.text = element_text(size = 12),
       legend.title = element_text(size = 14),
       legend.position = "right", legend.box = "vertical"
-    ) +labs(color='Host order')
+    ) 
+
+) 
 ```
 #### Richness (host species)
 
 ```{r beta_div_nmds_richness_plot_median_species, comment="", message=FALSE, warning=FALSE, fig.height=7, fig.width=10, fig.fullwidth=TRUE, eval=FALSE}
+
+ggplotly(
+
 beta_q0n$S %>%
   vegan::metaMDS(., trymax = 500, k = 2, trace=0) %>%
   vegan::scores() %>%
@@ -166,7 +176,8 @@ beta_q0n$S %>%
   mutate(x_cen = mean(NMDS1, na.rm = TRUE)) %>%
   mutate(y_cen = mean(NMDS2, na.rm = TRUE)) %>%
   ungroup() %>%
-  ggplot(aes(x = NMDS1, y = NMDS2, color = host_species, shape = host_order)) +
+  ggplot(aes(x = NMDS1, y = NMDS2, color = host_species, shape = host_order,
+             label = sample, label1 = singlem_fraction)) +
     geom_point(size = 4) +
     #   stat_ellipse(aes(color = beta_q1n_nmds$Groups))+
     geom_segment(aes(x = x_cen, y = y_cen, xend = NMDS1, yend = NMDS2), alpha = 0.9, show.legend = FALSE) +
@@ -181,12 +192,17 @@ beta_q0n$S %>%
       legend.text = element_text(size = 12),
       legend.title = element_text(size = 14),
       legend.position = "right", legend.box = "vertical"
-    ) +labs(color='host_species')
+    )
+
+) 
 ```
 
 #### Neutral
 
 ```{r beta_div_neutral, comment="", echo=FALSE, message=FALSE, warning=FALSE}
+
+ggplotly(
+
 beta_q1n$S %>%
   vegan::metaMDS(., trymax = 500, k = 2, trace=0) %>%
   vegan::scores() %>%
@@ -196,7 +212,8 @@ beta_q1n$S %>%
   mutate(x_cen = mean(NMDS1, na.rm = TRUE)) %>%
   mutate(y_cen = mean(NMDS2, na.rm = TRUE)) %>%
   ungroup() %>%
-  ggplot(aes(x = NMDS1, y = NMDS2, color = host_order)) +
+  ggplot(aes(x = NMDS1, y = NMDS2, color = host_order,
+             label = sample, label1 = singlem_fraction)) +
     geom_point(size = 4) +
     #   stat_ellipse(aes(color = beta_q1n_nmds$Groups))+
     geom_segment(aes(x = x_cen, y = y_cen, xend = NMDS1, yend = NMDS2), alpha = 0.9, show.legend = FALSE) +
@@ -211,12 +228,17 @@ beta_q1n$S %>%
       legend.text = element_text(size = 12),
       legend.title = element_text(size = 14),
       legend.position = "right", legend.box = "vertical"
-    ) +labs(color='Host order')
+    ) 
 # +geom_text_repel(aes(label = individual), size=3)
+
+) 
 ```
 #### Neutral (host species)
 
 ```{r beta_div_nmds_neutral_plot_median_species, comment="", message=FALSE, warning=FALSE, fig.height=7, fig.width=10, fig.fullwidth=TRUE, eval=FALSE}
+
+ggplotly(
+
 beta_q1n$S %>%
   vegan::metaMDS(., trymax = 500, k = 2, trace=0) %>%
   vegan::scores() %>%
@@ -226,7 +248,8 @@ beta_q1n$S %>%
   mutate(x_cen = mean(NMDS1, na.rm = TRUE)) %>%
   mutate(y_cen = mean(NMDS2, na.rm = TRUE)) %>%
   ungroup() %>%
-  ggplot(aes(x = NMDS1, y = NMDS2, color = host_species, shape = host_order)) +
+  ggplot(aes(x = NMDS1, y = NMDS2, color = host_species, shape = host_order,
+             label = sample, label1 = singlem_fraction)) +
     geom_point(size = 4) +
     #   stat_ellipse(aes(color = beta_q1n_nmds$Groups))+
     geom_segment(aes(x = x_cen, y = y_cen, xend = NMDS1, yend = NMDS2), alpha = 0.9, show.legend = FALSE) +
@@ -241,69 +264,11 @@ beta_q1n$S %>%
       legend.text = element_text(size = 12),
       legend.title = element_text(size = 14),
       legend.position = "right", legend.box = "vertical"
-    ) +labs(color='host_species')
+    )
+
+)
+
 ```
-
-#### Phylogenetic
-
-```{r beta_div_nmds_phylo1_plot, comment="", message=FALSE, warning=FALSE, fig.height=7, fig.width=10, fig.fullwidth=TRUE, eval=FALSE}
-# beta_q1p$S %>%
-#   vegan::metaMDS(., trymax = 500, k = 2, trace=0) %>%
-#   vegan::scores() %>%
-#   as_tibble(., rownames = "sample") %>%
-#   dplyr::left_join(sample_metadata, by = join_by(sample == sample)) %>%
-#   group_by(diet) %>%
-#   mutate(x_cen = median(NMDS1, na.rm = TRUE)) %>%
-#   mutate(y_cen = median(NMDS2, na.rm = TRUE)) %>%
-#   ungroup() %>%
-#   ggplot(aes(x = NMDS1, y = NMDS2, color = host_order)) +
-#     geom_point(size = 4) +
-#     geom_segment(aes(x = x_cen, y = y_cen, xend = NMDS1, yend = NMDS2), alpha = 0.9, show.legend = FALSE) +
-#     theme_classic() +
-#     theme(
-#       axis.text.x = element_text(size = 12),
-#       axis.text.y = element_text(size = 12),
-#       axis.title = element_text(size = 20, face = "bold"),
-#       axis.text = element_text(face = "bold", size = 18),
-#       panel.background = element_blank(),
-#       axis.line = element_line(size = 0.5, linetype = "solid", colour = "black"),
-#       legend.text = element_text(size = 16),
-#       legend.title = element_text(size = 18),
-#       legend.position = "right", legend.box = "vertical"
-#     ) +
-#     labs(color='Host order')
-```
-
-
-#### Functional
-```{r beta_div_nmds_func_plot, comment="", message=FALSE, warning=FALSE}
-# beta_q1f$S %>%
-#   vegan::metaMDS(., trymax = 500, k = 2, trace=0) %>%
-#   vegan::scores() %>%
-#   as_tibble(., rownames = "sample") %>%
-#   dplyr::left_join(sample_metadata, by = join_by(sample == sample)) %>%
-#   group_by(diet) %>%
-#   mutate(x_cen = median(NMDS1, na.rm = TRUE)) %>%
-#   mutate(y_cen = median(NMDS2, na.rm = TRUE)) %>%
-#   ungroup() %>%
-#   ggplot(aes(x = NMDS1, y = NMDS2, color = host_order)) +
-#   geom_point(size = 4) +
-#   geom_segment(aes(x = x_cen, y = y_cen, xend = NMDS1, yend = NMDS2), alpha = 0.9, show.legend = FALSE) +
-#   theme_classic() +
-#   theme(
-#       axis.text.x = element_text(size = 12),
-#       axis.text.y = element_text(size = 12),
-#       axis.title = element_text(size = 20, face = "bold"),
-#       axis.text = element_text(face = "bold", size = 18),
-#       panel.background = element_blank(),
-#       axis.line = element_line(size = 0.5, linetype = "solid", colour = "black"),
-#       legend.text = element_text(size = 16),
-#       legend.title = element_text(size = 18),
-#       legend.position = "right", legend.box = "vertical"
-#     ) +
-#     labs(color='Host order')
-```
-
 
 
 

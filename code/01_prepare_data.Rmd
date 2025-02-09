@@ -1,11 +1,10 @@
-## Code for pulling EHI data outputs into a single .Rdata file 
+# Data preparation
 
 ```{r packs, warning=FALSE, comments="", message=FALSE}
 library(tidyverse)
 library(ape)
 ```
 
-# Data preparation
 
 ## Load data
 
@@ -41,9 +40,13 @@ genome_coverage <- read_tsv("../data/DMB0173_coverage.tsv.gz") %>%
 ### Genome metadata
 
 ```{r load_genome_metadata, warning=FALSE, comments="", message=FALSE}
+mag_extra <- read_delim("../data/mag_extra_metadata.csv.gz") %>%
+  mutate(mag_name = str_replace(mag_name, ".fa", ""))
+
 genome_metadata <- read_tsv("../data/DMB0173_mag_info.tsv.gz")%>%
   rename(length = mag_size) %>%
   mutate(phylum = str_remove_all(phylum, "p__")) %>%
+  inner_join(., mag_extra, by = join_by(genome == mag_name)) %>%
   arrange(match(genome, genomes))
 ```
 
@@ -126,6 +129,39 @@ physeq_genome_clr <- microbiome::transform(physeq_genome, 'clr')
 
 ```
 
+## Prepare colour codes for host species
+
+```{r set_colours, warning=FALSE, comments="", message=FALSE}
+
+species_colours <- c(
+  "Podarcis pityusensis" = "#bef7ff", 
+  "Podarcis gaigeae" = "#a6e2ff", 
+  "Podarcis milensis" = "#8eccff", 
+  "Podarcis filfolensis" = "#75b7ff", 
+  "Podarcis liolepis" = "#5da1ff", 
+  "Podarcis muralis" = "#458cff",
+  "Iberolacerta bonnali" = "#c080ff",
+  "Iberolacerta aranica" = "#8000ff",
+  "Lacerta viridis" = "#804280",
+  "Chalcides striatus" = "#80d9ff",
+  "Timon lepidus" = "#797980",
+  "Psammodromus algirus" = "#a1a1aa",
+  "Rattus rattus" = "#ff0000",
+  "Rattus lutreolus" = "#ff5555",
+  "Myodes glareolus" = "#aa6c00",
+  "Myodes rufocanus" = "#ffa200",
+  "Apodemus sylvaticus" = "#5eff00",
+  "Apodemus flavicollis" = "#4ed500",
+  "Peromyscus maniculatus" = "#ffa7a7",
+  "Muscardinus avellanarius" = "#ff416d",
+  "Sciurus vulgaris" = "#00ff91"
+)
+
+
+
+
+```
+
 ## Wrap working objects
 
 All working objects are wrapped into a single Rdata object to facilitate downstream usage.
@@ -141,5 +177,6 @@ save(sample_metadata,
      phylum_colors,
      physeq_genome,
      physeq_genome_clr,
+     species_colours,
      file = "../data/data.Rdata")
 ```

@@ -37,7 +37,7 @@ genome_counts_filt %>%
   ggplot(., aes(x=sample,y=count, fill=phylum, group=phylum)) + #grouping enables keeping the same sorting of taxonomic units
     geom_bar(stat="identity", colour="white", linewidth=0.1) + #plot stacked bars with white borders
     scale_fill_manual(values=phylum_colors) +
-    facet_nested(. ~ host_order+host_species,  scales="free") + #facet 
+    facet_nested(. ~ host_order.x+host_species.x,  scales="free") + #facet 
     guides(fill = guide_legend(ncol = 1)) +
     theme(
           axis.title.x = element_blank(),
@@ -208,7 +208,7 @@ phylum_summary <- genome_counts_filt %>%
   pivot_longer(-genome, names_to = "sample", values_to = "count") %>%
   left_join(sample_metadata, by = join_by(sample == sample)) %>%
   left_join(genome_metadata, by = join_by(genome == genome)) %>%
-  group_by(sample,phylum,region, host_order) %>%
+  group_by(sample,phylum,region, host_order.x) %>%
   summarise(relabun=sum(count))
 ```
 
@@ -237,10 +237,10 @@ phylum_summary %>%
     group_by(phylum) %>%
     summarise(total_mean=mean(relabun*100, na.rm=T),
               total_sd=sd(relabun*100, na.rm=T),
-              squamate_mean=mean(relabun[host_order=="Squamate"]*100, na.rm=T),
-              squamate_sd=sd(relabun[host_order=="Squamate"]*100, na.rm=T),
-              rodent_mean=mean(relabun[host_order=="Rodentia"]*100, na.rm=T),
-              rodent_sd=sd(relabun[host_order=="Rodentia"]*100, na.rm=T)) %>%
+              squamate_mean=mean(relabun[host_order.x=="Squamate"]*100, na.rm=T),
+              squamate_sd=sd(relabun[host_order.x=="Squamate"]*100, na.rm=T),
+              rodent_mean=mean(relabun[host_order.x=="Rodentia"]*100, na.rm=T),
+              rodent_sd=sd(relabun[host_order.x=="Rodentia"]*100, na.rm=T)) %>%
     mutate(total=str_c(round(total_mean,3),"±",round(total_sd,3)),
            squamate=str_c(round(squamate_mean,3),"±",round(squamate_sd,3)),
            rodent=str_c(round(rodent_mean,3),"±",round(rodent_sd,3))) %>% 
@@ -267,7 +267,7 @@ phylum_summary %>%
     ggplot(aes(x=relabun, y=phylum, group=phylum, color=phylum)) +
         scale_color_manual(values=phylum_colors[-8]) +
         geom_jitter(alpha=0.5) + 
-        facet_grid(.~host_order)+
+        facet_grid(.~host_order.x)+
         theme_minimal() + 
         labs(y="phylum", x="Relative abundance", color="Phylum")
 ```
@@ -282,7 +282,7 @@ family_summary <- genome_counts_filt %>%
   pivot_longer(-genome, names_to = "sample", values_to = "count") %>% #reduce to minimum number of columns
   left_join(sample_metadata, by = join_by(sample == sample)) %>% #append sample metadata
   left_join(., genome_metadata, by = join_by(genome == genome)) %>% #append genome metadata
-  group_by(sample, family, host_order) %>%
+  group_by(sample, family, host_order.x) %>%
   summarise(relabun=sum(count))
 ```
 
@@ -292,10 +292,10 @@ family_summary %>%
     group_by(family) %>%
     summarise(total_mean=mean(relabun*100, na.rm=T),
               total_sd=sd(relabun*100, na.rm=T),
-              squamate_mean=mean(relabun[host_order=="Squamata"]*100, na.rm=T),
-              squamate_sd=sd(relabun[host_order=="Squamata"]*100, na.rm=T),
-              rodent_mean=mean(relabun[host_order=="Rodentia"]*100, na.rm=T),
-              rodent_sd=sd(relabun[host_order=="Rodentia"]*100, na.rm=T))  %>%
+              squamate_mean=mean(relabun[host_order.x=="Squamata"]*100, na.rm=T),
+              squamate_sd=sd(relabun[host_order.x=="Squamata"]*100, na.rm=T),
+              rodent_mean=mean(relabun[host_order.x=="Rodentia"]*100, na.rm=T),
+              rodent_sd=sd(relabun[host_order.x=="Rodentia"]*100, na.rm=T))  %>%
     mutate(Total=str_c(round(total_mean,2),"±",round(total_sd,2)),
            squamate=str_c(round(squamate_mean,2),"±",round(squamate_sd,2)),
            rodent=str_c(round(rodent_mean,2),"±",round(rodent_sd,2))) %>% 
@@ -321,7 +321,7 @@ family_summary %>%
     ggplot(aes(x=relabun, y=family, group=family, color=phylum)) +
         scale_color_manual(values=phylum_colors[-8]) +
         geom_jitter(alpha=0.5) + 
-        facet_grid(.~host_order)+
+        facet_grid(.~host_order.x)+
         theme_minimal() + 
         labs(y="Family", x="Relative abundance", color="Phylum")
 ```
@@ -334,7 +334,7 @@ genus_summary <- genome_counts_filt %>%
   pivot_longer(-genome, names_to = "sample", values_to = "count") %>% #reduce to minimum number of columns
   left_join(sample_metadata, by = join_by(sample == sample)) %>% #append sample metadata
   left_join(genome_metadata, by = join_by(genome == genome)) %>% #append genome metadata
-  group_by(sample, phylum, genus, host_order) %>%
+  group_by(sample, phylum, genus, host_order.x) %>%
   summarise(relabun=sum(count)) %>%
   filter(genus != "g__") %>%
   mutate(genus= sub("^g__", "", genus))
@@ -346,10 +346,10 @@ genus_summary %>%
     group_by(genus) %>%
     summarise(total_mean=mean(relabun*100, na.rm=T),
               total_sd=sd(relabun*100, na.rm=T),
-              squamate_mean=mean(relabun[host_order=="Squamata"]*100, na.rm=T),
-              squamate_sd=sd(relabun[host_order=="Squamata"]*100, na.rm=T),
-              rodent_mean=mean(relabun[host_order=="Rodentia"]*100, na.rm=T),
-              rodent_sd=sd(relabun[host_order=="Rodentia"]*100, na.rm=T)
+              squamate_mean=mean(relabun[host_order.x=="Squamata"]*100, na.rm=T),
+              squamate_sd=sd(relabun[host_order.x=="Squamata"]*100, na.rm=T),
+              rodent_mean=mean(relabun[host_order.x=="Rodentia"]*100, na.rm=T),
+              rodent_sd=sd(relabun[host_order.x=="Rodentia"]*100, na.rm=T)
               ) %>%
     mutate(Total=str_c(round(total_mean,2),"±",round(total_sd,2)),
            squamate=str_c(round(squamate_mean,2),"±",round(squamate_sd,2)),
@@ -381,7 +381,7 @@ genus_summary %>%
   ggplot(aes(x=relabun, y=genus, group=genus, color=phylum)) +
   scale_color_manual(values=phylum_colors) +
   geom_jitter(alpha=0.5) + 
-  facet_grid(.~host_order)+
+  facet_grid(.~host_order.x)+
   theme_minimal() + 
   theme(axis.text.y = element_text(size=6))+
   labs(y="Family", x="Relative abundance", color="Phylum")

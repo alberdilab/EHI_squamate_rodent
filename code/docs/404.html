@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Page not found | AlberdiLab | EHI Squamate Rodent metagenomics</title>
+  <meta name="description" content="Data analysis code for the study on comparing squamates and rodent gut metagenomes" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Page not found | AlberdiLab | EHI Squamate Rodent metagenomics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Data analysis code for the study on comparing squamates and rodent gut metagenomes" />
+  <meta name="github-repo" content="alberdilab/EHI_squamate_rodent" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Page not found | AlberdiLab | EHI Squamate Rodent metagenomics" />
+  
+  <meta name="twitter:description" content="Data analysis code for the study on comparing squamates and rodent gut metagenomes" />
+  
+
+<meta name="author" content="Raphael Eisenhofer" />
+<meta name="author" content="Antton Alberdi" />
+
+
+<meta name="date" content="2025-02-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#prepare-the-r-environment"><i class="fa fa-check"></i><b>1.1</b> Prepare the R environment</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#environment"><i class="fa fa-check"></i><b>1.1.1</b> Environment</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#libraries"><i class="fa fa-check"></i><b>1.1.2</b> Libraries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-preparation.html"><a href="data-preparation.html"><i class="fa fa-check"></i><b>2</b> Data preparation</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-preparation.html"><a href="data-preparation.html#load-data"><i class="fa fa-check"></i><b>2.1</b> Load data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="data-preparation.html"><a href="data-preparation.html#sample-metadata"><i class="fa fa-check"></i><b>2.1.1</b> Sample metadata</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-preparation.html"><a href="data-preparation.html#read-counts"><i class="fa fa-check"></i><b>2.1.2</b> Read counts</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-preparation.html"><a href="data-preparation.html#genome-coverage"><i class="fa fa-check"></i><b>2.1.3</b> Genome coverage</a></li>
+<li class="chapter" data-level="2.1.4" data-path="data-preparation.html"><a href="data-preparation.html#genome-metadata"><i class="fa fa-check"></i><b>2.1.4</b> Genome metadata</a></li>
+<li class="chapter" data-level="2.1.5" data-path="data-preparation.html"><a href="data-preparation.html#genome-tree"><i class="fa fa-check"></i><b>2.1.5</b> Genome tree</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-preparation.html"><a href="data-preparation.html#create-working-objects"><i class="fa fa-check"></i><b>2.2</b> Create working objects</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="data-preparation.html"><a href="data-preparation.html#filter-reads-by-evenness-of-coverage-0.5-50-of-the-genome-is-covered-by-reads"><i class="fa fa-check"></i><b>2.2.1</b> Filter reads by evenness of coverage (0.5 = 50% of the genome is covered by reads)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-preparation.html"><a href="data-preparation.html#transform-reads-into-genome-counts"><i class="fa fa-check"></i><b>2.2.2</b> Transform reads into genome counts</a></li>
+<li class="chapter" data-level="2.2.3" data-path="data-preparation.html"><a href="data-preparation.html#distill-annotations-into-gifts"><i class="fa fa-check"></i><b>2.2.3</b> Distill annotations into GIFTs</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-preparation.html"><a href="data-preparation.html#prepare-color-scheme"><i class="fa fa-check"></i><b>2.3</b> Prepare color scheme</a></li>
+<li class="chapter" data-level="2.4" data-path="data-preparation.html"><a href="data-preparation.html#prepare-a-phyloseq-object"><i class="fa fa-check"></i><b>2.4</b> Prepare a phyloseq object</a></li>
+<li class="chapter" data-level="2.5" data-path="data-preparation.html"><a href="data-preparation.html#prepare-colour-codes-for-host-species"><i class="fa fa-check"></i><b>2.5</b> Prepare colour codes for host species</a></li>
+<li class="chapter" data-level="2.6" data-path="data-preparation.html"><a href="data-preparation.html#wrap-working-objects"><i class="fa fa-check"></i><b>2.6</b> Wrap working objects</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-statistics.html"><a href="data-statistics.html"><i class="fa fa-check"></i><b>3</b> Data statistics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-statistics.html"><a href="data-statistics.html#filter-samples-with-high-host-data"><i class="fa fa-check"></i><b>3.1</b> filter samples with high host data</a></li>
+<li class="chapter" data-level="3.2" data-path="data-statistics.html"><a href="data-statistics.html#sequencing-reads-statistics"><i class="fa fa-check"></i><b>3.2</b> Sequencing reads statistics</a></li>
+<li class="chapter" data-level="3.3" data-path="data-statistics.html"><a href="data-statistics.html#dna-fractions"><i class="fa fa-check"></i><b>3.3</b> DNA fractions</a></li>
+<li class="chapter" data-level="3.4" data-path="data-statistics.html"><a href="data-statistics.html#recovered-microbial-fraction"><i class="fa fa-check"></i><b>3.4</b> Recovered microbial fraction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mag-catalogue.html"><a href="mag-catalogue.html"><i class="fa fa-check"></i><b>4</b> MAG catalogue</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="mag-catalogue.html"><a href="mag-catalogue.html#filter-samples-with-high-host-data-1"><i class="fa fa-check"></i><b>4.1</b> filter samples with high host data</a></li>
+<li class="chapter" data-level="4.2" data-path="mag-catalogue.html"><a href="mag-catalogue.html#genome-phylogeny"><i class="fa fa-check"></i><b>4.2</b> Genome phylogeny</a></li>
+<li class="chapter" data-level="4.3" data-path="mag-catalogue.html"><a href="mag-catalogue.html#taxonomy-overview"><i class="fa fa-check"></i><b>4.3</b> Taxonomy overview</a></li>
+<li class="chapter" data-level="4.4" data-path="mag-catalogue.html"><a href="mag-catalogue.html#mag-size-mb"><i class="fa fa-check"></i><b>4.4</b> Mag size (MB)</a></li>
+<li class="chapter" data-level="4.5" data-path="mag-catalogue.html"><a href="mag-catalogue.html#genome-quality"><i class="fa fa-check"></i><b>4.5</b> Genome quality</a></li>
+<li class="chapter" data-level="4.6" data-path="mag-catalogue.html"><a href="mag-catalogue.html#functional-overview"><i class="fa fa-check"></i><b>4.6</b> Functional overview</a></li>
+<li class="chapter" data-level="4.7" data-path="mag-catalogue.html"><a href="mag-catalogue.html#functional-ordination-at-distillr-function-level"><i class="fa fa-check"></i><b>4.7</b> Functional ordination (at DistillR function-level)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="community-composition.html"><a href="community-composition.html"><i class="fa fa-check"></i><b>5</b> Community composition</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="community-composition.html"><a href="community-composition.html#filter-data"><i class="fa fa-check"></i><b>5.1</b> Filter data</a></li>
+<li class="chapter" data-level="5.2" data-path="community-composition.html"><a href="community-composition.html#taxonomy-overview-1"><i class="fa fa-check"></i><b>5.2</b> Taxonomy overview</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="community-composition.html"><a href="community-composition.html#stacked-barplot"><i class="fa fa-check"></i><b>5.2.1</b> Stacked barplot</a></li>
+<li class="chapter" data-level="5.2.2" data-path="community-composition.html"><a href="community-composition.html#genus-and-species-annotation"><i class="fa fa-check"></i><b>5.2.2</b> Genus and species annotation</a></li>
+<li class="chapter" data-level="5.2.3" data-path="community-composition.html"><a href="community-composition.html#phylum-relative-abundances"><i class="fa fa-check"></i><b>5.2.3</b> Phylum relative abundances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="community-composition.html"><a href="community-composition.html#taxonomy-boxplot"><i class="fa fa-check"></i><b>5.3</b> Taxonomy boxplot</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="community-composition.html"><a href="community-composition.html#family"><i class="fa fa-check"></i><b>5.3.1</b> Family</a></li>
+<li class="chapter" data-level="5.3.2" data-path="community-composition.html"><a href="community-composition.html#genus"><i class="fa fa-check"></i><b>5.3.2</b> Genus</a></li>
+<li class="chapter" data-level="5.3.3" data-path="community-composition.html"><a href="community-composition.html#origin-and-diet"><i class="fa fa-check"></i><b>5.3.3</b> origin and diet</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>6</b> Alpha diversity</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#summary-table"><i class="fa fa-check"></i><b>6.1</b> Summary table</a></li>
+<li class="chapter" data-level="6.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#squamata-vs-rodentia"><i class="fa fa-check"></i><b>6.2</b> Squamata vs Rodentia</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#shapiro-test"><i class="fa fa-check"></i><b>6.2.1</b> Shapiro test</a></li>
+<li class="chapter" data-level="6.2.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#plots"><i class="fa fa-check"></i><b>6.2.2</b> Plots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>7</b> Beta diversity</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="beta-diversity.html"><a href="beta-diversity.html#permanova-analysis"><i class="fa fa-check"></i><b>7.0.1</b> Permanova analysis</a></li>
+<li class="chapter" data-level="7.0.2" data-path="beta-diversity.html"><a href="beta-diversity.html#beta-diversity-plots"><i class="fa fa-check"></i><b>7.0.2</b> Beta diversity plots</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">AlberdiLab | EHI Squamate Rodent metagenomics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

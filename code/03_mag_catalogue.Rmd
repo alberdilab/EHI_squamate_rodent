@@ -110,9 +110,9 @@ tax_mag %>%
 
 ## Mag size (MB)
 
-```{r}
-genome_metadata <-genome_metadata %>% 
-  mutate(corrected_size=100*length/completeness)
+```{r correct_mag_size, message=FALSE, warning=FALSE}
+genome_metadata <- genome_metadata %>% 
+  mutate(corrected_size = 100 * length / completeness)
 ```
 
 Mags average size (MB)
@@ -174,6 +174,63 @@ genome_metadata %>%
     unite("Contamination",contamination_mean, contamination_sd, sep = " ± ", remove = TRUE) %>%
     tt()
 ```
+
+#### Genomes per host species
+
+```{r completeness_per_species, message=FALSE, warning=FALSE}
+genome_metadata %>%
+  ggplot(aes(x = host_species, y = completeness, colour = host_species)) +
+  geom_jitter(size = 2, alpha = 0.3, height = 0, width = 0.2) + 
+  stat_summary(fun = "mean", geom = "crossbar", colour = "black", width = 0.4) +
+  facet_wrap(~host_order, scales = "free") +
+  scale_colour_manual(values = species_colours) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(face = "italic", angle = 90, vjust = 0.5, hjust = 1)
+  ) +
+  labs(x = "", y = "CheckM2 completeness score")
+
+```
+```{r contaimation_per_species, message=FALSE, warning=FALSE}
+genome_metadata %>%
+  ggplot(aes(x = host_species, y = contamination, colour = host_species)) +
+  geom_jitter(size = 2, alpha = 0.3, height = 0, width = 0.2) + 
+  stat_summary(fun = "mean", geom = "crossbar", colour = "black", width = 0.4) +
+  facet_wrap(~host_order, scales = "free") +
+  scale_colour_manual(values = species_colours) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(face = "italic", angle = 90, vjust = 0.5, hjust = 1)
+  ) +
+  labs(x = "", y = "CheckM2 contamination score")
+
+```
+
+#### Genome statistics per host species 
+
+```{r genome_stats_by_species, message=FALSE, warning=FALSE}
+
+genome_metadata %>%
+  group_by(host_species) %>%
+  mutate(n_mags = n()) %>%
+  ungroup() %>%
+  ggplot(aes(x = host_species, y = n_mags, colour = host_species)) +
+  geom_jitter(size = 2, alpha = 0.3, height = 0, width = 0.2) + 
+  facet_wrap(~host_order, scales = "free") +
+  scale_colour_manual(values = species_colours) +
+  scale_y_continuous(limits = c(75, 450)) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(face = "italic", angle = 90, vjust = 0.5, hjust = 1)
+  ) +
+  labs(x = "", y = "Number of MAGs")
+
+```
+
+
 
 ```{r genome_quality_plot, message=FALSE, warning=FALSE, fig.height=8, fig.width=10, fig.fullwidth=TRUE}
 
@@ -242,9 +299,11 @@ grid.arrange(grobs = list(genome_completeness,genome_biplot,genome_contamination
 
 ```{r function_heatmap, message=FALSE, warning=FALSE, fig.height=10, fig.width=10, fig.fullwidth=TRUE}
 
-# Aggregate basal GIFT into elements
-function_table <- genome_gifts %>%
-    to.elements(., GIFT_db)
+# Aggregate basal GIFT into functions
+GIFTs_elements <- to.elements(genome_gifts, GIFT_db)
+
+function_table <- GIFTs_elements %>%
+    to.functions(., GIFT_db)
 
 # Generate  basal tree
 function_tree <- force.ultrametric(genome_tree, method="extend") %>%
@@ -284,7 +343,7 @@ function_tree <- function_tree +
 function_tree
 ```
 
-## Functional ordination
+## Functional ordination (at DistillR function-level)
 
 ```{r function_ordination, message=FALSE, fig.height=8, fig.width=10, fig.fullwidth=TRUE}
 # Generate the tSNE ordination
