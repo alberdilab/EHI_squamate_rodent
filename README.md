@@ -7,7 +7,7 @@ The raw code used for data analysis are in the **.Rmd** files stored in the `cod
 
 For a detailed overview of the data stored in this repository, see [this readme file](https://github.com/alberdilab/EHI_squamate_rodent/tree/main/data_files_description.md).
 
-For a summary of the samples and host species used, [see here](https://github.com/alberdilab/EHI_squamate_rodent/blob/main/code/supplementary/supp_host_species_representation.qmd). [Here](https://github.com/alberdilab/EHI_squamate_rodent/blob/main/code/supplementary/supp_genomes_across_hosts.md) is also a description of bacterial genomes shared across different host species.
+For a summary of the samples and host species used, [see here](https://github.com/alberdilab/EHI_squamate_rodent/blob/main/code/supplemental/supp_host_species_representation.qmd). [Here](https://github.com/alberdilab/EHI_squamate_rodent/blob/main/code/supplemental/supp_genomes_across_hosts.md) is also a description of bacterial genomes shared across different host species.
 
 While the webbook provides a user-friendly overview of the procedures, analyses can be directly reproduced using the .Rmd documents. Note that the code chunks that require heavy computation have been tuned off using 'eval=FALSE'. To re-render the webbook, you can use the following code:
 
