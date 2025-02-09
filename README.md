@@ -3,7 +3,7 @@ Repository for comparative metagenomics on EHI squamate and rodent host species.
 
 The raw code used for data analysis are in the **.Rmd** files stored in the `code` directory of this repository, while the bookdown-rendered webbook is available at:
 
-[[https://alberdilab.github.io/ehi_squamate_rodent/](https://alberdilab.github.io/ehi_squamate_rodent/)
+https://alberdilab.github.io/EHI_squamate_rodent/
 
 For a detailed overview of the data stored in this repository, see [this readme file](https://github.com/alberdilab/EHI_squamate_rodent/tree/main/data_files_description.md).
 
