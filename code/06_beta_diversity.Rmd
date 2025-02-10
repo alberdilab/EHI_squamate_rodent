@@ -1,8 +1,8 @@
 # Beta diversity
 
 ```{r load_data_beta, comment="", message=FALSE, warning=FALSE, eval=TRUE}
-load("data/data.Rdata")
-load("data/beta.Rdata")
+load("../data/data.Rdata")
+load("../data/beta.Rdata")
 ```
 
 #### Calculate beta Hill div
@@ -69,7 +69,7 @@ save(beta_q0n,
      genome_gifts,
      genome_gifts1,
      genome_tree,
-     file = "data/beta.Rdata")
+     file = "../data/beta.Rdata")
 ```
 
 ### Permanova analysis

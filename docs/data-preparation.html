@@ -77,7 +77,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -135,6 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -249,31 +250,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Load the original data files outputted by the bioinformatic pipeline.</p>
 <div id="sample-metadata" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Sample metadata<a href="data-preparation.html#sample-metadata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb4-1"><a href="data-preparation.html#cb4-1" tabindex="-1"></a>sample_metadata <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;data/DMB0173_metadata.tsv.gz&quot;</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb4-1"><a href="data-preparation.html#cb4-1" tabindex="-1"></a>sample_metadata <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;../data/DMB0173_metadata.tsv.gz&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="data-preparation.html#cb4-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">sample =</span> EHI_plaintext,</span>
 <span id="cb4-3"><a href="data-preparation.html#cb4-3" tabindex="-1"></a>                <span class="at">host_order =</span> order,</span>
 <span id="cb4-4"><a href="data-preparation.html#cb4-4" tabindex="-1"></a>                <span class="at">host_species =</span> species)</span></code></pre></div>
 </div>
 <div id="read-counts" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Read counts<a href="data-preparation.html#read-counts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb5-1"><a href="data-preparation.html#cb5-1" tabindex="-1"></a>read_counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;data/DMB0173_counts.tsv.gz&quot;</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb5-1"><a href="data-preparation.html#cb5-1" tabindex="-1"></a>read_counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;../data/DMB0173_counts.tsv.gz&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="data-preparation.html#cb5-2" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">genome=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="data-preparation.html#cb5-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, sample_metadata<span class="sc">$</span>sample))</span>
 <span id="cb5-4"><a href="data-preparation.html#cb5-4" tabindex="-1"></a>genomes <span class="ot">&lt;-</span> read_counts<span class="sc">$</span>genome</span></code></pre></div>
 </div>
 <div id="genome-coverage" class="section level3 hasAnchor" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> Genome coverage<a href="data-preparation.html#genome-coverage" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb6-1"><a href="data-preparation.html#cb6-1" tabindex="-1"></a>genome_coverage <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;data/DMB0173_coverage.tsv.gz&quot;</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb6-1"><a href="data-preparation.html#cb6-1" tabindex="-1"></a>genome_coverage <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;../data/DMB0173_coverage.tsv.gz&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="data-preparation.html#cb6-2" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">genome=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="data-preparation.html#cb6-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, sample_metadata<span class="sc">$</span>sample))<span class="sc">%&gt;%</span></span>
 <span id="cb6-4"><a href="data-preparation.html#cb6-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">match</span>(genome, genomes))</span></code></pre></div>
 </div>
 <div id="genome-metadata" class="section level3 hasAnchor" number="2.1.4">
 <h3><span class="header-section-number">2.1.4</span> Genome metadata<a href="data-preparation.html#genome-metadata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb7-1"><a href="data-preparation.html#cb7-1" tabindex="-1"></a>mag_extra <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/mag_extra_metadata.csv.gz&quot;</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb7-1"><a href="data-preparation.html#cb7-1" tabindex="-1"></a>mag_extra <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;../data/mag_extra_metadata.csv.gz&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="data-preparation.html#cb7-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mag_name =</span> <span class="fu">str_replace</span>(mag_name, <span class="st">&quot;.fa&quot;</span>, <span class="st">&quot;&quot;</span>))</span>
 <span id="cb7-3"><a href="data-preparation.html#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="data-preparation.html#cb7-4" tabindex="-1"></a>genome_metadata <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;data/DMB0173_mag_info.tsv.gz&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="data-preparation.html#cb7-4" tabindex="-1"></a>genome_metadata <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;../data/DMB0173_mag_info.tsv.gz&quot;</span>)<span class="sc">%&gt;%</span></span>
 <span id="cb7-5"><a href="data-preparation.html#cb7-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">length =</span> mag_size) <span class="sc">%&gt;%</span></span>
 <span id="cb7-6"><a href="data-preparation.html#cb7-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">phylum =</span> <span class="fu">str_remove_all</span>(phylum, <span class="st">&quot;p__&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb7-7"><a href="data-preparation.html#cb7-7" tabindex="-1"></a>  <span class="fu">inner_join</span>(., mag_extra, <span class="at">by =</span> <span class="fu">join_by</span>(genome <span class="sc">==</span> mag_name)) <span class="sc">%&gt;%</span></span>
@@ -281,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="genome-tree" class="section level3 hasAnchor" number="2.1.5">
 <h3><span class="header-section-number">2.1.5</span> Genome tree<a href="data-preparation.html#genome-tree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb8-1"><a href="data-preparation.html#cb8-1" tabindex="-1"></a>genome_tree <span class="ot">&lt;-</span> <span class="fu">read_tree</span>(<span class="st">&quot;data/DMB0173.tree.gz&quot;</span>)</span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb8-1"><a href="data-preparation.html#cb8-1" tabindex="-1"></a>genome_tree <span class="ot">&lt;-</span> <span class="fu">read_tree</span>(<span class="st">&quot;../data/DMB0173.tree.gz&quot;</span>)</span>
 <span id="cb8-2"><a href="data-preparation.html#cb8-2" tabindex="-1"></a>genome_tree<span class="sc">$</span>tip.label <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(genome_tree<span class="sc">$</span>tip.label, <span class="st">&quot;&#39;&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="co">#remove single quotes in MAG names</span></span>
 <span id="cb8-3"><a href="data-preparation.html#cb8-3" tabindex="-1"></a>genome_tree <span class="ot">&lt;-</span> <span class="fu">keep.tip</span>(genome_tree, <span class="at">tip =</span> genome_metadata<span class="sc">$</span>genome) <span class="co"># keep only MAG tips</span></span></code></pre></div>
 </div>
@@ -307,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="distill-annotations-into-gifts" class="section level3 hasAnchor" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Distill annotations into GIFTs<a href="data-preparation.html#distill-annotations-into-gifts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb12-1"><a href="data-preparation.html#cb12-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/genome_gifts_raw.Rdata&quot;</span>)</span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb12-1"><a href="data-preparation.html#cb12-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;../data/genome_gifts_raw.Rdata&quot;</span>)</span>
 <span id="cb12-2"><a href="data-preparation.html#cb12-2" tabindex="-1"></a>genome_counts_filt <span class="ot">&lt;-</span> genome_counts_filt[genome_counts_filt<span class="sc">$</span>genome <span class="sc">%in%</span> <span class="fu">rownames</span>(genome_gifts_raw),] </span>
 <span id="cb12-3"><a href="data-preparation.html#cb12-3" tabindex="-1"></a><span class="fu">rownames</span>(genome_counts_filt) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb12-4"><a href="data-preparation.html#cb12-4" tabindex="-1"></a>genome_gifts <span class="ot">&lt;-</span> genome_gifts_raw[<span class="fu">rownames</span>(genome_gifts_raw) <span class="sc">%in%</span> genome_counts_filt<span class="sc">$</span>genome,] </span></code></pre></div>
@@ -381,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-9"><a href="data-preparation.html#cb16-9" tabindex="-1"></a>     physeq_genome,</span>
 <span id="cb16-10"><a href="data-preparation.html#cb16-10" tabindex="-1"></a>     physeq_genome_clr,</span>
 <span id="cb16-11"><a href="data-preparation.html#cb16-11" tabindex="-1"></a>     species_colours,</span>
-<span id="cb16-12"><a href="data-preparation.html#cb16-12" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;data/data.Rdata&quot;</span>)</span></code></pre></div>
+<span id="cb16-12"><a href="data-preparation.html#cb16-12" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;../data/data.Rdata&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
@@ -439,7 +440,8 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection"
+"collapse": "subsection",
+"download": ["pdf", "epub"]
 }
 });
 });

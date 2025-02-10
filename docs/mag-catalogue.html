@@ -77,7 +77,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -135,6 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -242,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="mag-catalogue" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> MAG catalogue<a href="mag-catalogue.html#mag-catalogue" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb30-1"><a href="mag-catalogue.html#cb30-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/data.Rdata&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb30-1"><a href="mag-catalogue.html#cb30-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;../data/data.Rdata&quot;</span>)</span></code></pre></div>
 <div id="filter-samples-with-high-host-data-1" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> filter samples with high host data<a href="mag-catalogue.html#filter-samples-with-high-host-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb31-1"><a href="mag-catalogue.html#cb31-1" tabindex="-1"></a>genome_counts_filt <span class="ot">&lt;-</span> genome_counts <span class="sc">%&gt;%</span> </span>
@@ -256,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb31-9"><a href="mag-catalogue.html#cb31-9" tabindex="-1"></a></span>
 <span id="cb31-10"><a href="mag-catalogue.html#cb31-10" tabindex="-1"></a>genome_tree <span class="ot">&lt;-</span> <span class="fu">keep.tip</span>(genome_tree, <span class="at">tip=</span>genome_metadata<span class="sc">$</span>genome) <span class="co"># keep only MAG tips</span></span>
 <span id="cb31-11"><a href="mag-catalogue.html#cb31-11" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="mag-catalogue.html#cb31-12" tabindex="-1"></a><span class="co">#load(&quot;data/genome_gifts.Rdata&quot;)</span></span></code></pre></div>
+<span id="cb31-12"><a href="mag-catalogue.html#cb31-12" tabindex="-1"></a><span class="co">#load(&quot;../data/genome_gifts.Rdata&quot;)</span></span></code></pre></div>
 </div>
 <div id="genome-phylogeny" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Genome phylogeny<a href="mag-catalogue.html#genome-phylogeny" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1284,7 +1285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb43-10"><a href="mag-catalogue.html#cb43-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>, <span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
 <span id="cb43-11"><a href="mag-catalogue.html#cb43-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb43-12"><a href="mag-catalogue.html#cb43-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;CheckM2 completeness score&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/completeness_per_species-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/completeness_per_species-1.png" width="768" /></p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb44-1"><a href="mag-catalogue.html#cb44-1" tabindex="-1"></a>genome_metadata <span class="sc">%&gt;%</span></span>
 <span id="cb44-2"><a href="mag-catalogue.html#cb44-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> host_species, <span class="at">y =</span> contamination, <span class="at">colour =</span> host_species)) <span class="sc">+</span></span>
 <span id="cb44-3"><a href="mag-catalogue.html#cb44-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
@@ -1297,7 +1298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb44-10"><a href="mag-catalogue.html#cb44-10" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>, <span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
 <span id="cb44-11"><a href="mag-catalogue.html#cb44-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb44-12"><a href="mag-catalogue.html#cb44-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;CheckM2 contamination score&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/contaimation_per_species-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/contaimation_per_species-1.png" width="768" /></p>
 </div>
 <div id="genome-statistics-per-host-species" class="section level4 hasAnchor" number="4.5.0.2">
 <h4><span class="header-section-number">4.5.0.2</span> Genome statistics per host species<a href="mag-catalogue.html#genome-statistics-per-host-species" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1316,7 +1317,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb45-13"><a href="mag-catalogue.html#cb45-13" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;italic&quot;</span>, <span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
 <span id="cb45-14"><a href="mag-catalogue.html#cb45-14" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb45-15"><a href="mag-catalogue.html#cb45-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of MAGs&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/genome_stats_by_species-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/genome_stats_by_species-1.png" width="768" /></p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb46-1"><a href="mag-catalogue.html#cb46-1" tabindex="-1"></a><span class="co">#Generate quality biplot</span></span>
 <span id="cb46-2"><a href="mag-catalogue.html#cb46-2" tabindex="-1"></a>genome_biplot <span class="ot">&lt;-</span> genome_metadata <span class="sc">%&gt;%</span></span>
 <span id="cb46-3"><a href="mag-catalogue.html#cb46-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(genome,domain,phylum,completeness,contamination,length)) <span class="sc">%&gt;%</span></span>
@@ -1506,7 +1507,8 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection"
+"collapse": "subsection",
+"download": ["pdf", "epub"]
 }
 });
 });

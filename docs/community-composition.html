@@ -77,7 +77,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -135,6 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -244,7 +245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 5</span> Community composition<a href="community-composition.html#community-composition" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="filter-data" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Filter data<a href="community-composition.html#filter-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb51-1"><a href="community-composition.html#cb51-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/data.Rdata&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb51-1"><a href="community-composition.html#cb51-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;../data/data.Rdata&quot;</span>)</span></code></pre></div>
 <p>Filter samples with high host data</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb52-1"><a href="community-composition.html#cb52-1" tabindex="-1"></a>genome_counts_filt <span class="ot">&lt;-</span> genome_counts <span class="sc">%&gt;%</span></span>
 <span id="cb52-2"><a href="community-composition.html#cb52-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>,sample_metadata<span class="sc">$</span>sample)))<span class="sc">%&gt;%</span></span>
@@ -257,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb52-9"><a href="community-composition.html#cb52-9" tabindex="-1"></a></span>
 <span id="cb52-10"><a href="community-composition.html#cb52-10" tabindex="-1"></a>genome_tree <span class="ot">&lt;-</span> <span class="fu">keep.tip</span>(genome_tree, <span class="at">tip=</span>genome_metadata<span class="sc">$</span>genome) <span class="co"># keep only MAG tips</span></span>
 <span id="cb52-11"><a href="community-composition.html#cb52-11" tabindex="-1"></a></span>
-<span id="cb52-12"><a href="community-composition.html#cb52-12" tabindex="-1"></a><span class="co">#load(&quot;data/genome_gifts.Rdata&quot;)</span></span></code></pre></div>
+<span id="cb52-12"><a href="community-composition.html#cb52-12" tabindex="-1"></a><span class="co">#load(&quot;../data/genome_gifts.Rdata&quot;)</span></span></code></pre></div>
 </div>
 <div id="taxonomy-overview-1" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Taxonomy overview<a href="community-composition.html#taxonomy-overview-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -767,7 +768,8 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection"
+"collapse": "subsection",
+"download": ["pdf", "epub"]
 }
 });
 });

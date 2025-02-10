@@ -13,7 +13,7 @@ Load the original data files outputted by the bioinformatic pipeline.
 ### Sample metadata
 
 ```{r load_sample_metadata, warning=FALSE, comments="", message=FALSE}
-sample_metadata <- read_tsv("data/DMB0173_metadata.tsv.gz") %>%
+sample_metadata <- read_tsv("../data/DMB0173_metadata.tsv.gz") %>%
   dplyr::rename(sample = EHI_plaintext,
                 host_order = order,
                 host_species = species)
@@ -22,7 +22,7 @@ sample_metadata <- read_tsv("data/DMB0173_metadata.tsv.gz") %>%
 ### Read counts
 
 ```{r load_read_counts, warning=FALSE, comments="", message=FALSE}
-read_counts <- read_tsv("data/DMB0173_counts.tsv.gz") %>%
+read_counts <- read_tsv("../data/DMB0173_counts.tsv.gz") %>%
   rename(genome=1) %>%
   select(c("genome", sample_metadata$sample))
 genomes <- read_counts$genome
@@ -31,7 +31,7 @@ genomes <- read_counts$genome
 ### Genome coverage
 
 ```{r load_genome_hits, warning=FALSE, comments="", message=FALSE}
-genome_coverage <- read_tsv("data/DMB0173_coverage.tsv.gz") %>%
+genome_coverage <- read_tsv("../data/DMB0173_coverage.tsv.gz") %>%
   rename(genome=1) %>%
   select(c("genome", sample_metadata$sample))%>%
   arrange(match(genome, genomes))
@@ -40,10 +40,10 @@ genome_coverage <- read_tsv("data/DMB0173_coverage.tsv.gz") %>%
 ### Genome metadata
 
 ```{r load_genome_metadata, warning=FALSE, comments="", message=FALSE}
-mag_extra <- read_delim("data/mag_extra_metadata.csv.gz") %>%
+mag_extra <- read_delim("../data/mag_extra_metadata.csv.gz") %>%
   mutate(mag_name = str_replace(mag_name, ".fa", ""))
 
-genome_metadata <- read_tsv("data/DMB0173_mag_info.tsv.gz")%>%
+genome_metadata <- read_tsv("../data/DMB0173_mag_info.tsv.gz")%>%
   rename(length = mag_size) %>%
   mutate(phylum = str_remove_all(phylum, "p__")) %>%
   inner_join(., mag_extra, by = join_by(genome == mag_name)) %>%
@@ -53,7 +53,7 @@ genome_metadata <- read_tsv("data/DMB0173_mag_info.tsv.gz")%>%
 ### Genome tree
 
 ```{r load_genome_tree, warning=FALSE, comments="", message=FALSE}
-genome_tree <- read_tree("data/DMB0173.tree.gz")
+genome_tree <- read_tree("../data/DMB0173.tree.gz")
 genome_tree$tip.label <- str_replace_all(genome_tree$tip.label, "'", "") #remove single quotes in MAG names
 genome_tree <- keep.tip(genome_tree, tip = genome_metadata$genome) # keep only MAG tips
 ```
@@ -89,7 +89,7 @@ genome_counts_filt <- read_counts_filt %>%
 ### Distill annotations into GIFTs 
 
 ```{r distill_annotations, warning=FALSE, comments="", message=FALSE}
-load("data/genome_gifts_raw.Rdata")
+load("../data/genome_gifts_raw.Rdata")
 genome_counts_filt <- genome_counts_filt[genome_counts_filt$genome %in% rownames(genome_gifts_raw),] 
 rownames(genome_counts_filt) <- NULL
 genome_gifts <- genome_gifts_raw[rownames(genome_gifts_raw) %in% genome_counts_filt$genome,] 
@@ -178,5 +178,5 @@ save(sample_metadata,
      physeq_genome,
      physeq_genome_clr,
      species_colours,
-     file = "data/data.Rdata")
+     file = "../data/data.Rdata")
 ```
