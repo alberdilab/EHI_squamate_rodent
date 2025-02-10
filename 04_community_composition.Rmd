@@ -3,7 +3,7 @@
 ## Filter data
 
 ```{r load_data_community, comment="", message=FALSE, warning=FALSE, eval=FALSE}
-load("../data/data.Rdata")
+load("data/data.Rdata")
 ```
 
 Filter samples with high host data
@@ -20,7 +20,7 @@ genome_metadata <- genome_metadata %>%
 
 genome_tree <- keep.tip(genome_tree, tip=genome_metadata$genome) # keep only MAG tips
 
-#load("../data/genome_gifts.Rdata")
+#load("data/genome_gifts.Rdata")
 ```
 
 ## Taxonomy overview 

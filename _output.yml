@@ -6,7 +6,7 @@ bookdown::gitbook:
       before: |
       after: |
       download: ["pdf", "epub"]
-  fig_width: 8
+  fig_width: 12
 
 bookdown::pdf_book:
   includes:

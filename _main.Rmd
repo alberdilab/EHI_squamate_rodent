@@ -106,7 +106,7 @@ Load the original data files outputted by the bioinformatic pipeline.
 ### Sample metadata
 
 ```{r load_sample_metadata, warning=FALSE, comments="", message=FALSE}
-sample_metadata <- read_tsv("../data/DMB0173_metadata.tsv.gz") %>%
+sample_metadata <- read_tsv("data/DMB0173_metadata.tsv.gz") %>%
   dplyr::rename(sample = EHI_plaintext,
                 host_order = order,
                 host_species = species)
@@ -115,7 +115,7 @@ sample_metadata <- read_tsv("../data/DMB0173_metadata.tsv.gz") %>%
 ### Read counts
 
 ```{r load_read_counts, warning=FALSE, comments="", message=FALSE}
-read_counts <- read_tsv("../data/DMB0173_counts.tsv.gz") %>%
+read_counts <- read_tsv("data/DMB0173_counts.tsv.gz") %>%
   rename(genome=1) %>%
   select(c("genome", sample_metadata$sample))
 genomes <- read_counts$genome
@@ -124,7 +124,7 @@ genomes <- read_counts$genome
 ### Genome coverage
 
 ```{r load_genome_hits, warning=FALSE, comments="", message=FALSE}
-genome_coverage <- read_tsv("../data/DMB0173_coverage.tsv.gz") %>%
+genome_coverage <- read_tsv("data/DMB0173_coverage.tsv.gz") %>%
   rename(genome=1) %>%
   select(c("genome", sample_metadata$sample))%>%
   arrange(match(genome, genomes))
@@ -133,10 +133,10 @@ genome_coverage <- read_tsv("../data/DMB0173_coverage.tsv.gz") %>%
 ### Genome metadata
 
 ```{r load_genome_metadata, warning=FALSE, comments="", message=FALSE}
-mag_extra <- read_delim("../data/mag_extra_metadata.csv.gz") %>%
+mag_extra <- read_delim("data/mag_extra_metadata.csv.gz") %>%
   mutate(mag_name = str_replace(mag_name, ".fa", ""))
 
-genome_metadata <- read_tsv("../data/DMB0173_mag_info.tsv.gz")%>%
+genome_metadata <- read_tsv("data/DMB0173_mag_info.tsv.gz")%>%
   rename(length = mag_size) %>%
   mutate(phylum = str_remove_all(phylum, "p__")) %>%
   inner_join(., mag_extra, by = join_by(genome == mag_name)) %>%
@@ -146,7 +146,7 @@ genome_metadata <- read_tsv("../data/DMB0173_mag_info.tsv.gz")%>%
 ### Genome tree
 
 ```{r load_genome_tree, warning=FALSE, comments="", message=FALSE}
-genome_tree <- read_tree("../data/DMB0173.tree.gz")
+genome_tree <- read_tree("data/DMB0173.tree.gz")
 genome_tree$tip.label <- str_replace_all(genome_tree$tip.label, "'", "") #remove single quotes in MAG names
 genome_tree <- keep.tip(genome_tree, tip = genome_metadata$genome) # keep only MAG tips
 ```
@@ -182,7 +182,7 @@ genome_counts_filt <- read_counts_filt %>%
 ### Distill annotations into GIFTs 
 
 ```{r distill_annotations, warning=FALSE, comments="", message=FALSE}
-load("../data/genome_gifts_raw.Rdata")
+load("data/genome_gifts_raw.Rdata")
 genome_counts_filt <- genome_counts_filt[genome_counts_filt$genome %in% rownames(genome_gifts_raw),] 
 rownames(genome_counts_filt) <- NULL
 genome_gifts <- genome_gifts_raw[rownames(genome_gifts_raw) %in% genome_counts_filt$genome,] 
@@ -271,7 +271,7 @@ save(sample_metadata,
      physeq_genome,
      physeq_genome_clr,
      species_colours,
-     file = "../data/data.Rdata")
+     file = "data/data.Rdata")
 ```
 
 <!--chapter:end:01_prepare_data.Rmd-->
@@ -279,7 +279,7 @@ save(sample_metadata,
 # Data statistics
 
 ```{r load_data_stats}
-load("../data/data.Rdata")
+load("data/data.Rdata")
 ```
 
 ## filter samples with high host data
@@ -296,7 +296,7 @@ genome_metadata <- genome_metadata %>%
 
 genome_tree <- keep.tip(genome_tree, tip=genome_metadata$genome) # keep only MAG tips
 
-#load("../data/genome_gifts.Rdata")
+#load("data/genome_gifts.Rdata")
 ```
 
 ## Sequencing reads statistics
@@ -417,7 +417,7 @@ damr %>%
 # MAG catalogue
 
 ```{r load_data_mag, message=FALSE, warning=FALSE}
-load("../data/data.Rdata")
+load("data/data.Rdata")
 ```
 
 ## filter samples with high host data
@@ -434,7 +434,7 @@ genome_metadata <- genome_metadata %>%
 
 genome_tree <- keep.tip(genome_tree, tip=genome_metadata$genome) # keep only MAG tips
 
-#load("../data/genome_gifts.Rdata")
+#load("data/genome_gifts.Rdata")
 ```
 
 ## Genome phylogeny
@@ -789,7 +789,7 @@ function_ordination
 ## Filter data
 
 ```{r load_data_community, comment="", message=FALSE, warning=FALSE, eval=FALSE}
-load("../data/data.Rdata")
+load("data/data.Rdata")
 ```
 
 Filter samples with high host data
@@ -806,7 +806,7 @@ genome_metadata <- genome_metadata %>%
 
 genome_tree <- keep.tip(genome_tree, tip=genome_metadata$genome) # keep only MAG tips
 
-#load("../data/genome_gifts.Rdata")
+#load("data/genome_gifts.Rdata")
 ```
 
 ## Taxonomy overview 
@@ -1180,8 +1180,8 @@ genus_summary %>%
 # Alpha diversity
 
 ```{r load_data_alpha, comment="", message=FALSE, warning=FALSE}
-load("../data/data.Rdata")
-load("../data/alpha.Rdata")
+load("data/data.Rdata")
+load("data/alpha.Rdata")
 ```
 
 ## Summary table
@@ -1248,7 +1248,7 @@ alpha_div <- richness %>%
   full_join(functional, by = join_by(sample == sample))
 ```
 ```{r wrap_alpha, warning=FALSE, comments="", message=FALSE, eval=FALSE}
-save(alpha_div, file = "../data/alpha.Rdata")
+save(alpha_div, file = "data/alpha.Rdata")
 ```
 
 
@@ -1511,8 +1511,8 @@ alpha_div %>%
 # Beta diversity
 
 ```{r load_data_beta, comment="", message=FALSE, warning=FALSE, eval=TRUE}
-load("../data/data.Rdata")
-load("../data/beta.Rdata")
+load("data/data.Rdata")
+load("data/beta.Rdata")
 ```
 
 #### Calculate beta Hill div
@@ -1579,7 +1579,7 @@ save(beta_q0n,
      genome_gifts,
      genome_gifts1,
      genome_tree,
-     file = "../data/beta.Rdata")
+     file = "data/beta.Rdata")
 ```
 
 ### Permanova analysis

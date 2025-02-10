@@ -1,8 +1,8 @@
 # Alpha diversity
 
 ```{r load_data_alpha, comment="", message=FALSE, warning=FALSE}
-load("../data/data.Rdata")
-load("../data/alpha.Rdata")
+load("data/data.Rdata")
+load("data/alpha.Rdata")
 ```
 
 ## Summary table
@@ -69,7 +69,7 @@ alpha_div <- richness %>%
   full_join(functional, by = join_by(sample == sample))
 ```
 ```{r wrap_alpha, warning=FALSE, comments="", message=FALSE, eval=FALSE}
-save(alpha_div, file = "../data/alpha.Rdata")
+save(alpha_div, file = "data/alpha.Rdata")
 ```
 
 
