@@ -1,7 +1,7 @@
 # Data statistics
 
 ```{r load_data_stats}
-load("../data/data.Rdata")
+load("data/data.Rdata")
 ```
 
 ## filter samples with high host data

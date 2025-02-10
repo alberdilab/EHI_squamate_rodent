@@ -242,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-statistics" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data statistics<a href="data-statistics.html#data-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb17-1"><a href="data-statistics.html#cb17-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;../data/data.Rdata&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb17-1"><a href="data-statistics.html#cb17-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/data.Rdata&quot;</span>)</span></code></pre></div>
 <div id="filter-samples-with-high-host-data" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> filter samples with high host data<a href="data-statistics.html#filter-samples-with-high-host-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb18-1"><a href="data-statistics.html#cb18-1" tabindex="-1"></a>read_counts <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span> </span>
@@ -270,8 +270,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <script>
 
-      function styleCell_gfb51iyv1d3w1l898u3n(i, j, css_id) {
-          var table = document.getElementById("tinytable_gfb51iyv1d3w1l898u3n");
+      function styleCell_djhq2i62e755m4sxe99c(i, j, css_id) {
+          var table = document.getElementById("tinytable_djhq2i62e755m4sxe99c");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_gfb51iyv1d3w1l898u3n');
+        var table = document.getElementById('tinytable_djhq2i62e755m4sxe99c');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -289,8 +289,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_gfb51iyv1d3w1l898u3n(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_gfb51iyv1d3w1l898u3n");
+      function spanCell_djhq2i62e755m4sxe99c(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_djhq2i62e755m4sxe99c");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -320,14 +320,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_h2acitgffpuzpsrdcajo',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_9tvhoq9cz5mjvtjf2h1y',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_vip5a6isyywj3un8ua9a',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_q6hghji6otmij2tbky29',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_gfb51iyv1d3w1l898u3n(cell.i, cell.j, group.css_id);
+                  styleCell_djhq2i62e755m4sxe99c(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -335,11 +335,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_h2acitgffpuzpsrdcajo, .table th.tinytable_css_h2acitgffpuzpsrdcajo { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_9tvhoq9cz5mjvtjf2h1y, .table th.tinytable_css_9tvhoq9cz5mjvtjf2h1y { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_vip5a6isyywj3un8ua9a, .table th.tinytable_css_vip5a6isyywj3un8ua9a { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_q6hghji6otmij2tbky29, .table th.tinytable_css_q6hghji6otmij2tbky29 { border-bottom: solid #d3d8dc 0.1em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_gfb51iyv1d3w1l898u3n" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_djhq2i62e755m4sxe99c" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -380,8 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <script>
 
-      function styleCell_9q6bnpt2ssipkptqsllo(i, j, css_id) {
-          var table = document.getElementById("tinytable_9q6bnpt2ssipkptqsllo");
+      function styleCell_zpyy7jyco8cb3mubv6yq(i, j, css_id) {
+          var table = document.getElementById("tinytable_zpyy7jyco8cb3mubv6yq");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -391,7 +391,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_9q6bnpt2ssipkptqsllo');
+        var table = document.getElementById('tinytable_zpyy7jyco8cb3mubv6yq');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -399,8 +399,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_9q6bnpt2ssipkptqsllo(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_9q6bnpt2ssipkptqsllo");
+      function spanCell_zpyy7jyco8cb3mubv6yq(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_zpyy7jyco8cb3mubv6yq");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -430,14 +430,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 249, j: 0 }, { i: 249, j: 1 }, { i: 249, j: 2 }, { i: 249, j: 3 }, { i: 249, j: 4 },  ], css_id: 'tinytable_css_zu5vrqw549jg239yrz8u',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_m0e3szw30b3guiwksimq',}, 
+          { positions: [ { i: 249, j: 0 }, { i: 249, j: 1 }, { i: 249, j: 2 }, { i: 249, j: 3 }, { i: 249, j: 4 },  ], css_id: 'tinytable_css_h29nykbqvme3ig1lmfjl',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_5va98ru4gatrasip15q9',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_9q6bnpt2ssipkptqsllo(cell.i, cell.j, group.css_id);
+                  styleCell_zpyy7jyco8cb3mubv6yq(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -445,11 +445,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_zu5vrqw549jg239yrz8u, .table th.tinytable_css_zu5vrqw549jg239yrz8u { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_m0e3szw30b3guiwksimq, .table th.tinytable_css_m0e3szw30b3guiwksimq { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_h29nykbqvme3ig1lmfjl, .table th.tinytable_css_h29nykbqvme3ig1lmfjl { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_5va98ru4gatrasip15q9, .table th.tinytable_css_5va98ru4gatrasip15q9 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_9q6bnpt2ssipkptqsllo" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_zpyy7jyco8cb3mubv6yq" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2214,23 +2214,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-3"><a href="data-statistics.html#cb21-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;Sample&quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Low quality&quot;</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">&quot;Mapped to host&quot;</span><span class="ot">=</span><span class="dv">3</span>, <span class="st">&quot;Unmapped&quot;</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">&quot;Mapped to MAGs&quot;</span><span class="ot">=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb21-4"><a href="data-statistics.html#cb21-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb21-5"><a href="data-statistics.html#cb21-5" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
-<pre><code>Warning: There was 1 warning in `summarise()`.
-ℹ In argument: `across(where(is.numeric), mean, na.rm = TRUE)`.
-Caused by warning:
-! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
-Supply arguments directly to `.fns` through an anonymous function instead.
-
-  # Previously
-  across(a:b, mean, na.rm = TRUE)
-
-  # Now
-  across(a:b, \(x) mean(x, na.rm = TRUE))</code></pre>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_tct2pime8mfmbcuvl0xq(i, j, css_id) {
-          var table = document.getElementById("tinytable_tct2pime8mfmbcuvl0xq");
+      function styleCell_wm0pxdaqnm463urckwqj(i, j, css_id) {
+          var table = document.getElementById("tinytable_wm0pxdaqnm463urckwqj");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2240,7 +2229,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_tct2pime8mfmbcuvl0xq');
+        var table = document.getElementById('tinytable_wm0pxdaqnm463urckwqj');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2248,8 +2237,8 @@ Supply arguments directly to `.fns` through an anonymous function instead.
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tct2pime8mfmbcuvl0xq(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_tct2pime8mfmbcuvl0xq");
+      function spanCell_wm0pxdaqnm463urckwqj(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_wm0pxdaqnm463urckwqj");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2279,14 +2268,14 @@ Supply arguments directly to `.fns` through an anonymous function instead.
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_z4isyjdevunph15alcbc',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 }, { i: 1, j: 2 }, { i: 1, j: 3 },  ], css_id: 'tinytable_css_5xlecn7nv6cj3g23e9zh',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 }, { i: 1, j: 2 }, { i: 1, j: 3 },  ], css_id: 'tinytable_css_zw5801bkrbequdnca4o1',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_i11l2zdmcbxjvuefpfcj',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_tct2pime8mfmbcuvl0xq(cell.i, cell.j, group.css_id);
+                  styleCell_wm0pxdaqnm463urckwqj(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2294,11 +2283,11 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_z4isyjdevunph15alcbc, .table th.tinytable_css_z4isyjdevunph15alcbc { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_5xlecn7nv6cj3g23e9zh, .table th.tinytable_css_5xlecn7nv6cj3g23e9zh { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_zw5801bkrbequdnca4o1, .table th.tinytable_css_zw5801bkrbequdnca4o1 { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_i11l2zdmcbxjvuefpfcj, .table th.tinytable_css_i11l2zdmcbxjvuefpfcj { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_tct2pime8mfmbcuvl0xq" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_wm0pxdaqnm463urckwqj" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2320,62 +2309,62 @@ Supply arguments directly to `.fns` through an anonymous function instead.
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb23"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb23-1"><a href="data-statistics.html#cb23-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="data-statistics.html#cb23-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;fraction&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="data-statistics.html#cb23-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">value =</span> value <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-4"><a href="data-statistics.html#cb23-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fraction =</span> <span class="fu">factor</span>(fraction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>, <span class="st">&quot;host_bases&quot;</span>, <span class="st">&quot;unmapped_bases&quot;</span>, <span class="st">&quot;mags_bases&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb23-5"><a href="data-statistics.html#cb23-5" tabindex="-1"></a>  </span>
-<span id="cb23-6"><a href="data-statistics.html#cb23-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value, <span class="at">fill=</span>fraction)) <span class="sc">+</span></span>
-<span id="cb23-7"><a href="data-statistics.html#cb23-7" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb23-8"><a href="data-statistics.html#cb23-8" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;Sequence type&quot;</span>,</span>
-<span id="cb23-9"><a href="data-statistics.html#cb23-9" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>,<span class="st">&quot;host_bases&quot;</span>,<span class="st">&quot;unmapped_bases&quot;</span>,<span class="st">&quot;mags_bases&quot;</span>),</span>
-<span id="cb23-10"><a href="data-statistics.html#cb23-10" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Low quality&quot;</span>,<span class="st">&quot;Mapped to host&quot;</span>,<span class="st">&quot;Unmapped&quot;</span>,<span class="st">&quot;Mapped to MAGs&quot;</span>),</span>
-<span id="cb23-11"><a href="data-statistics.html#cb23-11" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#CCCCCC&quot;</span>, <span class="st">&quot;#bcdee1&quot;</span>, <span class="st">&quot;#d8b8a3&quot;</span>,<span class="st">&quot;#93655c&quot;</span>))<span class="sc">+</span></span>
-<span id="cb23-12"><a href="data-statistics.html#cb23-12" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Amount of data (GB)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb23-13"><a href="data-statistics.html#cb23-13" tabindex="-1"></a>        <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb23-14"><a href="data-statistics.html#cb23-14" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb22-1"><a href="data-statistics.html#cb22-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="data-statistics.html#cb22-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;fraction&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="data-statistics.html#cb22-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">value =</span> value <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="data-statistics.html#cb22-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fraction =</span> <span class="fu">factor</span>(fraction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>, <span class="st">&quot;host_bases&quot;</span>, <span class="st">&quot;unmapped_bases&quot;</span>, <span class="st">&quot;mags_bases&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="data-statistics.html#cb22-5" tabindex="-1"></a>  </span>
+<span id="cb22-6"><a href="data-statistics.html#cb22-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value, <span class="at">fill=</span>fraction)) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="data-statistics.html#cb22-7" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="data-statistics.html#cb22-8" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;Sequence type&quot;</span>,</span>
+<span id="cb22-9"><a href="data-statistics.html#cb22-9" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>,<span class="st">&quot;host_bases&quot;</span>,<span class="st">&quot;unmapped_bases&quot;</span>,<span class="st">&quot;mags_bases&quot;</span>),</span>
+<span id="cb22-10"><a href="data-statistics.html#cb22-10" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Low quality&quot;</span>,<span class="st">&quot;Mapped to host&quot;</span>,<span class="st">&quot;Unmapped&quot;</span>,<span class="st">&quot;Mapped to MAGs&quot;</span>),</span>
+<span id="cb22-11"><a href="data-statistics.html#cb22-11" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#CCCCCC&quot;</span>, <span class="st">&quot;#bcdee1&quot;</span>, <span class="st">&quot;#d8b8a3&quot;</span>,<span class="st">&quot;#93655c&quot;</span>))<span class="sc">+</span></span>
+<span id="cb22-12"><a href="data-statistics.html#cb22-12" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Amount of data (GB)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-13"><a href="data-statistics.html#cb22-13" tabindex="-1"></a>        <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb22-14"><a href="data-statistics.html#cb22-14" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/dna_fractions_plot-1.png" width="960" /></p>
 </div>
 <div id="recovered-microbial-fraction" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Recovered microbial fraction<a href="data-statistics.html#recovered-microbial-fraction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb24-1"><a href="data-statistics.html#cb24-1" tabindex="-1"></a>singlem_table <span class="ot">&lt;-</span> sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="data-statistics.html#cb24-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">round</span>((mags_bases <span class="sc">/</span> (mags_bases <span class="sc">+</span> unmapped_bases))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="data-statistics.html#cb24-3" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample))  <span class="sc">%&gt;%</span></span>
-<span id="cb24-4"><a href="data-statistics.html#cb24-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">round</span>(singlem_fraction,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb24-5"><a href="data-statistics.html#cb24-5" tabindex="-1"></a>    <span class="fu">select</span>(sample,mags_proportion,singlem_proportion) <span class="sc">%&gt;%</span></span>
-<span id="cb24-6"><a href="data-statistics.html#cb24-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, mags_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
-<span id="cb24-7"><a href="data-statistics.html#cb24-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
-<span id="cb24-8"><a href="data-statistics.html#cb24-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&lt;</span> mags_proportion, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#if singlem is smaller, then NA, to simplify plot</span></span>
-<span id="cb24-9"><a href="data-statistics.html#cb24-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">100</span>, singlem_proportion)) <span class="co">#simplify</span></span>
-<span id="cb24-10"><a href="data-statistics.html#cb24-10" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="data-statistics.html#cb24-11" tabindex="-1"></a>singlem_table <span class="sc">%&gt;%</span></span>
-<span id="cb24-12"><a href="data-statistics.html#cb24-12" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;proportion&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-13"><a href="data-statistics.html#cb24-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">factor</span>(proportion, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb24-14"><a href="data-statistics.html#cb24-14" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> sample, <span class="at">color=</span>proportion)) <span class="sc">+</span></span>
-<span id="cb24-15"><a href="data-statistics.html#cb24-15" tabindex="-1"></a>            <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> sample), <span class="at">color =</span> <span class="st">&quot;#f8a538&quot;</span>) <span class="sc">+</span></span>
-<span id="cb24-16"><a href="data-statistics.html#cb24-16" tabindex="-1"></a>            <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-17"><a href="data-statistics.html#cb24-17" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="st">&quot;Proportion&quot;</span>,</span>
-<span id="cb24-18"><a href="data-statistics.html#cb24-18" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>),</span>
-<span id="cb24-19"><a href="data-statistics.html#cb24-19" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Recovered&quot;</span>,<span class="st">&quot;Estimated&quot;</span>),</span>
-<span id="cb24-20"><a href="data-statistics.html#cb24-20" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#52e1e8&quot;</span>, <span class="st">&quot;#876b53&quot;</span>))<span class="sc">+</span></span>
-<span id="cb24-21"><a href="data-statistics.html#cb24-21" tabindex="-1"></a>            <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb24-22"><a href="data-statistics.html#cb24-22" tabindex="-1"></a>            <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Prokaryotic fraction (%)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb24-23"><a href="data-statistics.html#cb24-23" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb23-1"><a href="data-statistics.html#cb23-1" tabindex="-1"></a>singlem_table <span class="ot">&lt;-</span> sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="data-statistics.html#cb23-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">round</span>((mags_bases <span class="sc">/</span> (mags_bases <span class="sc">+</span> unmapped_bases))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="data-statistics.html#cb23-3" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample))  <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="data-statistics.html#cb23-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">round</span>(singlem_fraction,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="data-statistics.html#cb23-5" tabindex="-1"></a>    <span class="fu">select</span>(sample,mags_proportion,singlem_proportion) <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="data-statistics.html#cb23-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, mags_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
+<span id="cb23-7"><a href="data-statistics.html#cb23-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
+<span id="cb23-8"><a href="data-statistics.html#cb23-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&lt;</span> mags_proportion, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#if singlem is smaller, then NA, to simplify plot</span></span>
+<span id="cb23-9"><a href="data-statistics.html#cb23-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">100</span>, singlem_proportion)) <span class="co">#simplify</span></span>
+<span id="cb23-10"><a href="data-statistics.html#cb23-10" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="data-statistics.html#cb23-11" tabindex="-1"></a>singlem_table <span class="sc">%&gt;%</span></span>
+<span id="cb23-12"><a href="data-statistics.html#cb23-12" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;proportion&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-13"><a href="data-statistics.html#cb23-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">factor</span>(proportion, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb23-14"><a href="data-statistics.html#cb23-14" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> sample, <span class="at">color=</span>proportion)) <span class="sc">+</span></span>
+<span id="cb23-15"><a href="data-statistics.html#cb23-15" tabindex="-1"></a>            <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> sample), <span class="at">color =</span> <span class="st">&quot;#f8a538&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-16"><a href="data-statistics.html#cb23-16" tabindex="-1"></a>            <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-17"><a href="data-statistics.html#cb23-17" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="st">&quot;Proportion&quot;</span>,</span>
+<span id="cb23-18"><a href="data-statistics.html#cb23-18" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>),</span>
+<span id="cb23-19"><a href="data-statistics.html#cb23-19" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Recovered&quot;</span>,<span class="st">&quot;Estimated&quot;</span>),</span>
+<span id="cb23-20"><a href="data-statistics.html#cb23-20" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#52e1e8&quot;</span>, <span class="st">&quot;#876b53&quot;</span>))<span class="sc">+</span></span>
+<span id="cb23-21"><a href="data-statistics.html#cb23-21" tabindex="-1"></a>            <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb23-22"><a href="data-statistics.html#cb23-22" tabindex="-1"></a>            <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Prokaryotic fraction (%)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-23"><a href="data-statistics.html#cb23-23" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/data_estimations_plot-1.png" width="960" /></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb25-1"><a href="data-statistics.html#cb25-1" tabindex="-1"></a>damr <span class="ot">&lt;-</span> singlem_table <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="data-statistics.html#cb25-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">damr=</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(singlem_proportion),<span class="dv">100</span>,mags_proportion<span class="sc">/</span>singlem_proportion<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="data-statistics.html#cb25-3" tabindex="-1"></a>  <span class="fu">select</span>(sample,damr)</span>
-<span id="cb25-4"><a href="data-statistics.html#cb25-4" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="data-statistics.html#cb25-5" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb25-6"><a href="data-statistics.html#cb25-6" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-7"><a href="data-statistics.html#cb25-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-8"><a href="data-statistics.html#cb25-8" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb24-1"><a href="data-statistics.html#cb24-1" tabindex="-1"></a>damr <span class="ot">&lt;-</span> singlem_table <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="data-statistics.html#cb24-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">damr=</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(singlem_proportion),<span class="dv">100</span>,mags_proportion<span class="sc">/</span>singlem_proportion<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="data-statistics.html#cb24-3" tabindex="-1"></a>  <span class="fu">select</span>(sample,damr)</span>
+<span id="cb24-4"><a href="data-statistics.html#cb24-4" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="data-statistics.html#cb24-5" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb24-6"><a href="data-statistics.html#cb24-6" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-7"><a href="data-statistics.html#cb24-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-8"><a href="data-statistics.html#cb24-8" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_hu3qo445kao5wqez6umi(i, j, css_id) {
-          var table = document.getElementById("tinytable_hu3qo445kao5wqez6umi");
+      function styleCell_leytk6euh1r34boekur6(i, j, css_id) {
+          var table = document.getElementById("tinytable_leytk6euh1r34boekur6");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2385,7 +2374,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_hu3qo445kao5wqez6umi');
+        var table = document.getElementById('tinytable_leytk6euh1r34boekur6');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2393,8 +2382,8 @@ Supply arguments directly to `.fns` through an anonymous function instead.
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_hu3qo445kao5wqez6umi(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_hu3qo445kao5wqez6umi");
+      function spanCell_leytk6euh1r34boekur6(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_leytk6euh1r34boekur6");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2424,14 +2413,14 @@ Supply arguments directly to `.fns` through an anonymous function instead.
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_tup1tuftbxmlccqmsv4d',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_589hne5e9roynvmb4juy',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_jyqy4wreeswn9dxd6sl1',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_404bnvx6q1ajq3zc4uz8',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_hu3qo445kao5wqez6umi(cell.i, cell.j, group.css_id);
+                  styleCell_leytk6euh1r34boekur6(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2439,11 +2428,106 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_tup1tuftbxmlccqmsv4d, .table th.tinytable_css_tup1tuftbxmlccqmsv4d { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_589hne5e9roynvmb4juy, .table th.tinytable_css_589hne5e9roynvmb4juy { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_jyqy4wreeswn9dxd6sl1, .table th.tinytable_css_jyqy4wreeswn9dxd6sl1 { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_404bnvx6q1ajq3zc4uz8, .table th.tinytable_css_404bnvx6q1ajq3zc4uz8 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_hu3qo445kao5wqez6umi" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_leytk6euh1r34boekur6" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+        <thead>
+        
+              <tr>
+                <th scope="col">mean</th>
+                <th scope="col">sd</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>91.89443</td>
+                  <td>12.12337</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+<div class="sourceCode" id="cb25"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb25-1"><a href="data-statistics.html#cb25-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="data-statistics.html#cb25-2" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="data-statistics.html#cb25-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="data-statistics.html#cb25-4" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_0uqdve6v7786dazro4d3(i, j, css_id) {
+          var table = document.getElementById("tinytable_0uqdve6v7786dazro4d3");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_0uqdve6v7786dazro4d3');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_0uqdve6v7786dazro4d3(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_0uqdve6v7786dazro4d3");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_yjygwqwj4ky0ur2fji6l',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_1j0bazar70i9x6nbvd04',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_0uqdve6v7786dazro4d3(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_yjygwqwj4ky0ur2fji6l, .table th.tinytable_css_yjygwqwj4ky0ur2fji6l { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_1j0bazar70i9x6nbvd04, .table th.tinytable_css_1j0bazar70i9x6nbvd04 { border-bottom: solid #d3d8dc 0.1em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_0uqdve6v7786dazro4d3" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2462,15 +2546,13 @@ Supply arguments directly to `.fns` through an anonymous function instead.
     </div>
 <!-- hack to avoid NA insertion in last line -->
 <div class="sourceCode" id="cb26"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb26-1"><a href="data-statistics.html#cb26-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="data-statistics.html#cb26-2" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="data-statistics.html#cb26-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-4"><a href="data-statistics.html#cb26-4" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<span id="cb26-2"><a href="data-statistics.html#cb26-2" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_xk7zig9upm42sknld5ai(i, j, css_id) {
-          var table = document.getElementById("tinytable_xk7zig9upm42sknld5ai");
+      function styleCell_n3ln742bdv787erkdi3r(i, j, css_id) {
+          var table = document.getElementById("tinytable_n3ln742bdv787erkdi3r");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2480,7 +2562,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_xk7zig9upm42sknld5ai');
+        var table = document.getElementById('tinytable_n3ln742bdv787erkdi3r');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2488,8 +2570,8 @@ Supply arguments directly to `.fns` through an anonymous function instead.
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_xk7zig9upm42sknld5ai(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_xk7zig9upm42sknld5ai");
+      function spanCell_n3ln742bdv787erkdi3r(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_n3ln742bdv787erkdi3r");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2519,14 +2601,14 @@ Supply arguments directly to `.fns` through an anonymous function instead.
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_rpkrku9jmme3bwn800jx',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_5yq28yoisxb8hsmkrd46',}, 
+          { positions: [ { i: 249, j: 0 }, { i: 249, j: 1 },  ], css_id: 'tinytable_css_ynjeoays9styntnac15h',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_9l8ojr30b4k8leyqss34',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_xk7zig9upm42sknld5ai(cell.i, cell.j, group.css_id);
+                  styleCell_n3ln742bdv787erkdi3r(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2534,104 +2616,11 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_rpkrku9jmme3bwn800jx, .table th.tinytable_css_rpkrku9jmme3bwn800jx { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_5yq28yoisxb8hsmkrd46, .table th.tinytable_css_5yq28yoisxb8hsmkrd46 { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_ynjeoays9styntnac15h, .table th.tinytable_css_ynjeoays9styntnac15h { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_9l8ojr30b4k8leyqss34, .table th.tinytable_css_9l8ojr30b4k8leyqss34 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_xk7zig9upm42sknld5ai" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
-        <thead>
-        
-              <tr>
-                <th scope="col">mean</th>
-                <th scope="col">sd</th>
-              </tr>
-        </thead>
-        
-        <tbody>
-                <tr>
-                  <td>91.89443</td>
-                  <td>12.12337</td>
-                </tr>
-        </tbody>
-      </table>
-    </div>
-<!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb27"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb27-1"><a href="data-statistics.html#cb27-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a href="data-statistics.html#cb27-2" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
-<!-- preamble start -->
-
-    <script>
-
-      function styleCell_yqkauxig27r7pqzcrtud(i, j, css_id) {
-          var table = document.getElementById("tinytable_yqkauxig27r7pqzcrtud");
-          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
-          if (cell) {
-              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
-              cell.classList.add(css_id);
-          } else {
-              console.warn(`Cell at (${i}, ${j}) not found.`);
-          }
-      }
-      function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_yqkauxig27r7pqzcrtud');
-        var newRow = table.insertRow(i);
-        var newCell = newRow.insertCell(0);
-        newCell.setAttribute("colspan", colspan);
-        // newCell.innerText = content;
-        // this may be unsafe, but innerText does not interpret <br>
-        newCell.innerHTML = content;
-      }
-      function spanCell_yqkauxig27r7pqzcrtud(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_yqkauxig27r7pqzcrtud");
-        const targetRow = table.rows[i];
-        const targetCell = targetRow.cells[j];
-        for (let r = 0; r < rowspan; r++) {
-          // Only start deleting cells to the right for the first row (r == 0)
-          if (r === 0) {
-            // Delete cells to the right of the target cell in the first row
-            for (let c = colspan - 1; c > 0; c--) {
-              if (table.rows[i + r].cells[j + c]) {
-                table.rows[i + r].deleteCell(j + c);
-              }
-            }
-          }
-          // For rows below the first, delete starting from the target column
-          if (r > 0) {
-            for (let c = colspan - 1; c >= 0; c--) {
-              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
-                table.rows[i + r].deleteCell(j);
-              }
-            }
-          }
-        }
-        // Set rowspan and colspan of the target cell
-        targetCell.rowSpan = rowspan;
-        targetCell.colSpan = colspan;
-      }
-      // tinytable span after
-      window.addEventListener('load', function () {
-          var cellsToStyle = [
-            // tinytable style arrays after
-          { positions: [ { i: 249, j: 0 }, { i: 249, j: 1 },  ], css_id: 'tinytable_css_ppndtytklrj4ic35t2rj',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_3ins0tg5s29fdewwretk',}, 
-          ];
-
-          // Loop over the arrays to style the cells
-          cellsToStyle.forEach(function (group) {
-              group.positions.forEach(function (cell) {
-                  styleCell_yqkauxig27r7pqzcrtud(cell.i, cell.j, group.css_id);
-              });
-          });
-      });
-    </script>
-
-    <style>
-      /* tinytable css entries after */
-      .table td.tinytable_css_ppndtytklrj4ic35t2rj, .table th.tinytable_css_ppndtytklrj4ic35t2rj { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_3ins0tg5s29fdewwretk, .table th.tinytable_css_3ins0tg5s29fdewwretk { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-    </style>
-    <div class="container">
-      <table class="table table-borderless" id="tinytable_yqkauxig27r7pqzcrtud" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_n3ln742bdv787erkdi3r" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -3641,19 +3630,19 @@ Supply arguments directly to `.fns` through an anonymous function instead.
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb28"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb28-1"><a href="data-statistics.html#cb28-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb28-2"><a href="data-statistics.html#cb28-2" tabindex="-1"></a>  <span class="fu">filter</span>(damr<span class="sc">&gt;</span><span class="dv">95</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb28-3"><a href="data-statistics.html#cb28-3" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb27-1"><a href="data-statistics.html#cb27-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="data-statistics.html#cb27-2" tabindex="-1"></a>  <span class="fu">filter</span>(damr<span class="sc">&gt;</span><span class="dv">95</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="data-statistics.html#cb27-3" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
 <pre class="script-output"><code>[1] 151</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb30-1"><a href="data-statistics.html#cb30-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb30-2"><a href="data-statistics.html#cb30-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb30-3"><a href="data-statistics.html#cb30-3" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb29-1"><a href="data-statistics.html#cb29-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="data-statistics.html#cb29-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="data-statistics.html#cb29-3" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_11zexc2fdfdlm259cjer(i, j, css_id) {
-          var table = document.getElementById("tinytable_11zexc2fdfdlm259cjer");
+      function styleCell_6c8d3pvn8jqlt1w0b8uz(i, j, css_id) {
+          var table = document.getElementById("tinytable_6c8d3pvn8jqlt1w0b8uz");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -3663,7 +3652,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_11zexc2fdfdlm259cjer');
+        var table = document.getElementById('tinytable_6c8d3pvn8jqlt1w0b8uz');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -3671,8 +3660,8 @@ Supply arguments directly to `.fns` through an anonymous function instead.
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_11zexc2fdfdlm259cjer(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_11zexc2fdfdlm259cjer");
+      function spanCell_6c8d3pvn8jqlt1w0b8uz(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_6c8d3pvn8jqlt1w0b8uz");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -3702,14 +3691,14 @@ Supply arguments directly to `.fns` through an anonymous function instead.
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_yn7fhmvlyeqgu775suww',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_8dzfne2efksj6e7vdtox',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_dhm4ymjms424sgeph0w7',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_0l5w5eba0i70negwh2rt',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_11zexc2fdfdlm259cjer(cell.i, cell.j, group.css_id);
+                  styleCell_6c8d3pvn8jqlt1w0b8uz(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -3717,11 +3706,11 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_yn7fhmvlyeqgu775suww, .table th.tinytable_css_yn7fhmvlyeqgu775suww { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_8dzfne2efksj6e7vdtox, .table th.tinytable_css_8dzfne2efksj6e7vdtox { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_dhm4ymjms424sgeph0w7, .table th.tinytable_css_dhm4ymjms424sgeph0w7 { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_0l5w5eba0i70negwh2rt, .table th.tinytable_css_0l5w5eba0i70negwh2rt { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_11zexc2fdfdlm259cjer" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_6c8d3pvn8jqlt1w0b8uz" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>

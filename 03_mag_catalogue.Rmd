@@ -1,7 +1,7 @@
 # MAG catalogue
 
 ```{r load_data_mag, message=FALSE, warning=FALSE}
-load("../data/data.Rdata")
+load("data/data.Rdata")
 ```
 
 ## filter samples with high host data
