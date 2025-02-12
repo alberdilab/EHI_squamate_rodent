@@ -86,6 +86,24 @@ genome_counts_filt <- read_counts_filt %>%
   mutate(across(where(is.numeric), ~ . / (genome_metadata$length / readlength) ))
 ```
 
+```{r remove_low_smf_samples, warning=FALSE, comments="", message=FALSE}
+
+low_smf_samples <- sample_metadata %>%
+  filter(singlem_fraction < 30)
+
+low_smf_samples %>% 
+  tt()
+
+#perform filtering
+genome_counts_filt <- genome_counts_filt %>%
+  select(!low_smf_samples$sample)
+
+read_counts <- read_counts %>%
+  select(!low_smf_samples$sample)
+
+```
+
+
 ### Distill annotations into GIFTs 
 
 ```{r distill_annotations, warning=FALSE, comments="", message=FALSE}

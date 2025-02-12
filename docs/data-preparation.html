@@ -24,7 +24,7 @@
 <meta name="author" content="Antton Alberdi" />
 
 
-<meta name="date" content="2025-02-10" />
+<meta name="date" content="2025-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -305,84 +305,346 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb11"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb11-1"><a href="data-preparation.html#cb11-1" tabindex="-1"></a>readlength<span class="ot">=</span><span class="dv">150</span></span>
 <span id="cb11-2"><a href="data-preparation.html#cb11-2" tabindex="-1"></a>genome_counts_filt <span class="ot">&lt;-</span> read_counts_filt <span class="sc">%&gt;%</span></span>
 <span id="cb11-3"><a href="data-preparation.html#cb11-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> . <span class="sc">/</span> (genome_metadata<span class="sc">$</span>length <span class="sc">/</span> readlength) ))</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb12-1"><a href="data-preparation.html#cb12-1" tabindex="-1"></a>low_smf_samples <span class="ot">&lt;-</span> sample_metadata <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="data-preparation.html#cb12-2" tabindex="-1"></a>  <span class="fu">filter</span>(singlem_fraction <span class="sc">&lt;</span> <span class="dv">30</span>)</span>
+<span id="cb12-3"><a href="data-preparation.html#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="data-preparation.html#cb12-4" tabindex="-1"></a>low_smf_samples <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a href="data-preparation.html#cb12-5" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_rde5msxufp8vs4v6gb2r(i, j, css_id) {
+          var table = document.getElementById("tinytable_rde5msxufp8vs4v6gb2r");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_rde5msxufp8vs4v6gb2r');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_rde5msxufp8vs4v6gb2r(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_rde5msxufp8vs4v6gb2r");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 7, j: 0 }, { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 7, j: 3 }, { i: 7, j: 4 }, { i: 7, j: 5 }, { i: 7, j: 12 }, { i: 7, j: 6 }, { i: 7, j: 13 }, { i: 7, j: 7 }, { i: 7, j: 14 }, { i: 7, j: 8 }, { i: 7, j: 15 }, { i: 7, j: 9 }, { i: 7, j: 16 }, { i: 7, j: 10 }, { i: 7, j: 17 }, { i: 7, j: 11 }, { i: 7, j: 18 },  ], css_id: 'tinytable_css_n1t6ldymkgtnmyed36ae',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 7 }, { i: 0, j: 1 }, { i: 0, j: 8 }, { i: 0, j: 2 }, { i: 0, j: 9 }, { i: 0, j: 3 }, { i: 0, j: 10 }, { i: 0, j: 4 }, { i: 0, j: 11 }, { i: 0, j: 5 }, { i: 0, j: 12 }, { i: 0, j: 6 }, { i: 0, j: 13 }, { i: 0, j: 14 }, { i: 0, j: 15 }, { i: 0, j: 16 }, { i: 0, j: 17 }, { i: 0, j: 18 },  ], css_id: 'tinytable_css_lc634toauneuob9fqx5s',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_rde5msxufp8vs4v6gb2r(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_n1t6ldymkgtnmyed36ae, .table th.tinytable_css_n1t6ldymkgtnmyed36ae { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_lc634toauneuob9fqx5s, .table th.tinytable_css_lc634toauneuob9fqx5s { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_rde5msxufp8vs4v6gb2r" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+        <thead>
+        
+              <tr>
+                <th scope="col">sample</th>
+                <th scope="col">sample_code</th>
+                <th scope="col">host_species</th>
+                <th scope="col">region</th>
+                <th scope="col">sample_type</th>
+                <th scope="col">host_order</th>
+                <th scope="col">sex</th>
+                <th scope="col">country</th>
+                <th scope="col">latitude</th>
+                <th scope="col">longitude</th>
+                <th scope="col">singlem_fraction</th>
+                <th scope="col">reads_post_fastp</th>
+                <th scope="col">host_reads</th>
+                <th scope="col">reads_lost_fastp_percent</th>
+                <th scope="col">metagenomic_bases</th>
+                <th scope="col">host_bases</th>
+                <th scope="col">bases_lost_fastp_percent</th>
+                <th scope="col">diversity</th>
+                <th scope="col">C</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>EHI02388</td>
+                  <td>ADG49</td>
+                  <td>Iberolacerta aranica </td>
+                  <td>Occitanie, Sentein         </td>
+                  <td>Faecal</td>
+                  <td>Squamata</td>
+                  <td>Male   </td>
+                  <td>recD0072mQhXdzBoy</td>
+                  <td>42.84</td>
+                  <td>0.86 </td>
+                  <td>24.18</td>
+                  <td>33915030</td>
+                  <td>16805956</td>
+                  <td>0.01862189</td>
+                  <td>2181608548</td>
+                  <td>2714947917</td>
+                  <td>0.05540929</td>
+                  <td>19.45642</td>
+                  <td>0.6853222</td>
+                </tr>
+                <tr>
+                  <td>EHI02266</td>
+                  <td>AAN34</td>
+                  <td>Myodes glareolus     </td>
+                  <td>Scotland                   </td>
+                  <td>Faecal</td>
+                  <td>Rodentia</td>
+                  <td>Female </td>
+                  <td>recWNrlBagsRxnwjj</td>
+                  <td>57.19</td>
+                  <td>-3.68</td>
+                  <td>28.17</td>
+                  <td>27488038</td>
+                  <td>  180508</td>
+                  <td>0.02693732</td>
+                  <td>3956379047</td>
+                  <td>  35226518</td>
+                  <td>0.05799451</td>
+                  <td>20.56006</td>
+                  <td>0.5747500</td>
+                </tr>
+                <tr>
+                  <td>EHI01806</td>
+                  <td>AHV65</td>
+                  <td>Psammodromus manuelae</td>
+                  <td>Figueira de Castelo Rodrigo</td>
+                  <td>Faecal</td>
+                  <td>Squamata</td>
+                  <td>Female </td>
+                  <td>recAf61NgigHFbcBU</td>
+                  <td>40.94</td>
+                  <td>-7.08</td>
+                  <td> 0.96</td>
+                  <td>16811768</td>
+                  <td> 2051904</td>
+                  <td>0.02101481</td>
+                  <td>2061748753</td>
+                  <td> 435036312</td>
+                  <td>0.03071246</td>
+                  <td>20.08947</td>
+                  <td>0.6102871</td>
+                </tr>
+                <tr>
+                  <td>EHI01812</td>
+                  <td>AHV59</td>
+                  <td>Psammodromus manuelae</td>
+                  <td>Figueira de Castelo Rodrigo</td>
+                  <td>Faecal</td>
+                  <td>Squamata</td>
+                  <td>Male   </td>
+                  <td>recAf61NgigHFbcBU</td>
+                  <td>40.94</td>
+                  <td>-7.08</td>
+                  <td> 0.00</td>
+                  <td>41729352</td>
+                  <td> 5188978</td>
+                  <td>0.01807842</td>
+                  <td>         0</td>
+                  <td>6203876032</td>
+                  <td>0.02678898</td>
+                  <td>20.01682</td>
+                  <td>0.7931143</td>
+                </tr>
+                <tr>
+                  <td>EHI01808</td>
+                  <td>AHV41</td>
+                  <td>Psammodromus manuelae</td>
+                  <td>Figueira de Castelo Rodrigo</td>
+                  <td>Faecal</td>
+                  <td>Squamata</td>
+                  <td>Female </td>
+                  <td>recAf61NgigHFbcBU</td>
+                  <td>40.91</td>
+                  <td>-7.09</td>
+                  <td> 6.77</td>
+                  <td>31804662</td>
+                  <td> 3586923</td>
+                  <td>0.02476776</td>
+                  <td>3962899698</td>
+                  <td> 763422374</td>
+                  <td>0.03383941</td>
+                  <td>20.21500</td>
+                  <td>0.7086988</td>
+                </tr>
+                <tr>
+                  <td>EHI02383</td>
+                  <td>ADG37</td>
+                  <td>Iberolacerta aranica </td>
+                  <td>Occitanie, Sentein         </td>
+                  <td>Faecal</td>
+                  <td>Squamata</td>
+                  <td>Female </td>
+                  <td>recD0072mQhXdzBoy</td>
+                  <td>42.83</td>
+                  <td>0.88 </td>
+                  <td> 5.21</td>
+                  <td>26187984</td>
+                  <td> 2738592</td>
+                  <td>0.02914754</td>
+                  <td>3189092747</td>
+                  <td> 456822311</td>
+                  <td>0.09891356</td>
+                  <td>16.88647</td>
+                  <td>0.7542054</td>
+                </tr>
+                <tr>
+                  <td>EHI01045</td>
+                  <td>ACX37</td>
+                  <td>Timon lepidus        </td>
+                  <td>Arouca                     </td>
+                  <td>Faecal</td>
+                  <td>Squamata</td>
+                  <td>Unknown</td>
+                  <td>recAf61NgigHFbcBU</td>
+                  <td>40.84</td>
+                  <td>-8.16</td>
+                  <td> 0.00</td>
+                  <td>  866710</td>
+                  <td>   16835</td>
+                  <td>0.01358454</td>
+                  <td>         0</td>
+                  <td> 125370657</td>
+                  <td>0.04875868</td>
+                  <td> 0.00000</td>
+                  <td>0.0000000</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+<div class="sourceCode" id="cb13"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb13-1"><a href="data-preparation.html#cb13-1" tabindex="-1"></a><span class="co">#perform filtering</span></span>
+<span id="cb13-2"><a href="data-preparation.html#cb13-2" tabindex="-1"></a>genome_counts_filt <span class="ot">&lt;-</span> genome_counts_filt <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="data-preparation.html#cb13-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>low_smf_samples<span class="sc">$</span>sample)</span>
+<span id="cb13-4"><a href="data-preparation.html#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="data-preparation.html#cb13-5" tabindex="-1"></a>read_counts <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="data-preparation.html#cb13-6" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>low_smf_samples<span class="sc">$</span>sample)</span></code></pre></div>
 </div>
 <div id="distill-annotations-into-gifts" class="section level3 hasAnchor" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Distill annotations into GIFTs<a href="data-preparation.html#distill-annotations-into-gifts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb12-1"><a href="data-preparation.html#cb12-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/genome_gifts_raw.Rdata&quot;</span>)</span>
-<span id="cb12-2"><a href="data-preparation.html#cb12-2" tabindex="-1"></a>genome_counts_filt <span class="ot">&lt;-</span> genome_counts_filt[genome_counts_filt<span class="sc">$</span>genome <span class="sc">%in%</span> <span class="fu">rownames</span>(genome_gifts_raw),] </span>
-<span id="cb12-3"><a href="data-preparation.html#cb12-3" tabindex="-1"></a><span class="fu">rownames</span>(genome_counts_filt) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb12-4"><a href="data-preparation.html#cb12-4" tabindex="-1"></a>genome_gifts <span class="ot">&lt;-</span> genome_gifts_raw[<span class="fu">rownames</span>(genome_gifts_raw) <span class="sc">%in%</span> genome_counts_filt<span class="sc">$</span>genome,] </span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb14-1"><a href="data-preparation.html#cb14-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/genome_gifts_raw.Rdata&quot;</span>)</span>
+<span id="cb14-2"><a href="data-preparation.html#cb14-2" tabindex="-1"></a>genome_counts_filt <span class="ot">&lt;-</span> genome_counts_filt[genome_counts_filt<span class="sc">$</span>genome <span class="sc">%in%</span> <span class="fu">rownames</span>(genome_gifts_raw),] </span>
+<span id="cb14-3"><a href="data-preparation.html#cb14-3" tabindex="-1"></a><span class="fu">rownames</span>(genome_counts_filt) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb14-4"><a href="data-preparation.html#cb14-4" tabindex="-1"></a>genome_gifts <span class="ot">&lt;-</span> genome_gifts_raw[<span class="fu">rownames</span>(genome_gifts_raw) <span class="sc">%in%</span> genome_counts_filt<span class="sc">$</span>genome,] </span></code></pre></div>
 </div>
 </div>
 <div id="prepare-color-scheme" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Prepare color scheme<a href="data-preparation.html#prepare-color-scheme" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><a href="www.alberdilab.dk">AlberdiLab</a> projects use unified color schemes developed for the <a href="www.earthhologenome.org">Earth Hologenome Initiative</a>, to facilitate figure interpretation.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb13-1"><a href="data-preparation.html#cb13-1" tabindex="-1"></a>phylum_colors <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://raw.githubusercontent.com/earthhologenome/EHI_taxonomy_colour/main/ehi_phylum_colors.tsv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="data-preparation.html#cb13-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">phylum=</span><span class="fu">str_remove_all</span>(phylum, <span class="st">&quot;p__&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="data-preparation.html#cb13-3" tabindex="-1"></a>  <span class="fu">right_join</span>(genome_metadata, <span class="at">by=</span><span class="fu">join_by</span>(phylum <span class="sc">==</span> phylum)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-4"><a href="data-preparation.html#cb13-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">match</span>(genome, genome_tree<span class="sc">$</span>tip.label)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="data-preparation.html#cb13-5" tabindex="-1"></a>  <span class="fu">select</span>(phylum, colors) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-6"><a href="data-preparation.html#cb13-6" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb13-7"><a href="data-preparation.html#cb13-7" tabindex="-1"></a>  <span class="fu">arrange</span>(phylum) <span class="sc">%&gt;%</span></span>
-<span id="cb13-8"><a href="data-preparation.html#cb13-8" tabindex="-1"></a>  <span class="fu">pull</span>(colors, <span class="at">name=</span>phylum)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb15-1"><a href="data-preparation.html#cb15-1" tabindex="-1"></a>phylum_colors <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://raw.githubusercontent.com/earthhologenome/EHI_taxonomy_colour/main/ehi_phylum_colors.tsv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="data-preparation.html#cb15-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">phylum=</span><span class="fu">str_remove_all</span>(phylum, <span class="st">&quot;p__&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="data-preparation.html#cb15-3" tabindex="-1"></a>  <span class="fu">right_join</span>(genome_metadata, <span class="at">by=</span><span class="fu">join_by</span>(phylum <span class="sc">==</span> phylum)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="data-preparation.html#cb15-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">match</span>(genome, genome_tree<span class="sc">$</span>tip.label)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="data-preparation.html#cb15-5" tabindex="-1"></a>  <span class="fu">select</span>(phylum, colors) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="data-preparation.html#cb15-6" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="data-preparation.html#cb15-7" tabindex="-1"></a>  <span class="fu">arrange</span>(phylum) <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a href="data-preparation.html#cb15-8" tabindex="-1"></a>  <span class="fu">pull</span>(colors, <span class="at">name=</span>phylum)</span></code></pre></div>
 </div>
 <div id="prepare-a-phyloseq-object" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Prepare a phyloseq object<a href="data-preparation.html#prepare-a-phyloseq-object" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb14-1"><a href="data-preparation.html#cb14-1" tabindex="-1"></a>phylo_samples <span class="ot">&lt;-</span> sample_metadata <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="data-preparation.html#cb14-2" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;sample&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a href="data-preparation.html#cb14-3" tabindex="-1"></a>  <span class="fu">sample_data</span>() <span class="co">#convert to phyloseq sample_data object</span></span>
-<span id="cb14-4"><a href="data-preparation.html#cb14-4" tabindex="-1"></a>phylo_genome <span class="ot">&lt;-</span> genome_counts_filt <span class="sc">%&gt;%</span> </span>
-<span id="cb14-5"><a href="data-preparation.html#cb14-5" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;genome&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-6"><a href="data-preparation.html#cb14-6" tabindex="-1"></a>  <span class="fu">otu_table</span>(., <span class="at">taxa_are_rows =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-7"><a href="data-preparation.html#cb14-7" tabindex="-1"></a>phylo_taxonomy <span class="ot">&lt;-</span> genome_metadata <span class="sc">%&gt;%</span></span>
-<span id="cb14-8"><a href="data-preparation.html#cb14-8" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;genome&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-9"><a href="data-preparation.html#cb14-9" tabindex="-1"></a>  <span class="fu">as.matrix</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb14-10"><a href="data-preparation.html#cb14-10" tabindex="-1"></a>  <span class="fu">tax_table</span>() <span class="co">#convert to phyloseq tax_table object</span></span>
-<span id="cb14-11"><a href="data-preparation.html#cb14-11" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="data-preparation.html#cb14-12" tabindex="-1"></a>physeq_genome <span class="ot">&lt;-</span> <span class="fu">phyloseq</span>(phylo_genome, phylo_taxonomy, phylo_samples)</span>
-<span id="cb14-13"><a href="data-preparation.html#cb14-13" tabindex="-1"></a>physeq_genome_clr <span class="ot">&lt;-</span> microbiome<span class="sc">::</span><span class="fu">transform</span>(physeq_genome, <span class="st">&#39;clr&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb16-1"><a href="data-preparation.html#cb16-1" tabindex="-1"></a>phylo_samples <span class="ot">&lt;-</span> sample_metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="data-preparation.html#cb16-2" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;sample&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="data-preparation.html#cb16-3" tabindex="-1"></a>  <span class="fu">sample_data</span>() <span class="co">#convert to phyloseq sample_data object</span></span>
+<span id="cb16-4"><a href="data-preparation.html#cb16-4" tabindex="-1"></a>phylo_genome <span class="ot">&lt;-</span> genome_counts_filt <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="data-preparation.html#cb16-5" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;genome&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-6"><a href="data-preparation.html#cb16-6" tabindex="-1"></a>  <span class="fu">otu_table</span>(., <span class="at">taxa_are_rows =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-7"><a href="data-preparation.html#cb16-7" tabindex="-1"></a>phylo_taxonomy <span class="ot">&lt;-</span> genome_metadata <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="data-preparation.html#cb16-8" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;genome&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-9"><a href="data-preparation.html#cb16-9" tabindex="-1"></a>  <span class="fu">as.matrix</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb16-10"><a href="data-preparation.html#cb16-10" tabindex="-1"></a>  <span class="fu">tax_table</span>() <span class="co">#convert to phyloseq tax_table object</span></span>
+<span id="cb16-11"><a href="data-preparation.html#cb16-11" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="data-preparation.html#cb16-12" tabindex="-1"></a>physeq_genome <span class="ot">&lt;-</span> <span class="fu">phyloseq</span>(phylo_genome, phylo_taxonomy, phylo_samples)</span>
+<span id="cb16-13"><a href="data-preparation.html#cb16-13" tabindex="-1"></a>physeq_genome_clr <span class="ot">&lt;-</span> microbiome<span class="sc">::</span><span class="fu">transform</span>(physeq_genome, <span class="st">&#39;clr&#39;</span>)</span></code></pre></div>
 </div>
 <div id="prepare-colour-codes-for-host-species" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> Prepare colour codes for host species<a href="data-preparation.html#prepare-colour-codes-for-host-species" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb15-1"><a href="data-preparation.html#cb15-1" tabindex="-1"></a>species_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb15-2"><a href="data-preparation.html#cb15-2" tabindex="-1"></a>  <span class="st">&quot;Podarcis pityusensis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#bef7ff&quot;</span>, </span>
-<span id="cb15-3"><a href="data-preparation.html#cb15-3" tabindex="-1"></a>  <span class="st">&quot;Podarcis gaigeae&quot;</span> <span class="ot">=</span> <span class="st">&quot;#a6e2ff&quot;</span>, </span>
-<span id="cb15-4"><a href="data-preparation.html#cb15-4" tabindex="-1"></a>  <span class="st">&quot;Podarcis milensis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#8eccff&quot;</span>, </span>
-<span id="cb15-5"><a href="data-preparation.html#cb15-5" tabindex="-1"></a>  <span class="st">&quot;Podarcis filfolensis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#75b7ff&quot;</span>, </span>
-<span id="cb15-6"><a href="data-preparation.html#cb15-6" tabindex="-1"></a>  <span class="st">&quot;Podarcis liolepis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#5da1ff&quot;</span>, </span>
-<span id="cb15-7"><a href="data-preparation.html#cb15-7" tabindex="-1"></a>  <span class="st">&quot;Podarcis muralis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#458cff&quot;</span>,</span>
-<span id="cb15-8"><a href="data-preparation.html#cb15-8" tabindex="-1"></a>  <span class="st">&quot;Iberolacerta bonnali&quot;</span> <span class="ot">=</span> <span class="st">&quot;#c080ff&quot;</span>,</span>
-<span id="cb15-9"><a href="data-preparation.html#cb15-9" tabindex="-1"></a>  <span class="st">&quot;Iberolacerta aranica&quot;</span> <span class="ot">=</span> <span class="st">&quot;#8000ff&quot;</span>,</span>
-<span id="cb15-10"><a href="data-preparation.html#cb15-10" tabindex="-1"></a>  <span class="st">&quot;Lacerta viridis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#804280&quot;</span>,</span>
-<span id="cb15-11"><a href="data-preparation.html#cb15-11" tabindex="-1"></a>  <span class="st">&quot;Chalcides striatus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#80d9ff&quot;</span>,</span>
-<span id="cb15-12"><a href="data-preparation.html#cb15-12" tabindex="-1"></a>  <span class="st">&quot;Timon lepidus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#797980&quot;</span>,</span>
-<span id="cb15-13"><a href="data-preparation.html#cb15-13" tabindex="-1"></a>  <span class="st">&quot;Psammodromus algirus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#a1a1aa&quot;</span>,</span>
-<span id="cb15-14"><a href="data-preparation.html#cb15-14" tabindex="-1"></a>  <span class="st">&quot;Rattus rattus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ff0000&quot;</span>,</span>
-<span id="cb15-15"><a href="data-preparation.html#cb15-15" tabindex="-1"></a>  <span class="st">&quot;Rattus lutreolus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ff5555&quot;</span>,</span>
-<span id="cb15-16"><a href="data-preparation.html#cb15-16" tabindex="-1"></a>  <span class="st">&quot;Myodes glareolus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#aa6c00&quot;</span>,</span>
-<span id="cb15-17"><a href="data-preparation.html#cb15-17" tabindex="-1"></a>  <span class="st">&quot;Myodes rufocanus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ffa200&quot;</span>,</span>
-<span id="cb15-18"><a href="data-preparation.html#cb15-18" tabindex="-1"></a>  <span class="st">&quot;Apodemus sylvaticus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#5eff00&quot;</span>,</span>
-<span id="cb15-19"><a href="data-preparation.html#cb15-19" tabindex="-1"></a>  <span class="st">&quot;Apodemus flavicollis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#4ed500&quot;</span>,</span>
-<span id="cb15-20"><a href="data-preparation.html#cb15-20" tabindex="-1"></a>  <span class="st">&quot;Peromyscus maniculatus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ffa7a7&quot;</span>,</span>
-<span id="cb15-21"><a href="data-preparation.html#cb15-21" tabindex="-1"></a>  <span class="st">&quot;Muscardinus avellanarius&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ff416d&quot;</span>,</span>
-<span id="cb15-22"><a href="data-preparation.html#cb15-22" tabindex="-1"></a>  <span class="st">&quot;Sciurus vulgaris&quot;</span> <span class="ot">=</span> <span class="st">&quot;#00ff91&quot;</span></span>
-<span id="cb15-23"><a href="data-preparation.html#cb15-23" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb17-1"><a href="data-preparation.html#cb17-1" tabindex="-1"></a>species_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb17-2"><a href="data-preparation.html#cb17-2" tabindex="-1"></a>  <span class="st">&quot;Podarcis pityusensis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#bef7ff&quot;</span>, </span>
+<span id="cb17-3"><a href="data-preparation.html#cb17-3" tabindex="-1"></a>  <span class="st">&quot;Podarcis gaigeae&quot;</span> <span class="ot">=</span> <span class="st">&quot;#a6e2ff&quot;</span>, </span>
+<span id="cb17-4"><a href="data-preparation.html#cb17-4" tabindex="-1"></a>  <span class="st">&quot;Podarcis milensis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#8eccff&quot;</span>, </span>
+<span id="cb17-5"><a href="data-preparation.html#cb17-5" tabindex="-1"></a>  <span class="st">&quot;Podarcis filfolensis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#75b7ff&quot;</span>, </span>
+<span id="cb17-6"><a href="data-preparation.html#cb17-6" tabindex="-1"></a>  <span class="st">&quot;Podarcis liolepis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#5da1ff&quot;</span>, </span>
+<span id="cb17-7"><a href="data-preparation.html#cb17-7" tabindex="-1"></a>  <span class="st">&quot;Podarcis muralis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#458cff&quot;</span>,</span>
+<span id="cb17-8"><a href="data-preparation.html#cb17-8" tabindex="-1"></a>  <span class="st">&quot;Iberolacerta bonnali&quot;</span> <span class="ot">=</span> <span class="st">&quot;#c080ff&quot;</span>,</span>
+<span id="cb17-9"><a href="data-preparation.html#cb17-9" tabindex="-1"></a>  <span class="st">&quot;Iberolacerta aranica&quot;</span> <span class="ot">=</span> <span class="st">&quot;#8000ff&quot;</span>,</span>
+<span id="cb17-10"><a href="data-preparation.html#cb17-10" tabindex="-1"></a>  <span class="st">&quot;Lacerta viridis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#804280&quot;</span>,</span>
+<span id="cb17-11"><a href="data-preparation.html#cb17-11" tabindex="-1"></a>  <span class="st">&quot;Chalcides striatus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#80d9ff&quot;</span>,</span>
+<span id="cb17-12"><a href="data-preparation.html#cb17-12" tabindex="-1"></a>  <span class="st">&quot;Timon lepidus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#797980&quot;</span>,</span>
+<span id="cb17-13"><a href="data-preparation.html#cb17-13" tabindex="-1"></a>  <span class="st">&quot;Psammodromus algirus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#a1a1aa&quot;</span>,</span>
+<span id="cb17-14"><a href="data-preparation.html#cb17-14" tabindex="-1"></a>  <span class="st">&quot;Rattus rattus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ff0000&quot;</span>,</span>
+<span id="cb17-15"><a href="data-preparation.html#cb17-15" tabindex="-1"></a>  <span class="st">&quot;Rattus lutreolus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ff5555&quot;</span>,</span>
+<span id="cb17-16"><a href="data-preparation.html#cb17-16" tabindex="-1"></a>  <span class="st">&quot;Myodes glareolus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#aa6c00&quot;</span>,</span>
+<span id="cb17-17"><a href="data-preparation.html#cb17-17" tabindex="-1"></a>  <span class="st">&quot;Myodes rufocanus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ffa200&quot;</span>,</span>
+<span id="cb17-18"><a href="data-preparation.html#cb17-18" tabindex="-1"></a>  <span class="st">&quot;Apodemus sylvaticus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#5eff00&quot;</span>,</span>
+<span id="cb17-19"><a href="data-preparation.html#cb17-19" tabindex="-1"></a>  <span class="st">&quot;Apodemus flavicollis&quot;</span> <span class="ot">=</span> <span class="st">&quot;#4ed500&quot;</span>,</span>
+<span id="cb17-20"><a href="data-preparation.html#cb17-20" tabindex="-1"></a>  <span class="st">&quot;Peromyscus maniculatus&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ffa7a7&quot;</span>,</span>
+<span id="cb17-21"><a href="data-preparation.html#cb17-21" tabindex="-1"></a>  <span class="st">&quot;Muscardinus avellanarius&quot;</span> <span class="ot">=</span> <span class="st">&quot;#ff416d&quot;</span>,</span>
+<span id="cb17-22"><a href="data-preparation.html#cb17-22" tabindex="-1"></a>  <span class="st">&quot;Sciurus vulgaris&quot;</span> <span class="ot">=</span> <span class="st">&quot;#00ff91&quot;</span></span>
+<span id="cb17-23"><a href="data-preparation.html#cb17-23" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="wrap-working-objects" class="section level2 hasAnchor" number="2.6">
 <h2><span class="header-section-number">2.6</span> Wrap working objects<a href="data-preparation.html#wrap-working-objects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>All working objects are wrapped into a single Rdata object to facilitate downstream usage.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb16-1"><a href="data-preparation.html#cb16-1" tabindex="-1"></a><span class="fu">save</span>(sample_metadata, </span>
-<span id="cb16-2"><a href="data-preparation.html#cb16-2" tabindex="-1"></a>     genome_metadata, </span>
-<span id="cb16-3"><a href="data-preparation.html#cb16-3" tabindex="-1"></a>     read_counts, </span>
-<span id="cb16-4"><a href="data-preparation.html#cb16-4" tabindex="-1"></a>     genome_counts, </span>
-<span id="cb16-5"><a href="data-preparation.html#cb16-5" tabindex="-1"></a>     genome_counts_filt, </span>
-<span id="cb16-6"><a href="data-preparation.html#cb16-6" tabindex="-1"></a>     genome_tree,</span>
-<span id="cb16-7"><a href="data-preparation.html#cb16-7" tabindex="-1"></a>     genome_gifts, </span>
-<span id="cb16-8"><a href="data-preparation.html#cb16-8" tabindex="-1"></a>     phylum_colors,</span>
-<span id="cb16-9"><a href="data-preparation.html#cb16-9" tabindex="-1"></a>     physeq_genome,</span>
-<span id="cb16-10"><a href="data-preparation.html#cb16-10" tabindex="-1"></a>     physeq_genome_clr,</span>
-<span id="cb16-11"><a href="data-preparation.html#cb16-11" tabindex="-1"></a>     species_colours,</span>
-<span id="cb16-12"><a href="data-preparation.html#cb16-12" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;data/data.Rdata&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb18-1"><a href="data-preparation.html#cb18-1" tabindex="-1"></a><span class="fu">save</span>(sample_metadata, </span>
+<span id="cb18-2"><a href="data-preparation.html#cb18-2" tabindex="-1"></a>     genome_metadata, </span>
+<span id="cb18-3"><a href="data-preparation.html#cb18-3" tabindex="-1"></a>     read_counts, </span>
+<span id="cb18-4"><a href="data-preparation.html#cb18-4" tabindex="-1"></a>     genome_counts, </span>
+<span id="cb18-5"><a href="data-preparation.html#cb18-5" tabindex="-1"></a>     genome_counts_filt, </span>
+<span id="cb18-6"><a href="data-preparation.html#cb18-6" tabindex="-1"></a>     genome_tree,</span>
+<span id="cb18-7"><a href="data-preparation.html#cb18-7" tabindex="-1"></a>     genome_gifts, </span>
+<span id="cb18-8"><a href="data-preparation.html#cb18-8" tabindex="-1"></a>     phylum_colors,</span>
+<span id="cb18-9"><a href="data-preparation.html#cb18-9" tabindex="-1"></a>     physeq_genome,</span>
+<span id="cb18-10"><a href="data-preparation.html#cb18-10" tabindex="-1"></a>     physeq_genome_clr,</span>
+<span id="cb18-11"><a href="data-preparation.html#cb18-11" tabindex="-1"></a>     species_colours,</span>
+<span id="cb18-12"><a href="data-preparation.html#cb18-12" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;data/data.Rdata&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>

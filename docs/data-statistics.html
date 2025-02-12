@@ -24,7 +24,7 @@
 <meta name="author" content="Antton Alberdi" />
 
 
-<meta name="date" content="2025-02-10" />
+<meta name="date" content="2025-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -243,36 +243,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-statistics" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data statistics<a href="data-statistics.html#data-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb17-1"><a href="data-statistics.html#cb17-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/data.Rdata&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb19-1"><a href="data-statistics.html#cb19-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/data.Rdata&quot;</span>)</span></code></pre></div>
 <div id="filter-samples-with-high-host-data" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> filter samples with high host data<a href="data-statistics.html#filter-samples-with-high-host-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb18-1"><a href="data-statistics.html#cb18-1" tabindex="-1"></a>read_counts <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="data-statistics.html#cb18-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, sample_metadata<span class="sc">$</span>sample))) <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="data-statistics.html#cb18-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">rowSums</span>(. <span class="sc">!=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a href="data-statistics.html#cb18-4" tabindex="-1"></a>  <span class="fu">select_if</span>(<span class="sc">~!</span><span class="fu">all</span>(. <span class="sc">==</span> <span class="dv">0</span>))</span>
-<span id="cb18-5"><a href="data-statistics.html#cb18-5" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="data-statistics.html#cb18-6" tabindex="-1"></a>genome_metadata <span class="ot">&lt;-</span> genome_metadata <span class="sc">%&gt;%</span> </span>
-<span id="cb18-7"><a href="data-statistics.html#cb18-7" tabindex="-1"></a>  <span class="fu">semi_join</span>(., read_counts, <span class="at">by =</span> <span class="st">&quot;genome&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-8"><a href="data-statistics.html#cb18-8" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">match</span>(genome,read_counts<span class="sc">$</span>genome))</span>
-<span id="cb18-9"><a href="data-statistics.html#cb18-9" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="data-statistics.html#cb18-10" tabindex="-1"></a>genome_tree <span class="ot">&lt;-</span> <span class="fu">keep.tip</span>(genome_tree, <span class="at">tip=</span>genome_metadata<span class="sc">$</span>genome) <span class="co"># keep only MAG tips</span></span>
-<span id="cb18-11"><a href="data-statistics.html#cb18-11" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="data-statistics.html#cb18-12" tabindex="-1"></a><span class="co">#load(&quot;data/genome_gifts.Rdata&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb20-1"><a href="data-statistics.html#cb20-1" tabindex="-1"></a>read_counts <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="data-statistics.html#cb20-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, sample_metadata<span class="sc">$</span>sample))) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="data-statistics.html#cb20-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">rowSums</span>(. <span class="sc">!=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="data-statistics.html#cb20-4" tabindex="-1"></a>  <span class="fu">select_if</span>(<span class="sc">~!</span><span class="fu">all</span>(. <span class="sc">==</span> <span class="dv">0</span>))</span>
+<span id="cb20-5"><a href="data-statistics.html#cb20-5" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="data-statistics.html#cb20-6" tabindex="-1"></a>genome_metadata <span class="ot">&lt;-</span> genome_metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb20-7"><a href="data-statistics.html#cb20-7" tabindex="-1"></a>  <span class="fu">semi_join</span>(., read_counts, <span class="at">by =</span> <span class="st">&quot;genome&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-8"><a href="data-statistics.html#cb20-8" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">match</span>(genome,read_counts<span class="sc">$</span>genome))</span>
+<span id="cb20-9"><a href="data-statistics.html#cb20-9" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="data-statistics.html#cb20-10" tabindex="-1"></a>genome_tree <span class="ot">&lt;-</span> <span class="fu">keep.tip</span>(genome_tree, <span class="at">tip=</span>genome_metadata<span class="sc">$</span>genome) <span class="co"># keep only MAG tips</span></span>
+<span id="cb20-11"><a href="data-statistics.html#cb20-11" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="data-statistics.html#cb20-12" tabindex="-1"></a><span class="co">#load(&quot;data/genome_gifts.Rdata&quot;)</span></span></code></pre></div>
 </div>
 <div id="sequencing-reads-statistics" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Sequencing reads statistics<a href="data-statistics.html#sequencing-reads-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb19-1"><a href="data-statistics.html#cb19-1" tabindex="-1"></a>sample_metadata <span class="sc">%&gt;%</span> </span>
-<span id="cb19-2"><a href="data-statistics.html#cb19-2" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Total=</span><span class="fu">sum</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>), </span>
-<span id="cb19-3"><a href="data-statistics.html#cb19-3" tabindex="-1"></a>              <span class="at">mean=</span><span class="fu">mean</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>),</span>
-<span id="cb19-4"><a href="data-statistics.html#cb19-4" tabindex="-1"></a>              <span class="at">sd=</span><span class="fu">sd</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb19-5"><a href="data-statistics.html#cb19-5" tabindex="-1"></a>    <span class="fu">unite</span>(<span class="st">&quot;Average&quot;</span>,mean, sd, <span class="at">sep =</span> <span class="st">&quot; ± &quot;</span>, <span class="at">remove =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-6"><a href="data-statistics.html#cb19-6" tabindex="-1"></a>    <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb21-1"><a href="data-statistics.html#cb21-1" tabindex="-1"></a>sample_metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="data-statistics.html#cb21-2" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Total=</span><span class="fu">sum</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>), </span>
+<span id="cb21-3"><a href="data-statistics.html#cb21-3" tabindex="-1"></a>              <span class="at">mean=</span><span class="fu">mean</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb21-4"><a href="data-statistics.html#cb21-4" tabindex="-1"></a>              <span class="at">sd=</span><span class="fu">sd</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="data-statistics.html#cb21-5" tabindex="-1"></a>    <span class="fu">unite</span>(<span class="st">&quot;Average&quot;</span>,mean, sd, <span class="at">sep =</span> <span class="st">&quot; ± &quot;</span>, <span class="at">remove =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="data-statistics.html#cb21-6" tabindex="-1"></a>    <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_djhq2i62e755m4sxe99c(i, j, css_id) {
-          var table = document.getElementById("tinytable_djhq2i62e755m4sxe99c");
+      function styleCell_rq8hm7gteis4ciceehiq(i, j, css_id) {
+          var table = document.getElementById("tinytable_rq8hm7gteis4ciceehiq");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -282,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_djhq2i62e755m4sxe99c');
+        var table = document.getElementById('tinytable_rq8hm7gteis4ciceehiq');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -290,8 +290,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_djhq2i62e755m4sxe99c(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_djhq2i62e755m4sxe99c");
+      function spanCell_rq8hm7gteis4ciceehiq(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_rq8hm7gteis4ciceehiq");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -321,14 +321,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_vip5a6isyywj3un8ua9a',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_q6hghji6otmij2tbky29',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_n6ia23iii59xbdh9pkut',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_1llrxo1s342ptfeo1phz',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_djhq2i62e755m4sxe99c(cell.i, cell.j, group.css_id);
+                  styleCell_rq8hm7gteis4ciceehiq(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -336,11 +336,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_vip5a6isyywj3un8ua9a, .table th.tinytable_css_vip5a6isyywj3un8ua9a { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_q6hghji6otmij2tbky29, .table th.tinytable_css_q6hghji6otmij2tbky29 { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_n6ia23iii59xbdh9pkut, .table th.tinytable_css_n6ia23iii59xbdh9pkut { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_1llrxo1s342ptfeo1phz, .table th.tinytable_css_1llrxo1s342ptfeo1phz { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_djhq2i62e755m4sxe99c" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_rq8hm7gteis4ciceehiq" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -361,28 +361,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="dna-fractions" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> DNA fractions<a href="data-statistics.html#dna-fractions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb20-1"><a href="data-statistics.html#cb20-1" tabindex="-1"></a>sequence_fractions <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="data-statistics.html#cb20-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>genome, <span class="at">names_to =</span> <span class="st">&quot;sample&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="data-statistics.html#cb20-3" tabindex="-1"></a>  <span class="fu">group_by</span>(sample) <span class="sc">%&gt;%</span></span>
-<span id="cb20-4"><a href="data-statistics.html#cb20-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mags =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-5"><a href="data-statistics.html#cb20-5" tabindex="-1"></a>    <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-6"><a href="data-statistics.html#cb20-6" tabindex="-1"></a>    <span class="fu">select</span>(sample, mags, metagenomic_bases, host_bases, bases_lost_fastp_percent) <span class="sc">%&gt;%</span></span>
-<span id="cb20-7"><a href="data-statistics.html#cb20-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_bases =</span> mags<span class="sc">*</span><span class="dv">146</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-8"><a href="data-statistics.html#cb20-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">lowqual_bases =</span> ((metagenomic_bases<span class="sc">+</span>host_bases)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>bases_lost_fastp_percent))<span class="sc">-</span>(metagenomic_bases<span class="sc">+</span>host_bases)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-9"><a href="data-statistics.html#cb20-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">unmapped_bases =</span> metagenomic_bases <span class="sc">-</span> mags_bases) <span class="sc">%&gt;%</span></span>
-<span id="cb20-10"><a href="data-statistics.html#cb20-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">unmapped_bases =</span> <span class="fu">ifelse</span>(unmapped_bases <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>, unmapped_bases)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-11"><a href="data-statistics.html#cb20-11" tabindex="-1"></a>    <span class="fu">select</span>(sample, lowqual_bases, host_bases, unmapped_bases, mags_bases)</span>
-<span id="cb20-12"><a href="data-statistics.html#cb20-12" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="data-statistics.html#cb20-13" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb20-14"><a href="data-statistics.html#cb20-14" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>sample), <span class="sc">~</span>.<span class="sc">/</span><span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-15"><a href="data-statistics.html#cb20-15" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;Sample&quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Low quality&quot;</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">&quot;Mapped to host&quot;</span><span class="ot">=</span><span class="dv">3</span>, <span class="st">&quot;Unmapped&quot;</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">&quot;Mapped to MAGs&quot;</span><span class="ot">=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-16"><a href="data-statistics.html#cb20-16" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb22-1"><a href="data-statistics.html#cb22-1" tabindex="-1"></a>sequence_fractions <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="data-statistics.html#cb22-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>genome, <span class="at">names_to =</span> <span class="st">&quot;sample&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="data-statistics.html#cb22-3" tabindex="-1"></a>  <span class="fu">group_by</span>(sample) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="data-statistics.html#cb22-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mags =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="data-statistics.html#cb22-5" tabindex="-1"></a>    <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="data-statistics.html#cb22-6" tabindex="-1"></a>    <span class="fu">select</span>(sample, mags, metagenomic_bases, host_bases, bases_lost_fastp_percent) <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href="data-statistics.html#cb22-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_bases =</span> mags<span class="sc">*</span><span class="dv">146</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href="data-statistics.html#cb22-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">lowqual_bases =</span> ((metagenomic_bases<span class="sc">+</span>host_bases)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>bases_lost_fastp_percent))<span class="sc">-</span>(metagenomic_bases<span class="sc">+</span>host_bases)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-9"><a href="data-statistics.html#cb22-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">unmapped_bases =</span> metagenomic_bases <span class="sc">-</span> mags_bases) <span class="sc">%&gt;%</span></span>
+<span id="cb22-10"><a href="data-statistics.html#cb22-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">unmapped_bases =</span> <span class="fu">ifelse</span>(unmapped_bases <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>, unmapped_bases)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-11"><a href="data-statistics.html#cb22-11" tabindex="-1"></a>    <span class="fu">select</span>(sample, lowqual_bases, host_bases, unmapped_bases, mags_bases)</span>
+<span id="cb22-12"><a href="data-statistics.html#cb22-12" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="data-statistics.html#cb22-13" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb22-14"><a href="data-statistics.html#cb22-14" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>sample), <span class="sc">~</span>.<span class="sc">/</span><span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-15"><a href="data-statistics.html#cb22-15" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;Sample&quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Low quality&quot;</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">&quot;Mapped to host&quot;</span><span class="ot">=</span><span class="dv">3</span>, <span class="st">&quot;Unmapped&quot;</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">&quot;Mapped to MAGs&quot;</span><span class="ot">=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-16"><a href="data-statistics.html#cb22-16" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_zpyy7jyco8cb3mubv6yq(i, j, css_id) {
-          var table = document.getElementById("tinytable_zpyy7jyco8cb3mubv6yq");
+      function styleCell_lcffuo328vxqzqmzik73(i, j, css_id) {
+          var table = document.getElementById("tinytable_lcffuo328vxqzqmzik73");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -392,7 +392,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_zpyy7jyco8cb3mubv6yq');
+        var table = document.getElementById('tinytable_lcffuo328vxqzqmzik73');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -400,8 +400,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_zpyy7jyco8cb3mubv6yq(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_zpyy7jyco8cb3mubv6yq");
+      function spanCell_lcffuo328vxqzqmzik73(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_lcffuo328vxqzqmzik73");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -431,14 +431,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 249, j: 0 }, { i: 249, j: 1 }, { i: 249, j: 2 }, { i: 249, j: 3 }, { i: 249, j: 4 },  ], css_id: 'tinytable_css_h29nykbqvme3ig1lmfjl',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_5va98ru4gatrasip15q9',}, 
+          { positions: [ { i: 242, j: 0 }, { i: 242, j: 1 }, { i: 242, j: 2 }, { i: 242, j: 3 }, { i: 242, j: 4 },  ], css_id: 'tinytable_css_xuqie4zwwhmlnv2icigr',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_jvz1ujkgxkjnqv6ipzkh',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_zpyy7jyco8cb3mubv6yq(cell.i, cell.j, group.css_id);
+                  styleCell_lcffuo328vxqzqmzik73(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -446,11 +446,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_h29nykbqvme3ig1lmfjl, .table th.tinytable_css_h29nykbqvme3ig1lmfjl { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_5va98ru4gatrasip15q9, .table th.tinytable_css_5va98ru4gatrasip15q9 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_xuqie4zwwhmlnv2icigr, .table th.tinytable_css_xuqie4zwwhmlnv2icigr { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_jvz1ujkgxkjnqv6ipzkh, .table th.tinytable_css_jvz1ujkgxkjnqv6ipzkh { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_zpyy7jyco8cb3mubv6yq" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_lcffuo328vxqzqmzik73" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -465,1762 +465,1713 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <tbody>
                 <tr>
                   <td>EHI00196</td>
-                  <td>0.139451477</td>
+                  <td>0.13945148</td>
                   <td>0.000845405</td>
                   <td>0.3215379</td>
-                  <td>0.994345410</td>
+                  <td>0.9943454</td>
                 </tr>
                 <tr>
                   <td>EHI00219</td>
-                  <td>0.415928482</td>
+                  <td>0.41592848</td>
                   <td>0.031644095</td>
                   <td>0.9483841</td>
-                  <td>3.950917242</td>
+                  <td>3.9509172</td>
                 </tr>
                 <tr>
                   <td>EHI00228</td>
-                  <td>0.550914680</td>
+                  <td>0.55091468</td>
                   <td>0.267099052</td>
                   <td>2.2103823</td>
-                  <td>5.128558936</td>
+                  <td>5.1285589</td>
                 </tr>
                 <tr>
                   <td>EHI00244</td>
-                  <td>0.324132141</td>
+                  <td>0.32413214</td>
                   <td>0.066372994</td>
                   <td>1.3201950</td>
-                  <td>3.767119886</td>
+                  <td>3.7671199</td>
                 </tr>
                 <tr>
                   <td>EHI00250</td>
-                  <td>0.462796716</td>
+                  <td>0.46279672</td>
                   <td>0.002425655</td>
                   <td>0.5769959</td>
-                  <td>3.115688764</td>
+                  <td>3.1156888</td>
                 </tr>
                 <tr>
                   <td>EHI00287</td>
-                  <td>0.186810900</td>
+                  <td>0.18681090</td>
                   <td>0.050357734</td>
                   <td>1.0473730</td>
-                  <td>4.059783456</td>
+                  <td>4.0597835</td>
                 </tr>
                 <tr>
                   <td>EHI00381</td>
-                  <td>0.179083567</td>
+                  <td>0.17908357</td>
                   <td>0.096191496</td>
                   <td>0.9959291</td>
-                  <td>2.084788750</td>
+                  <td>2.0847887</td>
                 </tr>
                 <tr>
                   <td>EHI00383</td>
-                  <td>1.433387442</td>
+                  <td>1.43338744</td>
                   <td>7.983761399</td>
                   <td>1.0832792</td>
-                  <td>3.129988004</td>
+                  <td>3.1299880</td>
                 </tr>
                 <tr>
                   <td>EHI00389</td>
-                  <td>0.138321535</td>
+                  <td>0.13832153</td>
                   <td>0.011150393</td>
                   <td>1.0685377</td>
-                  <td>2.499710092</td>
+                  <td>2.4997101</td>
                 </tr>
                 <tr>
                   <td>EHI00391</td>
-                  <td>0.445578559</td>
+                  <td>0.44557856</td>
                   <td>0.222149263</td>
                   <td>0.8625019</td>
-                  <td>1.834731338</td>
+                  <td>1.8347313</td>
                 </tr>
                 <tr>
                   <td>EHI00394</td>
-                  <td>0.189511205</td>
+                  <td>0.18951121</td>
                   <td>0.068785224</td>
                   <td>1.0978479</td>
-                  <td>2.334996250</td>
+                  <td>2.3349963</td>
                 </tr>
                 <tr>
                   <td>EHI00400</td>
-                  <td>0.187984973</td>
+                  <td>0.18798497</td>
                   <td>0.375475460</td>
                   <td>0.9060098</td>
-                  <td>2.185211346</td>
+                  <td>2.1852113</td>
                 </tr>
                 <tr>
                   <td>EHI00405</td>
-                  <td>0.133211930</td>
+                  <td>0.13321193</td>
                   <td>0.366709076</td>
                   <td>1.1772475</td>
-                  <td>2.543073114</td>
+                  <td>2.5430731</td>
                 </tr>
                 <tr>
                   <td>EHI00410</td>
-                  <td>0.249062891</td>
+                  <td>0.24906289</td>
                   <td>0.422690959</td>
                   <td>0.9221588</td>
-                  <td>2.278138740</td>
+                  <td>2.2781387</td>
                 </tr>
                 <tr>
                   <td>EHI00411</td>
-                  <td>0.120472763</td>
+                  <td>0.12047276</td>
                   <td>0.005253345</td>
                   <td>1.0032263</td>
-                  <td>2.370507684</td>
+                  <td>2.3705077</td>
                 </tr>
                 <tr>
                   <td>EHI00418</td>
-                  <td>0.101929737</td>
+                  <td>0.10192974</td>
                   <td>0.073920877</td>
                   <td>0.6964808</td>
-                  <td>2.132854724</td>
+                  <td>2.1328547</td>
                 </tr>
                 <tr>
                   <td>EHI00494</td>
-                  <td>0.886219443</td>
+                  <td>0.88621944</td>
                   <td>2.298507804</td>
                   <td>1.1419684</td>
-                  <td>2.188403490</td>
+                  <td>2.1884035</td>
                 </tr>
                 <tr>
                   <td>EHI00505</td>
-                  <td>0.248021238</td>
+                  <td>0.24802124</td>
                   <td>0.252914017</td>
                   <td>3.4562299</td>
-                  <td>2.100438490</td>
+                  <td>2.1004385</td>
                 </tr>
                 <tr>
                   <td>EHI00526</td>
-                  <td>0.230367951</td>
+                  <td>0.23036795</td>
                   <td>0.789568237</td>
                   <td>2.4050118</td>
-                  <td>2.784790130</td>
+                  <td>2.7847901</td>
                 </tr>
                 <tr>
                   <td>EHI00543</td>
-                  <td>0.393893399</td>
+                  <td>0.39389340</td>
                   <td>0.163341562</td>
                   <td>3.7810304</td>
-                  <td>3.715882646</td>
+                  <td>3.7158826</td>
                 </tr>
                 <tr>
                   <td>EHI00544</td>
-                  <td>0.506182890</td>
+                  <td>0.50618289</td>
                   <td>0.346906347</td>
                   <td>3.2996417</td>
-                  <td>4.171219708</td>
+                  <td>4.1712197</td>
                 </tr>
                 <tr>
                   <td>EHI00561</td>
-                  <td>0.466288278</td>
+                  <td>0.46628828</td>
                   <td>0.786129451</td>
                   <td>1.8040734</td>
-                  <td>2.887136422</td>
+                  <td>2.8871364</td>
                 </tr>
                 <tr>
                   <td>EHI00562</td>
-                  <td>0.564425570</td>
+                  <td>0.56442557</td>
                   <td>0.673015223</td>
                   <td>4.5686120</td>
-                  <td>3.680642918</td>
+                  <td>3.6806429</td>
                 </tr>
                 <tr>
                   <td>EHI00565</td>
-                  <td>0.278309245</td>
+                  <td>0.27830924</td>
                   <td>0.572054940</td>
                   <td>0.9669146</td>
-                  <td>2.483715646</td>
+                  <td>2.4837156</td>
                 </tr>
                 <tr>
                   <td>EHI00614</td>
-                  <td>1.791526595</td>
+                  <td>1.79152660</td>
                   <td>0.024356159</td>
                   <td>4.7976682</td>
-                  <td>1.977618326</td>
+                  <td>1.9776183</td>
                 </tr>
                 <tr>
                   <td>EHI00667</td>
-                  <td>0.091979102</td>
+                  <td>0.09197910</td>
                   <td>0.065157803</td>
                   <td>0.3478368</td>
-                  <td>1.733561806</td>
+                  <td>1.7335618</td>
                 </tr>
                 <tr>
                   <td>EHI00689</td>
-                  <td>0.084869462</td>
+                  <td>0.08486946</td>
                   <td>0.011112116</td>
                   <td>0.3537913</td>
-                  <td>1.579065920</td>
+                  <td>1.5790659</td>
                 </tr>
                 <tr>
                   <td>EHI00690</td>
-                  <td>0.082908396</td>
+                  <td>0.08290840</td>
                   <td>0.054358956</td>
                   <td>0.7253528</td>
-                  <td>1.596470872</td>
+                  <td>1.5964709</td>
                 </tr>
                 <tr>
                   <td>EHI00691</td>
-                  <td>0.138973462</td>
+                  <td>0.13897346</td>
                   <td>0.119452303</td>
                   <td>0.6739938</td>
-                  <td>2.913672214</td>
+                  <td>2.9136722</td>
                 </tr>
                 <tr>
                   <td>EHI00692</td>
-                  <td>0.185678605</td>
+                  <td>0.18567861</td>
                   <td>0.040174803</td>
                   <td>1.3789803</td>
-                  <td>3.494392032</td>
+                  <td>3.4943920</td>
                 </tr>
                 <tr>
                   <td>EHI00693</td>
-                  <td>0.213612676</td>
+                  <td>0.21361268</td>
                   <td>0.049839768</td>
                   <td>1.0845176</td>
-                  <td>4.307746060</td>
+                  <td>4.3077461</td>
                 </tr>
                 <tr>
                   <td>EHI00694</td>
-                  <td>0.260085430</td>
+                  <td>0.26008543</td>
                   <td>0.365387845</td>
                   <td>1.2447609</td>
-                  <td>3.766093798</td>
+                  <td>3.7660938</td>
                 </tr>
                 <tr>
                   <td>EHI00701</td>
-                  <td>0.498573263</td>
+                  <td>0.49857326</td>
                   <td>0.229207892</td>
                   <td>2.5043696</td>
-                  <td>8.390708768</td>
+                  <td>8.3907088</td>
                 </tr>
                 <tr>
                   <td>EHI00702</td>
-                  <td>0.116839504</td>
+                  <td>0.11683950</td>
                   <td>0.061754108</td>
                   <td>0.7506464</td>
-                  <td>2.210697398</td>
+                  <td>2.2106974</td>
                 </tr>
                 <tr>
                   <td>EHI00703</td>
-                  <td>0.222724702</td>
+                  <td>0.22272470</td>
                   <td>0.016763099</td>
                   <td>0.8168251</td>
-                  <td>3.441356656</td>
+                  <td>3.4413567</td>
                 </tr>
                 <tr>
                   <td>EHI00715</td>
-                  <td>0.261099761</td>
+                  <td>0.26109976</td>
                   <td>0.145892237</td>
                   <td>1.3328463</td>
-                  <td>3.705276622</td>
+                  <td>3.7052766</td>
                 </tr>
                 <tr>
                   <td>EHI00716</td>
-                  <td>0.221202346</td>
+                  <td>0.22120235</td>
                   <td>0.028889039</td>
                   <td>0.9753326</td>
-                  <td>3.447952936</td>
+                  <td>3.4479529</td>
                 </tr>
                 <tr>
                   <td>EHI00717</td>
-                  <td>0.148729737</td>
+                  <td>0.14872974</td>
                   <td>0.051492772</td>
                   <td>0.8493813</td>
-                  <td>3.189167936</td>
+                  <td>3.1891679</td>
                 </tr>
                 <tr>
                   <td>EHI00718</td>
-                  <td>0.253690560</td>
+                  <td>0.25369056</td>
                   <td>0.019363486</td>
                   <td>1.5517109</td>
-                  <td>3.503652666</td>
+                  <td>3.5036527</td>
                 </tr>
                 <tr>
                   <td>EHI00719</td>
-                  <td>0.215316554</td>
+                  <td>0.21531655</td>
                   <td>0.023531636</td>
                   <td>1.4666032</td>
-                  <td>4.989751480</td>
+                  <td>4.9897515</td>
                 </tr>
                 <tr>
                   <td>EHI00720</td>
-                  <td>0.165512550</td>
+                  <td>0.16551255</td>
                   <td>0.324605759</td>
                   <td>1.0176984</td>
-                  <td>3.037339908</td>
+                  <td>3.0373399</td>
                 </tr>
                 <tr>
                   <td>EHI00721</td>
-                  <td>0.086181011</td>
+                  <td>0.08618101</td>
                   <td>0.070972062</td>
                   <td>0.4313064</td>
-                  <td>1.410649956</td>
+                  <td>1.4106500</td>
                 </tr>
                 <tr>
                   <td>EHI00722</td>
-                  <td>0.285641331</td>
+                  <td>0.28564133</td>
                   <td>0.093834007</td>
                   <td>1.7362212</td>
-                  <td>5.661047508</td>
+                  <td>5.6610475</td>
                 </tr>
                 <tr>
                   <td>EHI00723</td>
-                  <td>0.083958614</td>
+                  <td>0.08395861</td>
                   <td>0.166320595</td>
                   <td>0.5784416</td>
-                  <td>2.667291958</td>
+                  <td>2.6672920</td>
                 </tr>
                 <tr>
                   <td>EHI00725</td>
-                  <td>0.123621193</td>
+                  <td>0.12362119</td>
                   <td>0.094014445</td>
                   <td>0.8549649</td>
-                  <td>3.026503788</td>
+                  <td>3.0265038</td>
                 </tr>
                 <tr>
                   <td>EHI00727</td>
-                  <td>0.251886384</td>
+                  <td>0.25188638</td>
                   <td>3.308017882</td>
                   <td>1.4219280</td>
-                  <td>1.912989382</td>
+                  <td>1.9129894</td>
                 </tr>
                 <tr>
                   <td>EHI00734</td>
-                  <td>0.141867133</td>
+                  <td>0.14186713</td>
                   <td>0.015188196</td>
                   <td>0.7229598</td>
-                  <td>2.855791828</td>
+                  <td>2.8557918</td>
                 </tr>
                 <tr>
                   <td>EHI00744</td>
-                  <td>0.258194267</td>
+                  <td>0.25819427</td>
                   <td>0.309336578</td>
                   <td>2.3747966</td>
-                  <td>2.348232902</td>
+                  <td>2.3482329</td>
                 </tr>
                 <tr>
                   <td>EHI00754</td>
-                  <td>0.250037423</td>
+                  <td>0.25003742</td>
                   <td>0.132267214</td>
                   <td>0.6986142</td>
-                  <td>2.516013036</td>
+                  <td>2.5160130</td>
                 </tr>
                 <tr>
                   <td>EHI00755</td>
-                  <td>0.203033067</td>
+                  <td>0.20303307</td>
                   <td>0.124565547</td>
                   <td>0.3791958</td>
-                  <td>1.951042384</td>
+                  <td>1.9510424</td>
                 </tr>
                 <tr>
                   <td>EHI00761</td>
-                  <td>0.304726670</td>
+                  <td>0.30472667</td>
                   <td>0.041281940</td>
                   <td>1.0174584</td>
-                  <td>5.958304238</td>
+                  <td>5.9583042</td>
                 </tr>
                 <tr>
                   <td>EHI00762</td>
-                  <td>0.150996221</td>
+                  <td>0.15099622</td>
                   <td>0.401871686</td>
                   <td>0.9536535</td>
-                  <td>4.884862452</td>
+                  <td>4.8848625</td>
                 </tr>
                 <tr>
                   <td>EHI00763</td>
-                  <td>0.138407609</td>
+                  <td>0.13840761</td>
                   <td>0.167321399</td>
                   <td>1.1051992</td>
-                  <td>4.550863508</td>
+                  <td>4.5508635</td>
                 </tr>
                 <tr>
                   <td>EHI00764</td>
-                  <td>0.143047757</td>
+                  <td>0.14304776</td>
                   <td>0.485858816</td>
                   <td>1.3328121</td>
-                  <td>5.396547192</td>
+                  <td>5.3965472</td>
                 </tr>
                 <tr>
                   <td>EHI00765</td>
-                  <td>0.118953118</td>
+                  <td>0.11895312</td>
                   <td>0.131783333</td>
                   <td>0.8204810</td>
-                  <td>4.821345006</td>
+                  <td>4.8213450</td>
                 </tr>
                 <tr>
                   <td>EHI00766</td>
-                  <td>0.193672262</td>
+                  <td>0.19367226</td>
                   <td>0.138942139</td>
                   <td>0.8756293</td>
-                  <td>6.244560890</td>
+                  <td>6.2445609</td>
                 </tr>
                 <tr>
                   <td>EHI00767</td>
-                  <td>0.148559089</td>
+                  <td>0.14855909</td>
                   <td>0.540805207</td>
                   <td>1.2442778</td>
-                  <td>3.645864696</td>
+                  <td>3.6458647</td>
                 </tr>
                 <tr>
                   <td>EHI00768</td>
-                  <td>0.254152028</td>
+                  <td>0.25415203</td>
                   <td>0.347879063</td>
                   <td>1.0137525</td>
-                  <td>6.509264584</td>
+                  <td>6.5092646</td>
                 </tr>
                 <tr>
                   <td>EHI00769</td>
-                  <td>0.096422063</td>
+                  <td>0.09642206</td>
                   <td>0.229388709</td>
                   <td>1.0094625</td>
-                  <td>2.781940502</td>
+                  <td>2.7819405</td>
                 </tr>
                 <tr>
                   <td>EHI00772</td>
-                  <td>0.151090237</td>
+                  <td>0.15109024</td>
                   <td>0.326568219</td>
                   <td>0.8726439</td>
-                  <td>4.838777698</td>
+                  <td>4.8387777</td>
                 </tr>
                 <tr>
                   <td>EHI00773</td>
-                  <td>0.129539210</td>
+                  <td>0.12953921</td>
                   <td>0.043278850</td>
                   <td>0.7535475</td>
-                  <td>5.307538146</td>
+                  <td>5.3075381</td>
                 </tr>
                 <tr>
                   <td>EHI00924</td>
-                  <td>0.191887062</td>
+                  <td>0.19188706</td>
                   <td>0.002966947</td>
                   <td>2.7475227</td>
-                  <td>0.884264038</td>
+                  <td>0.8842640</td>
                 </tr>
                 <tr>
                   <td>EHI00932</td>
-                  <td>0.144681427</td>
+                  <td>0.14468143</td>
                   <td>0.032953128</td>
                   <td>1.3926396</td>
-                  <td>1.220438090</td>
+                  <td>1.2204381</td>
                 </tr>
                 <tr>
                   <td>EHI00952</td>
-                  <td>0.266140100</td>
+                  <td>0.26614010</td>
                   <td>0.118979064</td>
                   <td>1.9395040</td>
-                  <td>1.687731676</td>
+                  <td>1.6877317</td>
                 </tr>
                 <tr>
                   <td>EHI00954</td>
-                  <td>0.558609250</td>
+                  <td>0.55860925</td>
                   <td>2.812760925</td>
                   <td>1.3966440</td>
-                  <td>1.003372590</td>
+                  <td>1.0033726</td>
                 </tr>
                 <tr>
                   <td>EHI00969</td>
-                  <td>0.331184243</td>
+                  <td>0.33118424</td>
                   <td>0.100148313</td>
                   <td>2.8793043</td>
-                  <td>1.816151378</td>
+                  <td>1.8161514</td>
                 </tr>
                 <tr>
                   <td>EHI00970</td>
-                  <td>0.373972295</td>
+                  <td>0.37397230</td>
                   <td>2.442550528</td>
                   <td>1.1084148</td>
-                  <td>1.616146708</td>
+                  <td>1.6161467</td>
                 </tr>
                 <tr>
                   <td>EHI00979</td>
-                  <td>0.478223801</td>
+                  <td>0.47822380</td>
                   <td>0.204069747</td>
                   <td>2.1121045</td>
-                  <td>4.194404946</td>
+                  <td>4.1944049</td>
                 </tr>
                 <tr>
                   <td>EHI00984</td>
-                  <td>0.248838671</td>
+                  <td>0.24883867</td>
                   <td>0.595711296</td>
                   <td>0.7721047</td>
-                  <td>1.423810834</td>
+                  <td>1.4238108</td>
                 </tr>
                 <tr>
                   <td>EHI00987</td>
-                  <td>0.321850330</td>
+                  <td>0.32185033</td>
                   <td>0.358017091</td>
                   <td>1.8380590</td>
-                  <td>3.095162332</td>
+                  <td>3.0951623</td>
                 </tr>
                 <tr>
                   <td>EHI01003</td>
-                  <td>0.357758161</td>
+                  <td>0.35775816</td>
                   <td>0.325306704</td>
                   <td>1.6274165</td>
-                  <td>4.080710804</td>
+                  <td>4.0807108</td>
                 </tr>
                 <tr>
                   <td>EHI01022</td>
-                  <td>0.282807565</td>
+                  <td>0.28280757</td>
                   <td>1.348037570</td>
                   <td>1.5363978</td>
-                  <td>2.149088610</td>
-                </tr>
-                <tr>
-                  <td>EHI01045</td>
-                  <td>0.006426243</td>
-                  <td>0.125370657</td>
-                  <td>0.0000000</td>
-                  <td>0.098398890</td>
+                  <td>2.1490886</td>
                 </tr>
                 <tr>
                   <td>EHI01053</td>
-                  <td>0.890712945</td>
+                  <td>0.89071294</td>
                   <td>0.010198481</td>
                   <td>1.0820394</td>
-                  <td>4.704882850</td>
+                  <td>4.7048828</td>
                 </tr>
                 <tr>
                   <td>EHI01055</td>
-                  <td>0.347008481</td>
+                  <td>0.34700848</td>
                   <td>0.365944130</td>
                   <td>1.1474041</td>
-                  <td>4.577204682</td>
+                  <td>4.5772047</td>
                 </tr>
                 <tr>
                   <td>EHI01059</td>
-                  <td>0.318458085</td>
+                  <td>0.31845809</td>
                   <td>0.184046452</td>
                   <td>1.0755150</td>
-                  <td>5.527179816</td>
+                  <td>5.5271798</td>
                 </tr>
                 <tr>
                   <td>EHI01061</td>
-                  <td>0.337191352</td>
+                  <td>0.33719135</td>
                   <td>0.212356378</td>
                   <td>1.0329292</td>
-                  <td>5.054350786</td>
+                  <td>5.0543508</td>
                 </tr>
                 <tr>
                   <td>EHI01063</td>
-                  <td>0.506089925</td>
+                  <td>0.50608992</td>
                   <td>1.091254010</td>
                   <td>2.2181719</td>
-                  <td>6.574267142</td>
+                  <td>6.5742671</td>
                 </tr>
                 <tr>
                   <td>EHI01067</td>
-                  <td>0.378152334</td>
+                  <td>0.37815233</td>
                   <td>0.235098562</td>
                   <td>1.3200510</td>
-                  <td>7.278986512</td>
+                  <td>7.2789865</td>
                 </tr>
                 <tr>
                   <td>EHI01069</td>
-                  <td>0.260326110</td>
+                  <td>0.26032611</td>
                   <td>0.010805827</td>
                   <td>1.1246151</td>
-                  <td>5.260787340</td>
+                  <td>5.2607873</td>
                 </tr>
                 <tr>
                   <td>EHI01076</td>
-                  <td>0.252355410</td>
+                  <td>0.25235541</td>
                   <td>0.029368827</td>
                   <td>0.7541612</td>
-                  <td>5.174317964</td>
+                  <td>5.1743180</td>
                 </tr>
                 <tr>
                   <td>EHI01077</td>
-                  <td>0.296380193</td>
+                  <td>0.29638019</td>
                   <td>0.049254469</td>
                   <td>2.2899090</td>
-                  <td>3.020294262</td>
+                  <td>3.0202943</td>
                 </tr>
                 <tr>
                   <td>EHI01078</td>
-                  <td>0.250596341</td>
+                  <td>0.25059634</td>
                   <td>0.055171421</td>
                   <td>1.1344069</td>
-                  <td>5.569977526</td>
+                  <td>5.5699775</td>
                 </tr>
                 <tr>
                   <td>EHI01084</td>
-                  <td>0.286436403</td>
+                  <td>0.28643640</td>
                   <td>0.001640258</td>
                   <td>1.0099464</td>
-                  <td>5.457151646</td>
+                  <td>5.4571516</td>
                 </tr>
                 <tr>
                   <td>EHI01085</td>
-                  <td>0.298762597</td>
+                  <td>0.29876260</td>
                   <td>0.045000339</td>
                   <td>1.0888979</td>
-                  <td>5.146256034</td>
+                  <td>5.1462560</td>
                 </tr>
                 <tr>
                   <td>EHI01276</td>
-                  <td>0.095228736</td>
+                  <td>0.09522874</td>
                   <td>0.303891923</td>
                   <td>1.2734460</td>
-                  <td>1.877791994</td>
+                  <td>1.8777920</td>
                 </tr>
                 <tr>
                   <td>EHI01361</td>
-                  <td>0.235482829</td>
+                  <td>0.23548283</td>
                   <td>4.037672442</td>
                   <td>1.2419987</td>
-                  <td>2.448295900</td>
+                  <td>2.4482959</td>
                 </tr>
                 <tr>
                   <td>EHI01427</td>
-                  <td>0.079082589</td>
+                  <td>0.07908259</td>
                   <td>0.735023224</td>
                   <td>0.7386969</td>
-                  <td>0.464177070</td>
+                  <td>0.4641771</td>
                 </tr>
                 <tr>
                   <td>EHI01431</td>
-                  <td>0.088672773</td>
+                  <td>0.08867277</td>
                   <td>0.042491319</td>
                   <td>0.8466425</td>
-                  <td>1.530155628</td>
+                  <td>1.5301556</td>
                 </tr>
                 <tr>
                   <td>EHI01454</td>
-                  <td>0.184012847</td>
+                  <td>0.18401285</td>
                   <td>0.458621857</td>
                   <td>0.9668405</td>
-                  <td>2.412716868</td>
+                  <td>2.4127169</td>
                 </tr>
                 <tr>
                   <td>EHI01457</td>
-                  <td>0.205398574</td>
+                  <td>0.20539857</td>
                   <td>1.155426469</td>
                   <td>1.2222100</td>
-                  <td>2.290530928</td>
+                  <td>2.2905309</td>
                 </tr>
                 <tr>
                   <td>EHI01458</td>
-                  <td>0.773831279</td>
+                  <td>0.77383128</td>
                   <td>4.830192899</td>
                   <td>2.7938976</td>
-                  <td>8.938974976</td>
+                  <td>8.9389750</td>
                 </tr>
                 <tr>
                   <td>EHI01460</td>
-                  <td>0.424381751</td>
+                  <td>0.42438175</td>
                   <td>1.190588792</td>
                   <td>1.6862627</td>
-                  <td>5.647044064</td>
+                  <td>5.6470441</td>
                 </tr>
                 <tr>
                   <td>EHI01461</td>
-                  <td>0.150711694</td>
+                  <td>0.15071169</td>
                   <td>3.718641261</td>
                   <td>0.4155788</td>
-                  <td>0.922783218</td>
+                  <td>0.9227832</td>
                 </tr>
                 <tr>
                   <td>EHI01462</td>
-                  <td>0.247880065</td>
+                  <td>0.24788007</td>
                   <td>0.070055758</td>
                   <td>1.1636194</td>
-                  <td>4.814879834</td>
+                  <td>4.8148798</td>
                 </tr>
                 <tr>
                   <td>EHI01470</td>
-                  <td>0.242501175</td>
+                  <td>0.24250117</td>
                   <td>0.099234229</td>
                   <td>2.4292930</td>
-                  <td>4.778828930</td>
+                  <td>4.7788289</td>
                 </tr>
                 <tr>
                   <td>EHI01581</td>
-                  <td>0.286638690</td>
+                  <td>0.28663869</td>
                   <td>0.275867997</td>
                   <td>2.2956710</td>
-                  <td>2.328058476</td>
+                  <td>2.3280585</td>
                 </tr>
                 <tr>
                   <td>EHI01582</td>
-                  <td>0.199141181</td>
+                  <td>0.19914118</td>
                   <td>0.469217295</td>
                   <td>1.2751657</td>
-                  <td>1.973999716</td>
+                  <td>1.9739997</td>
                 </tr>
                 <tr>
                   <td>EHI01592</td>
-                  <td>0.193805797</td>
+                  <td>0.19380580</td>
                   <td>0.004946839</td>
                   <td>3.1466576</td>
-                  <td>2.102674918</td>
+                  <td>2.1026749</td>
                 </tr>
                 <tr>
                   <td>EHI01593</td>
-                  <td>0.144289244</td>
+                  <td>0.14428924</td>
                   <td>0.024075505</td>
                   <td>1.7157178</td>
-                  <td>1.696787326</td>
+                  <td>1.6967873</td>
                 </tr>
                 <tr>
                   <td>EHI01594</td>
-                  <td>0.167011287</td>
+                  <td>0.16701129</td>
                   <td>0.007303228</td>
                   <td>2.2915620</td>
-                  <td>2.009815706</td>
+                  <td>2.0098157</td>
                 </tr>
                 <tr>
                   <td>EHI01595</td>
-                  <td>0.126580161</td>
+                  <td>0.12658016</td>
                   <td>0.196199095</td>
                   <td>1.2569635</td>
-                  <td>1.187941702</td>
+                  <td>1.1879417</td>
                 </tr>
                 <tr>
                   <td>EHI01597</td>
-                  <td>0.136855089</td>
+                  <td>0.13685509</td>
                   <td>0.191051045</td>
                   <td>2.0887337</td>
-                  <td>1.785021258</td>
+                  <td>1.7850213</td>
                 </tr>
                 <tr>
                   <td>EHI01598</td>
-                  <td>0.144727805</td>
+                  <td>0.14472780</td>
                   <td>0.115710127</td>
                   <td>1.8502373</td>
-                  <td>1.538321116</td>
+                  <td>1.5383211</td>
                 </tr>
                 <tr>
                   <td>EHI01600</td>
-                  <td>0.097521184</td>
+                  <td>0.09752118</td>
                   <td>0.100105291</td>
                   <td>1.3731728</td>
-                  <td>1.073478432</td>
+                  <td>1.0734784</td>
                 </tr>
                 <tr>
                   <td>EHI01602</td>
-                  <td>0.132788873</td>
+                  <td>0.13278887</td>
                   <td>0.061421641</td>
                   <td>1.3235225</td>
-                  <td>1.845485406</td>
+                  <td>1.8454854</td>
                 </tr>
                 <tr>
                   <td>EHI01603</td>
-                  <td>0.116305294</td>
+                  <td>0.11630529</td>
                   <td>0.278682506</td>
                   <td>1.1109784</td>
-                  <td>1.519382288</td>
+                  <td>1.5193823</td>
                 </tr>
                 <tr>
                   <td>EHI01604</td>
-                  <td>0.096783514</td>
+                  <td>0.09678351</td>
                   <td>0.167624124</td>
                   <td>0.9581276</td>
-                  <td>1.242637390</td>
+                  <td>1.2426374</td>
                 </tr>
                 <tr>
                   <td>EHI01605</td>
-                  <td>0.135995010</td>
+                  <td>0.13599501</td>
                   <td>0.147278460</td>
                   <td>1.3526446</td>
-                  <td>2.054519300</td>
+                  <td>2.0545193</td>
                 </tr>
                 <tr>
                   <td>EHI01606</td>
-                  <td>0.114405330</td>
+                  <td>0.11440533</td>
                   <td>0.042554195</td>
                   <td>1.4297842</td>
-                  <td>0.857446904</td>
+                  <td>0.8574469</td>
                 </tr>
                 <tr>
                   <td>EHI01607</td>
-                  <td>0.300571224</td>
+                  <td>0.30057122</td>
                   <td>0.181674195</td>
                   <td>2.5170511</td>
-                  <td>5.065411454</td>
+                  <td>5.0654115</td>
                 </tr>
                 <tr>
                   <td>EHI01608</td>
-                  <td>0.125932618</td>
+                  <td>0.12593262</td>
                   <td>0.092440115</td>
                   <td>1.6939273</td>
-                  <td>1.520422684</td>
+                  <td>1.5204227</td>
                 </tr>
                 <tr>
                   <td>EHI01609</td>
-                  <td>0.198695252</td>
+                  <td>0.19869525</td>
                   <td>0.258081374</td>
                   <td>2.2482628</td>
-                  <td>1.940088880</td>
+                  <td>1.9400889</td>
                 </tr>
                 <tr>
                   <td>EHI01805</td>
-                  <td>0.203354003</td>
+                  <td>0.20335400</td>
                   <td>0.067010963</td>
                   <td>1.7111913</td>
-                  <td>6.265476996</td>
-                </tr>
-                <tr>
-                  <td>EHI01806</td>
-                  <td>0.079112135</td>
-                  <td>0.435036312</td>
-                  <td>2.0387408</td>
-                  <td>0.023007994</td>
+                  <td>6.2654770</td>
                 </tr>
                 <tr>
                   <td>EHI01807</td>
-                  <td>0.189084236</td>
+                  <td>0.18908424</td>
                   <td>0.407212332</td>
                   <td>2.7669067</td>
-                  <td>4.041318982</td>
-                </tr>
-                <tr>
-                  <td>EHI01808</td>
-                  <td>0.165537626</td>
-                  <td>0.763422374</td>
-                  <td>3.6626580</td>
-                  <td>0.300241700</td>
+                  <td>4.0413190</td>
                 </tr>
                 <tr>
                   <td>EHI01810</td>
-                  <td>0.128473126</td>
+                  <td>0.12847313</td>
                   <td>0.193593641</td>
                   <td>1.4953751</td>
-                  <td>2.924116324</td>
-                </tr>
-                <tr>
-                  <td>EHI01812</td>
-                  <td>0.170770266</td>
-                  <td>6.203876032</td>
-                  <td>0.0000000</td>
-                  <td>0.008283456</td>
+                  <td>2.9241163</td>
                 </tr>
                 <tr>
                   <td>EHI01814</td>
-                  <td>0.260892581</td>
+                  <td>0.26089258</td>
                   <td>0.076580793</td>
                   <td>1.7512774</td>
-                  <td>7.638856948</td>
+                  <td>7.6388569</td>
                 </tr>
                 <tr>
                   <td>EHI01817</td>
-                  <td>0.091927542</td>
+                  <td>0.09192754</td>
                   <td>0.219592674</td>
                   <td>1.5112236</td>
-                  <td>1.926173182</td>
+                  <td>1.9261732</td>
                 </tr>
                 <tr>
                   <td>EHI01818</td>
-                  <td>0.239846577</td>
+                  <td>0.23984658</td>
                   <td>0.173039258</td>
                   <td>1.9067874</td>
-                  <td>6.146295006</td>
+                  <td>6.1462950</td>
                 </tr>
                 <tr>
                   <td>EHI01819</td>
-                  <td>0.148782928</td>
+                  <td>0.14878293</td>
                   <td>0.036782058</td>
                   <td>1.3237186</td>
-                  <td>4.698074870</td>
+                  <td>4.6980749</td>
                 </tr>
                 <tr>
                   <td>EHI01825</td>
-                  <td>0.167767858</td>
+                  <td>0.16776786</td>
                   <td>0.151633998</td>
                   <td>1.7410952</td>
-                  <td>3.863817146</td>
+                  <td>3.8638171</td>
                 </tr>
                 <tr>
                   <td>EHI01830</td>
-                  <td>0.475920490</td>
+                  <td>0.47592049</td>
                   <td>0.589580315</td>
                   <td>4.3782673</td>
-                  <td>7.013235706</td>
+                  <td>7.0132357</td>
                 </tr>
                 <tr>
                   <td>EHI01832</td>
-                  <td>0.476377415</td>
+                  <td>0.47637742</td>
                   <td>0.645332482</td>
                   <td>0.8848535</td>
-                  <td>2.359468040</td>
+                  <td>2.3594680</td>
                 </tr>
                 <tr>
                   <td>EHI01836</td>
-                  <td>0.156762503</td>
+                  <td>0.15676250</td>
                   <td>0.208710433</td>
                   <td>0.6839650</td>
-                  <td>2.692619308</td>
+                  <td>2.6926193</td>
                 </tr>
                 <tr>
                   <td>EHI01838</td>
-                  <td>0.165889753</td>
+                  <td>0.16588975</td>
                   <td>0.201750565</td>
                   <td>1.0362179</td>
-                  <td>3.038036620</td>
+                  <td>3.0380366</td>
                 </tr>
                 <tr>
                   <td>EHI01844</td>
-                  <td>0.405913457</td>
+                  <td>0.40591346</td>
                   <td>0.134647506</td>
                   <td>1.8722292</td>
-                  <td>2.175975970</td>
+                  <td>2.1759760</td>
                 </tr>
                 <tr>
                   <td>EHI01846</td>
-                  <td>0.291963252</td>
+                  <td>0.29196325</td>
                   <td>0.274818457</td>
                   <td>1.6485510</td>
-                  <td>2.603756846</td>
+                  <td>2.6037568</td>
                 </tr>
                 <tr>
                   <td>EHI01847</td>
-                  <td>0.207820093</td>
+                  <td>0.20782009</td>
                   <td>0.244902415</td>
                   <td>1.3307736</td>
-                  <td>3.670838434</td>
+                  <td>3.6708384</td>
                 </tr>
                 <tr>
                   <td>EHI01850</td>
-                  <td>0.215444357</td>
+                  <td>0.21544436</td>
                   <td>0.099901318</td>
                   <td>1.0712312</td>
-                  <td>3.451597242</td>
+                  <td>3.4515972</td>
                 </tr>
                 <tr>
                   <td>EHI01855</td>
-                  <td>0.362886537</td>
+                  <td>0.36288654</td>
                   <td>2.796558420</td>
                   <td>0.7440757</td>
-                  <td>0.845043182</td>
+                  <td>0.8450432</td>
                 </tr>
                 <tr>
                   <td>EHI01857</td>
-                  <td>0.633269622</td>
+                  <td>0.63326962</td>
                   <td>0.008822464</td>
                   <td>2.1744182</td>
-                  <td>3.597076022</td>
+                  <td>3.5970760</td>
                 </tr>
                 <tr>
                   <td>EHI01858</td>
-                  <td>0.223124104</td>
+                  <td>0.22312410</td>
                   <td>0.078211458</td>
                   <td>1.4928496</td>
-                  <td>2.895391992</td>
+                  <td>2.8953920</td>
                 </tr>
                 <tr>
                   <td>EHI02144</td>
-                  <td>0.233366005</td>
+                  <td>0.23336601</td>
                   <td>0.135104682</td>
                   <td>1.0339177</td>
-                  <td>3.617446526</td>
+                  <td>3.6174465</td>
                 </tr>
                 <tr>
                   <td>EHI02145</td>
-                  <td>0.484726834</td>
+                  <td>0.48472683</td>
                   <td>0.304442270</td>
                   <td>2.1071807</td>
-                  <td>5.659020152</td>
+                  <td>5.6590202</td>
                 </tr>
                 <tr>
                   <td>EHI02146</td>
-                  <td>0.396598480</td>
+                  <td>0.39659848</td>
                   <td>0.022723211</td>
                   <td>1.0805826</td>
-                  <td>5.784687316</td>
+                  <td>5.7846873</td>
                 </tr>
                 <tr>
                   <td>EHI02147</td>
-                  <td>0.284968458</td>
+                  <td>0.28496846</td>
                   <td>1.796367947</td>
                   <td>1.0854405</td>
-                  <td>2.068443028</td>
+                  <td>2.0684430</td>
                 </tr>
                 <tr>
                   <td>EHI02148</td>
-                  <td>0.268057817</td>
+                  <td>0.26805782</td>
                   <td>0.079626434</td>
                   <td>1.3178386</td>
-                  <td>3.212759492</td>
+                  <td>3.2127595</td>
                 </tr>
                 <tr>
                   <td>EHI02149</td>
-                  <td>0.388660051</td>
+                  <td>0.38866005</td>
                   <td>0.024591015</td>
                   <td>1.0426246</td>
-                  <td>5.343479404</td>
+                  <td>5.3434794</td>
                 </tr>
                 <tr>
                   <td>EHI02150</td>
-                  <td>0.508047838</td>
+                  <td>0.50804784</td>
                   <td>0.612558754</td>
                   <td>1.5019638</td>
-                  <td>6.723704274</td>
+                  <td>6.7237043</td>
                 </tr>
                 <tr>
                   <td>EHI02163</td>
-                  <td>0.249441441</td>
+                  <td>0.24944144</td>
                   <td>0.353373832</td>
                   <td>0.8107075</td>
-                  <td>3.270159684</td>
+                  <td>3.2701597</td>
                 </tr>
                 <tr>
                   <td>EHI02168</td>
-                  <td>0.265107969</td>
+                  <td>0.26510797</td>
                   <td>0.005294109</td>
                   <td>1.1499268</td>
-                  <td>3.504476836</td>
+                  <td>3.5044768</td>
                 </tr>
                 <tr>
                   <td>EHI02173</td>
-                  <td>0.495816924</td>
+                  <td>0.49581692</td>
                   <td>0.127355452</td>
                   <td>1.3493281</td>
-                  <td>6.704788368</td>
+                  <td>6.7047884</td>
                 </tr>
                 <tr>
                   <td>EHI02175</td>
-                  <td>0.376564449</td>
+                  <td>0.37656445</td>
                   <td>0.459282745</td>
                   <td>1.5629339</td>
-                  <td>5.300646654</td>
+                  <td>5.3006467</td>
                 </tr>
                 <tr>
                   <td>EHI02176</td>
-                  <td>0.305810340</td>
+                  <td>0.30581034</td>
                   <td>0.646531312</td>
                   <td>1.1509803</td>
-                  <td>4.573919390</td>
+                  <td>4.5739194</td>
                 </tr>
                 <tr>
                   <td>EHI02177</td>
-                  <td>0.244913722</td>
+                  <td>0.24491372</td>
                   <td>0.618051224</td>
                   <td>0.6775554</td>
-                  <td>3.394591542</td>
+                  <td>3.3945915</td>
                 </tr>
                 <tr>
                   <td>EHI02181</td>
-                  <td>0.273843922</td>
+                  <td>0.27384392</td>
                   <td>0.221574786</td>
                   <td>0.7330386</td>
-                  <td>2.837044844</td>
+                  <td>2.8370448</td>
                 </tr>
                 <tr>
                   <td>EHI02183</td>
-                  <td>0.249112801</td>
+                  <td>0.24911280</td>
                   <td>0.327146734</td>
                   <td>0.9335973</td>
-                  <td>2.432171660</td>
+                  <td>2.4321717</td>
                 </tr>
                 <tr>
                   <td>EHI02185</td>
-                  <td>0.354848509</td>
+                  <td>0.35484851</td>
                   <td>0.320802699</td>
                   <td>1.7336855</td>
-                  <td>3.917622234</td>
+                  <td>3.9176222</td>
                 </tr>
                 <tr>
                   <td>EHI02186</td>
-                  <td>0.283945773</td>
+                  <td>0.28394577</td>
                   <td>0.014104732</td>
                   <td>1.2118278</td>
-                  <td>3.613930262</td>
+                  <td>3.6139303</td>
                 </tr>
                 <tr>
                   <td>EHI02187</td>
-                  <td>0.346896589</td>
+                  <td>0.34689659</td>
                   <td>0.230622596</td>
                   <td>1.7190550</td>
-                  <td>4.031772480</td>
+                  <td>4.0317725</td>
                 </tr>
                 <tr>
                   <td>EHI02188</td>
-                  <td>0.393769410</td>
+                  <td>0.39376941</td>
                   <td>0.129811669</td>
                   <td>1.3535723</td>
-                  <td>3.509135988</td>
+                  <td>3.5091360</td>
                 </tr>
                 <tr>
                   <td>EHI02189</td>
-                  <td>0.173455501</td>
+                  <td>0.17345550</td>
                   <td>0.080410048</td>
                   <td>0.8537177</td>
-                  <td>1.621521844</td>
+                  <td>1.6215218</td>
                 </tr>
                 <tr>
                   <td>EHI02190</td>
-                  <td>0.301411204</td>
+                  <td>0.30141120</td>
                   <td>0.124667844</td>
                   <td>1.1677691</td>
-                  <td>3.470493584</td>
+                  <td>3.4704936</td>
                 </tr>
                 <tr>
                   <td>EHI02192</td>
-                  <td>0.256467330</td>
+                  <td>0.25646733</td>
                   <td>0.032914569</td>
                   <td>0.6123759</td>
-                  <td>2.972428746</td>
+                  <td>2.9724287</td>
                 </tr>
                 <tr>
                   <td>EHI02200</td>
-                  <td>0.229270718</td>
+                  <td>0.22927072</td>
                   <td>0.260170151</td>
                   <td>0.6558930</td>
-                  <td>3.079841530</td>
+                  <td>3.0798415</td>
                 </tr>
                 <tr>
                   <td>EHI02204</td>
-                  <td>0.276810314</td>
+                  <td>0.27681031</td>
                   <td>0.044854996</td>
                   <td>1.9318630</td>
-                  <td>2.867351378</td>
+                  <td>2.8673514</td>
                 </tr>
                 <tr>
                   <td>EHI02205</td>
-                  <td>0.362708367</td>
+                  <td>0.36270837</td>
                   <td>0.547307160</td>
                   <td>1.4709080</td>
-                  <td>3.082438286</td>
+                  <td>3.0824383</td>
                 </tr>
                 <tr>
                   <td>EHI02206</td>
-                  <td>0.195796885</td>
+                  <td>0.19579688</td>
                   <td>0.296836029</td>
                   <td>0.7761338</td>
-                  <td>3.431500050</td>
+                  <td>3.4315000</td>
                 </tr>
                 <tr>
                   <td>EHI02207</td>
-                  <td>0.247375452</td>
+                  <td>0.24737545</td>
                   <td>0.091601964</td>
                   <td>0.7953698</td>
-                  <td>3.143096322</td>
+                  <td>3.1430963</td>
                 </tr>
                 <tr>
                   <td>EHI02212</td>
-                  <td>0.355319034</td>
+                  <td>0.35531903</td>
                   <td>0.083626809</td>
                   <td>1.1659462</td>
-                  <td>3.835138804</td>
+                  <td>3.8351388</td>
                 </tr>
                 <tr>
                   <td>EHI02213</td>
-                  <td>0.324141250</td>
+                  <td>0.32414125</td>
                   <td>0.587544861</td>
                   <td>0.9494633</td>
-                  <td>3.502267710</td>
+                  <td>3.5022677</td>
                 </tr>
                 <tr>
                   <td>EHI02215</td>
-                  <td>0.334780203</td>
+                  <td>0.33478020</td>
                   <td>0.017148379</td>
                   <td>1.0019263</td>
-                  <td>3.230061368</td>
+                  <td>3.2300614</td>
                 </tr>
                 <tr>
                   <td>EHI02220</td>
-                  <td>0.494512237</td>
+                  <td>0.49451224</td>
                   <td>0.093404077</td>
                   <td>0.4336903</td>
-                  <td>1.995734882</td>
+                  <td>1.9957349</td>
                 </tr>
                 <tr>
                   <td>EHI02224</td>
-                  <td>0.081419663</td>
+                  <td>0.08141966</td>
                   <td>0.334626271</td>
                   <td>0.3758555</td>
-                  <td>0.777226328</td>
+                  <td>0.7772263</td>
                 </tr>
                 <tr>
                   <td>EHI02225</td>
-                  <td>0.413301750</td>
+                  <td>0.41330175</td>
                   <td>0.349512685</td>
                   <td>4.7575214</td>
-                  <td>4.416184640</td>
+                  <td>4.4161846</td>
                 </tr>
                 <tr>
                   <td>EHI02226</td>
-                  <td>0.390744844</td>
+                  <td>0.39074484</td>
                   <td>0.039615586</td>
                   <td>3.0073699</td>
-                  <td>3.967071850</td>
+                  <td>3.9670718</td>
                 </tr>
                 <tr>
                   <td>EHI02227</td>
-                  <td>0.239963461</td>
+                  <td>0.23996346</td>
                   <td>0.221613793</td>
                   <td>2.4588211</td>
-                  <td>2.088932376</td>
+                  <td>2.0889324</td>
                 </tr>
                 <tr>
                   <td>EHI02229</td>
-                  <td>0.249593633</td>
+                  <td>0.24959363</td>
                   <td>1.194106074</td>
                   <td>1.1624408</td>
-                  <td>2.676119118</td>
+                  <td>2.6761191</td>
                 </tr>
                 <tr>
                   <td>EHI02230</td>
-                  <td>0.290059405</td>
+                  <td>0.29005941</td>
                   <td>0.379525025</td>
                   <td>1.6127797</td>
-                  <td>2.083170194</td>
+                  <td>2.0831702</td>
                 </tr>
                 <tr>
                   <td>EHI02232</td>
-                  <td>0.231557598</td>
+                  <td>0.23155760</td>
                   <td>0.969227939</td>
                   <td>1.4354485</td>
-                  <td>2.146648220</td>
+                  <td>2.1466482</td>
                 </tr>
                 <tr>
                   <td>EHI02233</td>
-                  <td>0.302719175</td>
+                  <td>0.30271917</td>
                   <td>2.449097819</td>
                   <td>1.4628453</td>
-                  <td>1.876172854</td>
+                  <td>1.8761729</td>
                 </tr>
                 <tr>
                   <td>EHI02234</td>
-                  <td>0.264116053</td>
+                  <td>0.26411605</td>
                   <td>0.609382878</td>
                   <td>1.5125561</td>
-                  <td>3.061413702</td>
+                  <td>3.0614137</td>
                 </tr>
                 <tr>
                   <td>EHI02244</td>
-                  <td>0.219158559</td>
+                  <td>0.21915856</td>
                   <td>0.191212632</td>
                   <td>1.6779900</td>
-                  <td>2.181222918</td>
+                  <td>2.1812229</td>
                 </tr>
                 <tr>
                   <td>EHI02245</td>
-                  <td>0.365730232</td>
+                  <td>0.36573023</td>
                   <td>0.148921561</td>
                   <td>4.0563816</td>
-                  <td>3.226674022</td>
+                  <td>3.2266740</td>
                 </tr>
                 <tr>
                   <td>EHI02248</td>
-                  <td>0.320041156</td>
+                  <td>0.32004116</td>
                   <td>1.570079605</td>
                   <td>1.7606608</td>
-                  <td>2.165283368</td>
+                  <td>2.1652834</td>
                 </tr>
                 <tr>
                   <td>EHI02249</td>
-                  <td>0.354615215</td>
+                  <td>0.35461522</td>
                   <td>0.720258547</td>
                   <td>2.7681957</td>
-                  <td>3.254434316</td>
+                  <td>3.2544343</td>
                 </tr>
                 <tr>
                   <td>EHI02250</td>
-                  <td>0.439646585</td>
+                  <td>0.43964658</td>
                   <td>0.629099890</td>
                   <td>3.4576720</td>
-                  <td>4.642744374</td>
+                  <td>4.6427444</td>
                 </tr>
                 <tr>
                   <td>EHI02251</td>
-                  <td>0.504374091</td>
+                  <td>0.50437409</td>
                   <td>1.376886856</td>
                   <td>2.0393598</td>
-                  <td>4.545933672</td>
+                  <td>4.5459337</td>
                 </tr>
                 <tr>
                   <td>EHI02252</td>
-                  <td>0.433768276</td>
+                  <td>0.43376828</td>
                   <td>0.504835550</td>
                   <td>2.4488109</td>
-                  <td>4.162905738</td>
+                  <td>4.1629057</td>
                 </tr>
                 <tr>
                   <td>EHI02257</td>
-                  <td>0.306617669</td>
+                  <td>0.30661767</td>
                   <td>2.236784717</td>
                   <td>1.4297728</td>
-                  <td>1.099142020</td>
+                  <td>1.0991420</td>
                 </tr>
                 <tr>
                   <td>EHI02258</td>
-                  <td>0.477078534</td>
+                  <td>0.47707853</td>
                   <td>0.011475238</td>
                   <td>3.2062865</td>
-                  <td>3.117715098</td>
+                  <td>3.1177151</td>
                 </tr>
                 <tr>
                   <td>EHI02261</td>
-                  <td>0.333866019</td>
+                  <td>0.33386602</td>
                   <td>4.802615301</td>
                   <td>0.9262589</td>
-                  <td>1.252668320</td>
-                </tr>
-                <tr>
-                  <td>EHI02266</td>
-                  <td>0.245742933</td>
-                  <td>0.035226518</td>
-                  <td>2.9707987</td>
-                  <td>0.985580300</td>
+                  <td>1.2526683</td>
                 </tr>
                 <tr>
                   <td>EHI02269</td>
-                  <td>0.651576790</td>
+                  <td>0.65157679</td>
                   <td>0.459332347</td>
                   <td>2.1441771</td>
-                  <td>4.297305162</td>
+                  <td>4.2973052</td>
                 </tr>
                 <tr>
                   <td>EHI02279</td>
-                  <td>0.278208174</td>
+                  <td>0.27820817</td>
                   <td>0.007094590</td>
                   <td>1.1173847</td>
-                  <td>4.603400732</td>
+                  <td>4.6034007</td>
                 </tr>
                 <tr>
                   <td>EHI02287</td>
-                  <td>0.590632856</td>
+                  <td>0.59063286</td>
                   <td>0.079387566</td>
                   <td>1.8271277</td>
-                  <td>2.571872052</td>
+                  <td>2.5718721</td>
                 </tr>
                 <tr>
                   <td>EHI02288</td>
-                  <td>0.215322153</td>
+                  <td>0.21532215</td>
                   <td>0.237914481</td>
                   <td>0.3971523</td>
-                  <td>2.493317774</td>
+                  <td>2.4933178</td>
                 </tr>
                 <tr>
                   <td>EHI02294</td>
-                  <td>0.335575495</td>
+                  <td>0.33557550</td>
                   <td>0.058883617</td>
                   <td>1.0257545</td>
-                  <td>5.382537762</td>
+                  <td>5.3825378</td>
                 </tr>
                 <tr>
                   <td>EHI02295</td>
-                  <td>0.409545887</td>
+                  <td>0.40954589</td>
                   <td>1.342900419</td>
                   <td>1.5387958</td>
-                  <td>3.672027312</td>
+                  <td>3.6720273</td>
                 </tr>
                 <tr>
                   <td>EHI02296</td>
-                  <td>0.496010965</td>
+                  <td>0.49601096</td>
                   <td>0.140855391</td>
                   <td>1.2440611</td>
-                  <td>3.994162734</td>
+                  <td>3.9941627</td>
                 </tr>
                 <tr>
                   <td>EHI02309</td>
-                  <td>0.427503916</td>
+                  <td>0.42750392</td>
                   <td>0.081233404</td>
                   <td>0.7049514</td>
-                  <td>1.165774814</td>
+                  <td>1.1657748</td>
                 </tr>
                 <tr>
                   <td>EHI02352</td>
-                  <td>0.264054053</td>
+                  <td>0.26405405</td>
                   <td>0.627101313</td>
                   <td>0.5968526</td>
-                  <td>2.736615386</td>
+                  <td>2.7366154</td>
                 </tr>
                 <tr>
                   <td>EHI02354</td>
-                  <td>0.200796586</td>
+                  <td>0.20079659</td>
                   <td>0.398394849</td>
                   <td>1.3972320</td>
-                  <td>2.537287864</td>
+                  <td>2.5372879</td>
                 </tr>
                 <tr>
                   <td>EHI02355</td>
-                  <td>0.217570821</td>
+                  <td>0.21757082</td>
                   <td>0.379707977</td>
                   <td>0.7071088</td>
-                  <td>3.445023738</td>
+                  <td>3.4450237</td>
                 </tr>
                 <tr>
                   <td>EHI02356</td>
-                  <td>0.221836869</td>
+                  <td>0.22183687</td>
                   <td>0.343606867</td>
                   <td>0.6386925</td>
-                  <td>3.591940034</td>
+                  <td>3.5919400</td>
                 </tr>
                 <tr>
                   <td>EHI02357</td>
-                  <td>0.598867942</td>
+                  <td>0.59886794</td>
                   <td>1.220861954</td>
                   <td>5.3855036</td>
-                  <td>6.764730274</td>
+                  <td>6.7647303</td>
                 </tr>
                 <tr>
                   <td>EHI02359</td>
-                  <td>0.212067784</td>
+                  <td>0.21206778</td>
                   <td>0.056324366</td>
                   <td>1.5526465</td>
-                  <td>3.282656408</td>
+                  <td>3.2826564</td>
                 </tr>
                 <tr>
                   <td>EHI02361</td>
-                  <td>0.117671746</td>
+                  <td>0.11767175</td>
                   <td>0.020283883</td>
                   <td>0.3821612</td>
-                  <td>2.116822610</td>
+                  <td>2.1168226</td>
                 </tr>
                 <tr>
                   <td>EHI02362</td>
-                  <td>0.226356799</td>
+                  <td>0.22635680</td>
                   <td>0.041382295</td>
                   <td>1.0074494</td>
-                  <td>3.875653074</td>
+                  <td>3.8756531</td>
                 </tr>
                 <tr>
                   <td>EHI02363</td>
-                  <td>0.175146248</td>
+                  <td>0.17514625</td>
                   <td>0.381952058</td>
                   <td>1.0179982</td>
-                  <td>2.321434602</td>
+                  <td>2.3214346</td>
                 </tr>
                 <tr>
                   <td>EHI02364</td>
-                  <td>0.225108479</td>
+                  <td>0.22510848</td>
                   <td>0.012515998</td>
                   <td>1.7703654</td>
-                  <td>3.259248082</td>
+                  <td>3.2592481</td>
                 </tr>
                 <tr>
                   <td>EHI02365</td>
-                  <td>0.272131949</td>
+                  <td>0.27213195</td>
                   <td>0.675151942</td>
                   <td>0.7917615</td>
-                  <td>3.644502954</td>
+                  <td>3.6445030</td>
                 </tr>
                 <tr>
                   <td>EHI02366</td>
-                  <td>0.207076950</td>
+                  <td>0.20707695</td>
                   <td>0.032505674</td>
                   <td>0.7648809</td>
-                  <td>3.125449302</td>
+                  <td>3.1254493</td>
                 </tr>
                 <tr>
                   <td>EHI02367</td>
-                  <td>0.174984825</td>
+                  <td>0.17498482</td>
                   <td>0.017915651</td>
                   <td>0.7572338</td>
-                  <td>3.090470914</td>
+                  <td>3.0904709</td>
                 </tr>
                 <tr>
                   <td>EHI02368</td>
-                  <td>0.263699084</td>
+                  <td>0.26369908</td>
                   <td>0.843894719</td>
                   <td>1.5198989</td>
-                  <td>2.750020230</td>
+                  <td>2.7500202</td>
                 </tr>
                 <tr>
                   <td>EHI02369</td>
-                  <td>0.242956908</td>
+                  <td>0.24295691</td>
                   <td>0.132120699</td>
                   <td>1.5158353</td>
-                  <td>3.836612090</td>
+                  <td>3.8366121</td>
                 </tr>
                 <tr>
                   <td>EHI02370</td>
-                  <td>0.219767609</td>
+                  <td>0.21976761</td>
                   <td>0.114411977</td>
                   <td>0.7971614</td>
-                  <td>3.571974388</td>
+                  <td>3.5719744</td>
                 </tr>
                 <tr>
                   <td>EHI02371</td>
-                  <td>0.170439125</td>
+                  <td>0.17043912</td>
                   <td>0.155385238</td>
                   <td>1.6250644</td>
-                  <td>1.643512364</td>
+                  <td>1.6435124</td>
                 </tr>
                 <tr>
                   <td>EHI02374</td>
-                  <td>0.317981791</td>
+                  <td>0.31798179</td>
                   <td>0.874608703</td>
                   <td>0.5660789</td>
-                  <td>2.954143998</td>
+                  <td>2.9541440</td>
                 </tr>
                 <tr>
                   <td>EHI02382</td>
-                  <td>0.266428397</td>
+                  <td>0.26642840</td>
                   <td>0.803700708</td>
                   <td>0.6643631</td>
-                  <td>2.878608708</td>
-                </tr>
-                <tr>
-                  <td>EHI02383</td>
-                  <td>0.400217344</td>
-                  <td>0.456822311</td>
-                  <td>2.9796448</td>
-                  <td>0.209447950</td>
+                  <td>2.8786087</td>
                 </tr>
                 <tr>
                   <td>EHI02384</td>
-                  <td>0.329171592</td>
+                  <td>0.32917159</td>
                   <td>1.769598411</td>
                   <td>2.2067878</td>
-                  <td>1.536709130</td>
+                  <td>1.5367091</td>
                 </tr>
                 <tr>
                   <td>EHI02385</td>
-                  <td>0.348593024</td>
+                  <td>0.34859302</td>
                   <td>0.382406262</td>
                   <td>1.4622358</td>
-                  <td>3.575230042</td>
+                  <td>3.5752300</td>
                 </tr>
                 <tr>
                   <td>EHI02387</td>
-                  <td>0.280557150</td>
+                  <td>0.28055715</td>
                   <td>0.058689090</td>
                   <td>0.9045066</td>
-                  <td>4.176038438</td>
-                </tr>
-                <tr>
-                  <td>EHI02388</td>
-                  <td>0.287229934</td>
-                  <td>2.714947917</td>
-                  <td>1.4983049</td>
-                  <td>0.683303652</td>
+                  <td>4.1760384</td>
                 </tr>
                 <tr>
                   <td>EHI02390</td>
-                  <td>0.243807609</td>
+                  <td>0.24380761</td>
                   <td>0.270494973</td>
                   <td>0.6541657</td>
-                  <td>3.276894226</td>
+                  <td>3.2768942</td>
                 </tr>
                 <tr>
                   <td>EHI02391</td>
-                  <td>0.181925128</td>
+                  <td>0.18192513</td>
                   <td>0.248050903</td>
                   <td>0.4234308</td>
-                  <td>1.741671814</td>
+                  <td>1.7416718</td>
                 </tr>
                 <tr>
                   <td>EHI02757</td>
-                  <td>0.294034282</td>
+                  <td>0.29403428</td>
                   <td>0.082789920</td>
                   <td>2.1970083</td>
-                  <td>1.247865066</td>
+                  <td>1.2478651</td>
                 </tr>
                 <tr>
                   <td>EHI02759</td>
-                  <td>0.276046018</td>
+                  <td>0.27604602</td>
                   <td>0.007594356</td>
                   <td>1.9961628</td>
-                  <td>2.197462206</td>
+                  <td>2.1974622</td>
                 </tr>
                 <tr>
                   <td>EHI02761</td>
-                  <td>0.297296177</td>
+                  <td>0.29729618</td>
                   <td>0.000887657</td>
                   <td>1.1203068</td>
-                  <td>3.370384742</td>
+                  <td>3.3703847</td>
                 </tr>
                 <tr>
                   <td>EHI02763</td>
-                  <td>0.524224077</td>
+                  <td>0.52422408</td>
                   <td>0.205085923</td>
                   <td>2.7533114</td>
-                  <td>2.917003496</td>
+                  <td>2.9170035</td>
                 </tr>
                 <tr>
                   <td>EHI02764</td>
-                  <td>0.449391888</td>
+                  <td>0.44939189</td>
                   <td>0.005282447</td>
                   <td>1.4698058</td>
-                  <td>3.355541798</td>
+                  <td>3.3555418</td>
                 </tr>
                 <tr>
                   <td>EHI02765</td>
-                  <td>0.394035578</td>
+                  <td>0.39403558</td>
                   <td>0.028582614</td>
                   <td>1.8560324</td>
-                  <td>2.155209952</td>
+                  <td>2.1552100</td>
                 </tr>
                 <tr>
                   <td>EHI02777</td>
-                  <td>0.379828561</td>
+                  <td>0.37982856</td>
                   <td>0.013483286</td>
                   <td>1.4614610</td>
-                  <td>3.083651400</td>
+                  <td>3.0836514</td>
                 </tr>
                 <tr>
                   <td>EHI02782</td>
-                  <td>0.238281031</td>
+                  <td>0.23828103</td>
                   <td>0.014906912</td>
                   <td>1.2278475</td>
-                  <td>1.924142176</td>
+                  <td>1.9241422</td>
                 </tr>
                 <tr>
                   <td>EHI02783</td>
-                  <td>0.273176747</td>
+                  <td>0.27317675</td>
                   <td>0.002016375</td>
                   <td>1.5073783</td>
-                  <td>2.487189424</td>
+                  <td>2.4871894</td>
                 </tr>
                 <tr>
                   <td>EHI02787</td>
-                  <td>0.300188574</td>
+                  <td>0.30018857</td>
                   <td>0.005022157</td>
                   <td>1.4235209</td>
-                  <td>2.837781706</td>
+                  <td>2.8377817</td>
                 </tr>
                 <tr>
                   <td>EHI02788</td>
-                  <td>0.295635092</td>
+                  <td>0.29563509</td>
                   <td>0.053677482</td>
                   <td>1.8817202</td>
-                  <td>2.686377662</td>
+                  <td>2.6863777</td>
                 </tr>
                 <tr>
                   <td>EHI02791</td>
-                  <td>0.346526101</td>
+                  <td>0.34652610</td>
                   <td>0.170757536</td>
                   <td>2.3776453</td>
-                  <td>1.922915338</td>
+                  <td>1.9229153</td>
                 </tr>
                 <tr>
                   <td>EHI02794</td>
-                  <td>0.248015130</td>
+                  <td>0.24801513</td>
                   <td>0.138442901</td>
                   <td>1.7684754</td>
-                  <td>1.676635384</td>
+                  <td>1.6766354</td>
                 </tr>
                 <tr>
                   <td>EHI02795</td>
-                  <td>0.377025287</td>
+                  <td>0.37702529</td>
                   <td>0.158631851</td>
                   <td>1.5443461</td>
-                  <td>2.110558188</td>
+                  <td>2.1105582</td>
                 </tr>
                 <tr>
                   <td>EHI02798</td>
-                  <td>0.357301167</td>
+                  <td>0.35730117</td>
                   <td>0.002362708</td>
                   <td>1.9554534</td>
-                  <td>1.907907414</td>
+                  <td>1.9079074</td>
                 </tr>
                 <tr>
                   <td>EHI02799</td>
-                  <td>0.402583040</td>
+                  <td>0.40258304</td>
                   <td>0.060179682</td>
                   <td>1.9181801</td>
-                  <td>2.655883518</td>
+                  <td>2.6558835</td>
                 </tr>
                 <tr>
                   <td>EHI02802</td>
-                  <td>0.265790984</td>
+                  <td>0.26579098</td>
                   <td>0.002203097</td>
                   <td>2.0678691</td>
-                  <td>1.979885268</td>
+                  <td>1.9798853</td>
                 </tr>
                 <tr>
                   <td>EHI02803</td>
-                  <td>0.251949238</td>
+                  <td>0.25194924</td>
                   <td>0.150107715</td>
                   <td>2.1202424</td>
-                  <td>1.709881336</td>
+                  <td>1.7098813</td>
                 </tr>
                 <tr>
                   <td>EHI02807</td>
-                  <td>0.364889438</td>
+                  <td>0.36488944</td>
                   <td>0.015431488</td>
                   <td>2.4012048</td>
-                  <td>3.296380992</td>
+                  <td>3.2963810</td>
                 </tr>
                 <tr>
                   <td>EHI02808</td>
-                  <td>0.439886327</td>
+                  <td>0.43988633</td>
                   <td>1.200635849</td>
                   <td>2.0724617</td>
-                  <td>1.849679986</td>
+                  <td>1.8496800</td>
                 </tr>
                 <tr>
                   <td>EHI02810</td>
-                  <td>0.274062756</td>
+                  <td>0.27406276</td>
                   <td>0.003288171</td>
                   <td>1.8365760</td>
-                  <td>2.579502888</td>
+                  <td>2.5795029</td>
                 </tr>
                 <tr>
                   <td>EHI02813</td>
-                  <td>0.276299341</td>
+                  <td>0.27629934</td>
                   <td>0.462701217</td>
                   <td>1.7232469</td>
-                  <td>1.311108470</td>
+                  <td>1.3111085</td>
                 </tr>
                 <tr>
                   <td>EHI02815</td>
-                  <td>0.321359282</td>
+                  <td>0.32135928</td>
                   <td>0.007933980</td>
                   <td>1.6970506</td>
-                  <td>2.158758482</td>
+                  <td>2.1587585</td>
                 </tr>
                 <tr>
                   <td>EHI02820</td>
-                  <td>0.212165739</td>
+                  <td>0.21216574</td>
                   <td>0.002092627</td>
                   <td>1.4602005</td>
-                  <td>1.520110682</td>
+                  <td>1.5201107</td>
                 </tr>
                 <tr>
                   <td>EHI02821</td>
-                  <td>0.348891708</td>
+                  <td>0.34889171</td>
                   <td>1.327289142</td>
                   <td>2.0562876</td>
-                  <td>1.810006676</td>
+                  <td>1.8100067</td>
                 </tr>
                 <tr>
                   <td>EHI02825</td>
-                  <td>0.907082972</td>
+                  <td>0.90708297</td>
                   <td>0.198946833</td>
                   <td>1.9494225</td>
-                  <td>1.679730584</td>
+                  <td>1.6797306</td>
                 </tr>
                 <tr>
                   <td>EHI02827</td>
-                  <td>0.896086104</td>
+                  <td>0.89608610</td>
                   <td>0.773841945</td>
                   <td>1.4883037</td>
-                  <td>1.733951042</td>
+                  <td>1.7339510</td>
                 </tr>
                 <tr>
                   <td>EHI02833</td>
-                  <td>0.444510864</td>
+                  <td>0.44451086</td>
                   <td>0.007061658</td>
                   <td>1.9045831</td>
-                  <td>2.897196260</td>
+                  <td>2.8971963</td>
                 </tr>
                 <tr>
                   <td>EHI02842</td>
-                  <td>0.432098311</td>
+                  <td>0.43209831</td>
                   <td>0.008961870</td>
                   <td>2.8527400</td>
-                  <td>3.788013946</td>
+                  <td>3.7880139</td>
                 </tr>
         </tbody>
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb21"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb21-1"><a href="data-statistics.html#cb21-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="data-statistics.html#cb21-2" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>sample), <span class="sc">~</span>.<span class="sc">/</span><span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="data-statistics.html#cb21-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;Sample&quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Low quality&quot;</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">&quot;Mapped to host&quot;</span><span class="ot">=</span><span class="dv">3</span>, <span class="st">&quot;Unmapped&quot;</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">&quot;Mapped to MAGs&quot;</span><span class="ot">=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-4"><a href="data-statistics.html#cb21-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-5"><a href="data-statistics.html#cb21-5" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb23-1"><a href="data-statistics.html#cb23-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="data-statistics.html#cb23-2" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>sample), <span class="sc">~</span>.<span class="sc">/</span><span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="data-statistics.html#cb23-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;Sample&quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Low quality&quot;</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">&quot;Mapped to host&quot;</span><span class="ot">=</span><span class="dv">3</span>, <span class="st">&quot;Unmapped&quot;</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">&quot;Mapped to MAGs&quot;</span><span class="ot">=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="data-statistics.html#cb23-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="data-statistics.html#cb23-5" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_wm0pxdaqnm463urckwqj(i, j, css_id) {
-          var table = document.getElementById("tinytable_wm0pxdaqnm463urckwqj");
+      function styleCell_s1cn0rrbcvcm1jvt6cqr(i, j, css_id) {
+          var table = document.getElementById("tinytable_s1cn0rrbcvcm1jvt6cqr");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2230,7 +2181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_wm0pxdaqnm463urckwqj');
+        var table = document.getElementById('tinytable_s1cn0rrbcvcm1jvt6cqr');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2238,8 +2189,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_wm0pxdaqnm463urckwqj(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_wm0pxdaqnm463urckwqj");
+      function spanCell_s1cn0rrbcvcm1jvt6cqr(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_s1cn0rrbcvcm1jvt6cqr");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2269,14 +2220,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 }, { i: 1, j: 2 }, { i: 1, j: 3 },  ], css_id: 'tinytable_css_zw5801bkrbequdnca4o1',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_i11l2zdmcbxjvuefpfcj',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 }, { i: 1, j: 2 }, { i: 1, j: 3 },  ], css_id: 'tinytable_css_wipvyvgnefk3djpn5myj',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_d3d8suz1buezdvfis0uo',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_wm0pxdaqnm463urckwqj(cell.i, cell.j, group.css_id);
+                  styleCell_s1cn0rrbcvcm1jvt6cqr(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2284,11 +2235,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_zw5801bkrbequdnca4o1, .table th.tinytable_css_zw5801bkrbequdnca4o1 { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_i11l2zdmcbxjvuefpfcj, .table th.tinytable_css_i11l2zdmcbxjvuefpfcj { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_wipvyvgnefk3djpn5myj, .table th.tinytable_css_wipvyvgnefk3djpn5myj { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_d3d8suz1buezdvfis0uo, .table th.tinytable_css_d3d8suz1buezdvfis0uo { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_wm0pxdaqnm463urckwqj" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_s1cn0rrbcvcm1jvt6cqr" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2301,71 +2252,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         
         <tbody>
                 <tr>
-                  <td>0.2954648</td>
-                  <td>0.468943</td>
-                  <td>1.501473</td>
-                  <td>3.103511</td>
+                  <td>0.298412</td>
+                  <td>0.4381492</td>
+                  <td>1.490564</td>
+                  <td>3.183744</td>
                 </tr>
         </tbody>
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb22"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb22-1"><a href="data-statistics.html#cb22-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="data-statistics.html#cb22-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;fraction&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="data-statistics.html#cb22-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">value =</span> value <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="data-statistics.html#cb22-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fraction =</span> <span class="fu">factor</span>(fraction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>, <span class="st">&quot;host_bases&quot;</span>, <span class="st">&quot;unmapped_bases&quot;</span>, <span class="st">&quot;mags_bases&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb22-5"><a href="data-statistics.html#cb22-5" tabindex="-1"></a>  </span>
-<span id="cb22-6"><a href="data-statistics.html#cb22-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value, <span class="at">fill=</span>fraction)) <span class="sc">+</span></span>
-<span id="cb22-7"><a href="data-statistics.html#cb22-7" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb22-8"><a href="data-statistics.html#cb22-8" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;Sequence type&quot;</span>,</span>
-<span id="cb22-9"><a href="data-statistics.html#cb22-9" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>,<span class="st">&quot;host_bases&quot;</span>,<span class="st">&quot;unmapped_bases&quot;</span>,<span class="st">&quot;mags_bases&quot;</span>),</span>
-<span id="cb22-10"><a href="data-statistics.html#cb22-10" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Low quality&quot;</span>,<span class="st">&quot;Mapped to host&quot;</span>,<span class="st">&quot;Unmapped&quot;</span>,<span class="st">&quot;Mapped to MAGs&quot;</span>),</span>
-<span id="cb22-11"><a href="data-statistics.html#cb22-11" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#CCCCCC&quot;</span>, <span class="st">&quot;#bcdee1&quot;</span>, <span class="st">&quot;#d8b8a3&quot;</span>,<span class="st">&quot;#93655c&quot;</span>))<span class="sc">+</span></span>
-<span id="cb22-12"><a href="data-statistics.html#cb22-12" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Amount of data (GB)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb22-13"><a href="data-statistics.html#cb22-13" tabindex="-1"></a>        <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb22-14"><a href="data-statistics.html#cb22-14" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb24-1"><a href="data-statistics.html#cb24-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="data-statistics.html#cb24-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;fraction&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="data-statistics.html#cb24-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">value =</span> value <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="data-statistics.html#cb24-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fraction =</span> <span class="fu">factor</span>(fraction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>, <span class="st">&quot;host_bases&quot;</span>, <span class="st">&quot;unmapped_bases&quot;</span>, <span class="st">&quot;mags_bases&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="data-statistics.html#cb24-5" tabindex="-1"></a>  </span>
+<span id="cb24-6"><a href="data-statistics.html#cb24-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value, <span class="at">fill=</span>fraction)) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="data-statistics.html#cb24-7" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="data-statistics.html#cb24-8" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;Sequence type&quot;</span>,</span>
+<span id="cb24-9"><a href="data-statistics.html#cb24-9" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>,<span class="st">&quot;host_bases&quot;</span>,<span class="st">&quot;unmapped_bases&quot;</span>,<span class="st">&quot;mags_bases&quot;</span>),</span>
+<span id="cb24-10"><a href="data-statistics.html#cb24-10" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Low quality&quot;</span>,<span class="st">&quot;Mapped to host&quot;</span>,<span class="st">&quot;Unmapped&quot;</span>,<span class="st">&quot;Mapped to MAGs&quot;</span>),</span>
+<span id="cb24-11"><a href="data-statistics.html#cb24-11" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#CCCCCC&quot;</span>, <span class="st">&quot;#bcdee1&quot;</span>, <span class="st">&quot;#d8b8a3&quot;</span>,<span class="st">&quot;#93655c&quot;</span>))<span class="sc">+</span></span>
+<span id="cb24-12"><a href="data-statistics.html#cb24-12" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Amount of data (GB)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-13"><a href="data-statistics.html#cb24-13" tabindex="-1"></a>        <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb24-14"><a href="data-statistics.html#cb24-14" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/dna_fractions_plot-1.png" width="960" /></p>
 </div>
 <div id="recovered-microbial-fraction" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Recovered microbial fraction<a href="data-statistics.html#recovered-microbial-fraction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb23-1"><a href="data-statistics.html#cb23-1" tabindex="-1"></a>singlem_table <span class="ot">&lt;-</span> sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="data-statistics.html#cb23-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">round</span>((mags_bases <span class="sc">/</span> (mags_bases <span class="sc">+</span> unmapped_bases))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="data-statistics.html#cb23-3" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample))  <span class="sc">%&gt;%</span></span>
-<span id="cb23-4"><a href="data-statistics.html#cb23-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">round</span>(singlem_fraction,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-5"><a href="data-statistics.html#cb23-5" tabindex="-1"></a>    <span class="fu">select</span>(sample,mags_proportion,singlem_proportion) <span class="sc">%&gt;%</span></span>
-<span id="cb23-6"><a href="data-statistics.html#cb23-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, mags_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
-<span id="cb23-7"><a href="data-statistics.html#cb23-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
-<span id="cb23-8"><a href="data-statistics.html#cb23-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&lt;</span> mags_proportion, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#if singlem is smaller, then NA, to simplify plot</span></span>
-<span id="cb23-9"><a href="data-statistics.html#cb23-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">100</span>, singlem_proportion)) <span class="co">#simplify</span></span>
-<span id="cb23-10"><a href="data-statistics.html#cb23-10" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="data-statistics.html#cb23-11" tabindex="-1"></a>singlem_table <span class="sc">%&gt;%</span></span>
-<span id="cb23-12"><a href="data-statistics.html#cb23-12" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;proportion&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-13"><a href="data-statistics.html#cb23-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">factor</span>(proportion, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb23-14"><a href="data-statistics.html#cb23-14" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> sample, <span class="at">color=</span>proportion)) <span class="sc">+</span></span>
-<span id="cb23-15"><a href="data-statistics.html#cb23-15" tabindex="-1"></a>            <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> sample), <span class="at">color =</span> <span class="st">&quot;#f8a538&quot;</span>) <span class="sc">+</span></span>
-<span id="cb23-16"><a href="data-statistics.html#cb23-16" tabindex="-1"></a>            <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb23-17"><a href="data-statistics.html#cb23-17" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="st">&quot;Proportion&quot;</span>,</span>
-<span id="cb23-18"><a href="data-statistics.html#cb23-18" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>),</span>
-<span id="cb23-19"><a href="data-statistics.html#cb23-19" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Recovered&quot;</span>,<span class="st">&quot;Estimated&quot;</span>),</span>
-<span id="cb23-20"><a href="data-statistics.html#cb23-20" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#52e1e8&quot;</span>, <span class="st">&quot;#876b53&quot;</span>))<span class="sc">+</span></span>
-<span id="cb23-21"><a href="data-statistics.html#cb23-21" tabindex="-1"></a>            <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb23-22"><a href="data-statistics.html#cb23-22" tabindex="-1"></a>            <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Prokaryotic fraction (%)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb23-23"><a href="data-statistics.html#cb23-23" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb25-1"><a href="data-statistics.html#cb25-1" tabindex="-1"></a>singlem_table <span class="ot">&lt;-</span> sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="data-statistics.html#cb25-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">round</span>((mags_bases <span class="sc">/</span> (mags_bases <span class="sc">+</span> unmapped_bases))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="data-statistics.html#cb25-3" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample))  <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="data-statistics.html#cb25-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">round</span>(singlem_fraction,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-5"><a href="data-statistics.html#cb25-5" tabindex="-1"></a>    <span class="fu">select</span>(sample,mags_proportion,singlem_proportion) <span class="sc">%&gt;%</span></span>
+<span id="cb25-6"><a href="data-statistics.html#cb25-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, mags_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
+<span id="cb25-7"><a href="data-statistics.html#cb25-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
+<span id="cb25-8"><a href="data-statistics.html#cb25-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&lt;</span> mags_proportion, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#if singlem is smaller, then NA, to simplify plot</span></span>
+<span id="cb25-9"><a href="data-statistics.html#cb25-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">100</span>, singlem_proportion)) <span class="co">#simplify</span></span>
+<span id="cb25-10"><a href="data-statistics.html#cb25-10" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="data-statistics.html#cb25-11" tabindex="-1"></a>singlem_table <span class="sc">%&gt;%</span></span>
+<span id="cb25-12"><a href="data-statistics.html#cb25-12" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;proportion&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-13"><a href="data-statistics.html#cb25-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">factor</span>(proportion, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb25-14"><a href="data-statistics.html#cb25-14" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> sample, <span class="at">color=</span>proportion)) <span class="sc">+</span></span>
+<span id="cb25-15"><a href="data-statistics.html#cb25-15" tabindex="-1"></a>            <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> sample), <span class="at">color =</span> <span class="st">&quot;#f8a538&quot;</span>) <span class="sc">+</span></span>
+<span id="cb25-16"><a href="data-statistics.html#cb25-16" tabindex="-1"></a>            <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-17"><a href="data-statistics.html#cb25-17" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="st">&quot;Proportion&quot;</span>,</span>
+<span id="cb25-18"><a href="data-statistics.html#cb25-18" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>),</span>
+<span id="cb25-19"><a href="data-statistics.html#cb25-19" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Recovered&quot;</span>,<span class="st">&quot;Estimated&quot;</span>),</span>
+<span id="cb25-20"><a href="data-statistics.html#cb25-20" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#52e1e8&quot;</span>, <span class="st">&quot;#876b53&quot;</span>))<span class="sc">+</span></span>
+<span id="cb25-21"><a href="data-statistics.html#cb25-21" tabindex="-1"></a>            <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb25-22"><a href="data-statistics.html#cb25-22" tabindex="-1"></a>            <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Prokaryotic fraction (%)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb25-23"><a href="data-statistics.html#cb25-23" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/data_estimations_plot-1.png" width="960" /></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb24-1"><a href="data-statistics.html#cb24-1" tabindex="-1"></a>damr <span class="ot">&lt;-</span> singlem_table <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="data-statistics.html#cb24-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">damr=</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(singlem_proportion),<span class="dv">100</span>,mags_proportion<span class="sc">/</span>singlem_proportion<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="data-statistics.html#cb24-3" tabindex="-1"></a>  <span class="fu">select</span>(sample,damr)</span>
-<span id="cb24-4"><a href="data-statistics.html#cb24-4" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="data-statistics.html#cb24-5" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb24-6"><a href="data-statistics.html#cb24-6" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
-<span id="cb24-7"><a href="data-statistics.html#cb24-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-8"><a href="data-statistics.html#cb24-8" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb26-1"><a href="data-statistics.html#cb26-1" tabindex="-1"></a>damr <span class="ot">&lt;-</span> singlem_table <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="data-statistics.html#cb26-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">damr=</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(singlem_proportion),<span class="dv">100</span>,mags_proportion<span class="sc">/</span>singlem_proportion<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="data-statistics.html#cb26-3" tabindex="-1"></a>  <span class="fu">select</span>(sample,damr)</span>
+<span id="cb26-4"><a href="data-statistics.html#cb26-4" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="data-statistics.html#cb26-5" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb26-6"><a href="data-statistics.html#cb26-6" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-7"><a href="data-statistics.html#cb26-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-8"><a href="data-statistics.html#cb26-8" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_leytk6euh1r34boekur6(i, j, css_id) {
-          var table = document.getElementById("tinytable_leytk6euh1r34boekur6");
+      function styleCell_z3pxoi05najm69bpm005(i, j, css_id) {
+          var table = document.getElementById("tinytable_z3pxoi05najm69bpm005");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2375,7 +2326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_leytk6euh1r34boekur6');
+        var table = document.getElementById('tinytable_z3pxoi05najm69bpm005');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2383,8 +2334,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_leytk6euh1r34boekur6(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_leytk6euh1r34boekur6");
+      function spanCell_z3pxoi05najm69bpm005(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_z3pxoi05najm69bpm005");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2414,14 +2365,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_jyqy4wreeswn9dxd6sl1',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_404bnvx6q1ajq3zc4uz8',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_k38piurwinoep6beony7',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_htcr15t6lfzkqr354eg1',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_leytk6euh1r34boekur6(cell.i, cell.j, group.css_id);
+                  styleCell_z3pxoi05najm69bpm005(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2429,11 +2380,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_jyqy4wreeswn9dxd6sl1, .table th.tinytable_css_jyqy4wreeswn9dxd6sl1 { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_404bnvx6q1ajq3zc4uz8, .table th.tinytable_css_404bnvx6q1ajq3zc4uz8 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_k38piurwinoep6beony7, .table th.tinytable_css_k38piurwinoep6beony7 { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_htcr15t6lfzkqr354eg1, .table th.tinytable_css_htcr15t6lfzkqr354eg1 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_leytk6euh1r34boekur6" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_z3pxoi05najm69bpm005" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2444,23 +2395,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         
         <tbody>
                 <tr>
-                  <td>91.89443</td>
-                  <td>12.12337</td>
+                  <td>91.70779</td>
+                  <td>12.22803</td>
                 </tr>
         </tbody>
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb25"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb25-1"><a href="data-statistics.html#cb25-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb25-2"><a href="data-statistics.html#cb25-2" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="data-statistics.html#cb25-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-4"><a href="data-statistics.html#cb25-4" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb27-1"><a href="data-statistics.html#cb27-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="data-statistics.html#cb27-2" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="data-statistics.html#cb27-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="data-statistics.html#cb27-4" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_0uqdve6v7786dazro4d3(i, j, css_id) {
-          var table = document.getElementById("tinytable_0uqdve6v7786dazro4d3");
+      function styleCell_yilzk8iwikl8vd5odmuw(i, j, css_id) {
+          var table = document.getElementById("tinytable_yilzk8iwikl8vd5odmuw");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2470,7 +2421,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_0uqdve6v7786dazro4d3');
+        var table = document.getElementById('tinytable_yilzk8iwikl8vd5odmuw');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2478,8 +2429,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_0uqdve6v7786dazro4d3(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_0uqdve6v7786dazro4d3");
+      function spanCell_yilzk8iwikl8vd5odmuw(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_yilzk8iwikl8vd5odmuw");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2509,14 +2460,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_yjygwqwj4ky0ur2fji6l',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_1j0bazar70i9x6nbvd04',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_nk5dstsdzjz72ug6c2oo',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_1iqx5d6d8uiokd2t4nx2',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_0uqdve6v7786dazro4d3(cell.i, cell.j, group.css_id);
+                  styleCell_yilzk8iwikl8vd5odmuw(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2524,11 +2475,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_yjygwqwj4ky0ur2fji6l, .table th.tinytable_css_yjygwqwj4ky0ur2fji6l { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_1j0bazar70i9x6nbvd04, .table th.tinytable_css_1j0bazar70i9x6nbvd04 { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_nk5dstsdzjz72ug6c2oo, .table th.tinytable_css_nk5dstsdzjz72ug6c2oo { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_1iqx5d6d8uiokd2t4nx2, .table th.tinytable_css_1iqx5d6d8uiokd2t4nx2 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_0uqdve6v7786dazro4d3" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_yilzk8iwikl8vd5odmuw" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2539,21 +2490,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         
         <tbody>
                 <tr>
-                  <td>91.89443</td>
-                  <td>12.12337</td>
+                  <td>91.70779</td>
+                  <td>12.22803</td>
                 </tr>
         </tbody>
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb26"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb26-1"><a href="data-statistics.html#cb26-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="data-statistics.html#cb26-2" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb28-1"><a href="data-statistics.html#cb28-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="data-statistics.html#cb28-2" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_n3ln742bdv787erkdi3r(i, j, css_id) {
-          var table = document.getElementById("tinytable_n3ln742bdv787erkdi3r");
+      function styleCell_4f83o1f4kxgqh6ccj0up(i, j, css_id) {
+          var table = document.getElementById("tinytable_4f83o1f4kxgqh6ccj0up");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2563,7 +2514,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_n3ln742bdv787erkdi3r');
+        var table = document.getElementById('tinytable_4f83o1f4kxgqh6ccj0up');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2571,8 +2522,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_n3ln742bdv787erkdi3r(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_n3ln742bdv787erkdi3r");
+      function spanCell_4f83o1f4kxgqh6ccj0up(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_4f83o1f4kxgqh6ccj0up");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2602,14 +2553,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 249, j: 0 }, { i: 249, j: 1 },  ], css_id: 'tinytable_css_ynjeoays9styntnac15h',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_9l8ojr30b4k8leyqss34',}, 
+          { positions: [ { i: 242, j: 0 }, { i: 242, j: 1 },  ], css_id: 'tinytable_css_n1zfswkt8eetoaxff1rg',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_31swspibcltkn88mwcex',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_n3ln742bdv787erkdi3r(cell.i, cell.j, group.css_id);
+                  styleCell_4f83o1f4kxgqh6ccj0up(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2617,11 +2568,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_ynjeoays9styntnac15h, .table th.tinytable_css_ynjeoays9styntnac15h { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_9l8ojr30b4k8leyqss34, .table th.tinytable_css_9l8ojr30b4k8leyqss34 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_n1zfswkt8eetoaxff1rg, .table th.tinytable_css_n1zfswkt8eetoaxff1rg { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_31swspibcltkn88mwcex, .table th.tinytable_css_31swspibcltkn88mwcex { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_n3ln742bdv787erkdi3r" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_4f83o1f4kxgqh6ccj0up" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2920,10 +2871,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                   <td> 89.06369</td>
                 </tr>
                 <tr>
-                  <td>EHI01045</td>
-                  <td>100.00000</td>
-                </tr>
-                <tr>
                   <td>EHI01053</td>
                   <td>100.00000</td>
                 </tr>
@@ -3088,23 +3035,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                   <td>100.00000</td>
                 </tr>
                 <tr>
-                  <td>EHI01806</td>
-                  <td>100.00000</td>
-                </tr>
-                <tr>
                   <td>EHI01807</td>
                   <td>100.00000</td>
                 </tr>
                 <tr>
-                  <td>EHI01808</td>
-                  <td>100.00000</td>
-                </tr>
-                <tr>
                   <td>EHI01810</td>
-                  <td>100.00000</td>
-                </tr>
-                <tr>
-                  <td>EHI01812</td>
                   <td>100.00000</td>
                 </tr>
                 <tr>
@@ -3372,10 +3307,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                   <td> 78.91558</td>
                 </tr>
                 <tr>
-                  <td>EHI02266</td>
-                  <td> 88.42741</td>
-                </tr>
-                <tr>
                   <td>EHI02269</td>
                   <td> 80.96856</td>
                 </tr>
@@ -3484,10 +3415,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                   <td>100.00000</td>
                 </tr>
                 <tr>
-                  <td>EHI02383</td>
-                  <td>100.00000</td>
-                </tr>
-                <tr>
                   <td>EHI02384</td>
                   <td>100.00000</td>
                 </tr>
@@ -3497,10 +3424,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                 </tr>
                 <tr>
                   <td>EHI02387</td>
-                  <td>100.00000</td>
-                </tr>
-                <tr>
-                  <td>EHI02388</td>
                   <td>100.00000</td>
                 </tr>
                 <tr>
@@ -3631,19 +3554,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb27"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb27-1"><a href="data-statistics.html#cb27-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a href="data-statistics.html#cb27-2" tabindex="-1"></a>  <span class="fu">filter</span>(damr<span class="sc">&gt;</span><span class="dv">95</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="data-statistics.html#cb27-3" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
-<pre class="script-output"><code>[1] 151</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb29-1"><a href="data-statistics.html#cb29-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb29-2"><a href="data-statistics.html#cb29-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-3"><a href="data-statistics.html#cb29-3" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<span id="cb29-2"><a href="data-statistics.html#cb29-2" tabindex="-1"></a>  <span class="fu">filter</span>(damr<span class="sc">&gt;</span><span class="dv">95</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="data-statistics.html#cb29-3" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
+<pre class="script-output"><code>[1] 145</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb31-1"><a href="data-statistics.html#cb31-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="data-statistics.html#cb31-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="data-statistics.html#cb31-3" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_6c8d3pvn8jqlt1w0b8uz(i, j, css_id) {
-          var table = document.getElementById("tinytable_6c8d3pvn8jqlt1w0b8uz");
+      function styleCell_gkkd15nrspqs1ixqvve5(i, j, css_id) {
+          var table = document.getElementById("tinytable_gkkd15nrspqs1ixqvve5");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -3653,7 +3576,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_6c8d3pvn8jqlt1w0b8uz');
+        var table = document.getElementById('tinytable_gkkd15nrspqs1ixqvve5');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -3661,8 +3584,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_6c8d3pvn8jqlt1w0b8uz(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_6c8d3pvn8jqlt1w0b8uz");
+      function spanCell_gkkd15nrspqs1ixqvve5(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_gkkd15nrspqs1ixqvve5");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -3692,14 +3615,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_dhm4ymjms424sgeph0w7',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_0l5w5eba0i70negwh2rt',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_7zs0pkudvylnyvkhhf67',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_7wzhxrwwwphjslzs2jds',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_6c8d3pvn8jqlt1w0b8uz(cell.i, cell.j, group.css_id);
+                  styleCell_gkkd15nrspqs1ixqvve5(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -3707,11 +3630,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_dhm4ymjms424sgeph0w7, .table th.tinytable_css_dhm4ymjms424sgeph0w7 { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_0l5w5eba0i70negwh2rt, .table th.tinytable_css_0l5w5eba0i70negwh2rt { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_7zs0pkudvylnyvkhhf67, .table th.tinytable_css_7zs0pkudvylnyvkhhf67 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_7wzhxrwwwphjslzs2jds, .table th.tinytable_css_7wzhxrwwwphjslzs2jds { border-bottom: solid #d3d8dc 0.1em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_6c8d3pvn8jqlt1w0b8uz" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_gkkd15nrspqs1ixqvve5" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -3722,8 +3645,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         
         <tbody>
                 <tr>
-                  <td>91.89443</td>
-                  <td>12.12337</td>
+                  <td>91.70779</td>
+                  <td>12.22803</td>
                 </tr>
         </tbody>
       </table>
