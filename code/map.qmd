@@ -1,0 +1,48 @@
+---
+title: "Interactive map of samples"
+author: "Raphael Eisenhofer"
+format: 
+  gfm:
+    fig-width: 14
+    fig-height: 10
+    fig-dpi: 300
+    toc: true
+  html:
+    fig-width: 14
+    fig-height: 10
+    fig-dpi: 300
+    toc: true
+editor: visual
+---
+
+## Load required data and packages
+
+```{r}
+#| message: false
+#| echo: false
+
+library(tidyverse)
+
+
+coassembly_df <- read_delim("../data/EHI_squamate_rodent_coassembly_info.txt")
+
+n_hosts <- nrow(coassembly_df)
+n_squamata <- coassembly_df %>% filter(host_order == "squamata") %>% nrow(.)
+n_rodent <- n_hosts - n_squamata
+```
+
+## Load required data and packages
+
+```{r}
+#| message: false
+#| echo: false
+
+library(tidyverse)
+
+
+coassembly_df <- read_delim("../data/EHI_squamate_rodent_coassembly_info.txt")
+
+n_hosts <- nrow(coassembly_df)
+n_squamata <- coassembly_df %>% filter(host_order == "squamata") %>% nrow(.)
+n_rodent <- n_hosts - n_squamata
+```

@@ -68,6 +68,8 @@ alpha_div <- richness %>%
   full_join(phylogenetic, by = join_by(sample == sample))%>%
   full_join(functional, by = join_by(sample == sample))
 ```
+
+
 ```{r wrap_alpha, warning=FALSE, comments="", message=FALSE, eval=FALSE}
 save(alpha_div, file = "data/alpha.Rdata")
 ```

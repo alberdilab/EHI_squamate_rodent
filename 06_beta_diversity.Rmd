@@ -82,7 +82,7 @@ set.seed(1234)
 sample_metadata_row <- column_to_rownames(sample_metadata, "sample") 
 sample_metadata_row <- sample_metadata_row[labels(beta_q0n$S), ]
 sample_metadata_trim <- sample_metadata %>%
-  filter(sample != "EHI01806" & sample != "EHI01812")
+  filter(sample %in% rownames(sample_metadata_row))
 
 betadisper(beta_q0n$S, sample_metadata_row$host_order) %>% permutest(., pairwise = TRUE) 
 
