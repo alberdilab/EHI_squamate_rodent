@@ -22,7 +22,7 @@ editor: visual
 #| echo: false
 
 library(tidyverse)
-
+library(leaflet)
 
 coassembly_df <- read_delim("../data/EHI_squamate_rodent_coassembly_info.txt")
 
@@ -37,12 +37,25 @@ n_rodent <- n_hosts - n_squamata
 #| message: false
 #| echo: false
 
-library(tidyverse)
 
 
-coassembly_df <- read_delim("../data/EHI_squamate_rodent_coassembly_info.txt")
+# Make a map
+leaflet() %>%
+  addTiles() %>% # Add default OpenStreetMap map tiles
+  addMarkers(lng = 174.768, lat = -36.852, popup = "The birthplace of R")
 
-n_hosts <- nrow(coassembly_df)
-n_squamata <- coassembly_df %>% filter(host_order == "squamata") %>% nrow(.)
-n_rodent <- n_hosts - n_squamata
+clusterOptions = markerClusterOptions()
+
+
+#colour / size / shape of markers
+leaflet(df) %>% addTiles() %>%
+  addCircleMarkers(
+    color = ~pal(type),
+    stroke = FALSE, fillOpacity = 0.5
+  )
+
+#maybe adding metadata to popup labels?
+leaflet(df) %>% addTiles() %>%
+  addMarkers(~Long, ~Lat, popup = ~htmlEscape(Name))
+
 ```
