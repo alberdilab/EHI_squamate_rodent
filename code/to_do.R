@@ -5,7 +5,7 @@
 # group func phylo tree by gift level (elem2function)
 # document files that are in .Rdata in the readme.md
 # timetree in repo?
-build a map of samples + metadata labels
+# build a map of samples + metadata labels
 lab / geograph / sample metadata -> check outliers
 host life history/diets -> make table (check database)
 

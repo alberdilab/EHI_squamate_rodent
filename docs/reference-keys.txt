@@ -18,6 +18,7 @@ prepare-a-phyloseq-object
 prepare-colour-codes-for-host-species
 wrap-working-objects
 data-statistics
+interactive-map-of-samples
 filter-samples-with-high-host-data
 sequencing-reads-statistics
 dna-fractions

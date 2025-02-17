@@ -4,6 +4,51 @@
 load("data/data.Rdata")
 ```
 
+## Interactive map of samples
+```{r plot_map, comment="", message=FALSE, warning=FALSE}
+library(htmlwidgets)
+library(tidyverse)
+library(leaflet)
+
+metadata <- read_delim("../data/DMB0173_metadata.tsv.gz") %>% 
+  filter(singlem_fraction > 30 & longitude != "None") %>%
+  mutate(
+    latitude = as.numeric(latitude),
+    longitude = as.numeric(longitude)
+    )
+
+# n.b. missing GPS info for 3 samples:EHI02233, EHI02249, EHI02250 
+# (z.borowski@ibles.waw.pl)
+
+#set colour palette for samples
+colPal <- colorFactor(
+  palette = species_colours, 
+  domain = metadata$species
+  )
+
+#set popup metadata
+metadata$label <- paste0("Sample: ", metadata$EHI_plaintext,"<br>",
+                      "Species: ", metadata$species, "<br>",
+                      "Region: ", metadata$region, "<br>",
+                      "Sex: ", metadata$sex, "<br>",
+                      "SMF: ", metadata$singlem_fraction
+                      )
+
+#plot map
+leaflet(metadata) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~longitude, 
+    lat = ~latitude,
+    popup = ~label,
+    color = ~colPal(species),
+    stroke = FALSE, 
+    fillOpacity = 0.5,
+    radius = 5
+  )
+
+```
+
 ## filter samples with high host data
 ```{r load_data_host_filt, comment="", message=FALSE, warning=FALSE, eval=FALSE}
 

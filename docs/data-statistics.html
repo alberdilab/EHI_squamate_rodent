@@ -24,7 +24,7 @@
 <meta name="author" content="Antton Alberdi" />
 
 
-<meta name="date" content="2025-02-12" />
+<meta name="date" content="2025-02-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,10 +53,17 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 <script src="libs/plotly-binding-4.10.4/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
@@ -179,10 +186,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-statistics.html"><a href="data-statistics.html"><i class="fa fa-check"></i><b>3</b> Data statistics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-statistics.html"><a href="data-statistics.html#filter-samples-with-high-host-data"><i class="fa fa-check"></i><b>3.1</b> filter samples with high host data</a></li>
-<li class="chapter" data-level="3.2" data-path="data-statistics.html"><a href="data-statistics.html#sequencing-reads-statistics"><i class="fa fa-check"></i><b>3.2</b> Sequencing reads statistics</a></li>
-<li class="chapter" data-level="3.3" data-path="data-statistics.html"><a href="data-statistics.html#dna-fractions"><i class="fa fa-check"></i><b>3.3</b> DNA fractions</a></li>
-<li class="chapter" data-level="3.4" data-path="data-statistics.html"><a href="data-statistics.html#recovered-microbial-fraction"><i class="fa fa-check"></i><b>3.4</b> Recovered microbial fraction</a></li>
+<li class="chapter" data-level="3.1" data-path="data-statistics.html"><a href="data-statistics.html#interactive-map-of-samples"><i class="fa fa-check"></i><b>3.1</b> Interactive map of samples</a></li>
+<li class="chapter" data-level="3.2" data-path="data-statistics.html"><a href="data-statistics.html#filter-samples-with-high-host-data"><i class="fa fa-check"></i><b>3.2</b> filter samples with high host data</a></li>
+<li class="chapter" data-level="3.3" data-path="data-statistics.html"><a href="data-statistics.html#sequencing-reads-statistics"><i class="fa fa-check"></i><b>3.3</b> Sequencing reads statistics</a></li>
+<li class="chapter" data-level="3.4" data-path="data-statistics.html"><a href="data-statistics.html#dna-fractions"><i class="fa fa-check"></i><b>3.4</b> DNA fractions</a></li>
+<li class="chapter" data-level="3.5" data-path="data-statistics.html"><a href="data-statistics.html#recovered-microbial-fraction"><i class="fa fa-check"></i><b>3.5</b> Recovered microbial fraction</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mag-catalogue.html"><a href="mag-catalogue.html"><i class="fa fa-check"></i><b>4</b> MAG catalogue</a>
 <ul>
@@ -244,35 +252,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-statistics" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data statistics<a href="data-statistics.html#data-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb19-1"><a href="data-statistics.html#cb19-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/data.Rdata&quot;</span>)</span></code></pre></div>
-<div id="filter-samples-with-high-host-data" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> filter samples with high host data<a href="data-statistics.html#filter-samples-with-high-host-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb20-1"><a href="data-statistics.html#cb20-1" tabindex="-1"></a>read_counts <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span> </span>
-<span id="cb20-2"><a href="data-statistics.html#cb20-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, sample_metadata<span class="sc">$</span>sample))) <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="data-statistics.html#cb20-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">rowSums</span>(. <span class="sc">!=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-4"><a href="data-statistics.html#cb20-4" tabindex="-1"></a>  <span class="fu">select_if</span>(<span class="sc">~!</span><span class="fu">all</span>(. <span class="sc">==</span> <span class="dv">0</span>))</span>
-<span id="cb20-5"><a href="data-statistics.html#cb20-5" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="data-statistics.html#cb20-6" tabindex="-1"></a>genome_metadata <span class="ot">&lt;-</span> genome_metadata <span class="sc">%&gt;%</span> </span>
-<span id="cb20-7"><a href="data-statistics.html#cb20-7" tabindex="-1"></a>  <span class="fu">semi_join</span>(., read_counts, <span class="at">by =</span> <span class="st">&quot;genome&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-8"><a href="data-statistics.html#cb20-8" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">match</span>(genome,read_counts<span class="sc">$</span>genome))</span>
-<span id="cb20-9"><a href="data-statistics.html#cb20-9" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="data-statistics.html#cb20-10" tabindex="-1"></a>genome_tree <span class="ot">&lt;-</span> <span class="fu">keep.tip</span>(genome_tree, <span class="at">tip=</span>genome_metadata<span class="sc">$</span>genome) <span class="co"># keep only MAG tips</span></span>
+<div id="interactive-map-of-samples" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Interactive map of samples<a href="data-statistics.html#interactive-map-of-samples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb20-1"><a href="data-statistics.html#cb20-1" tabindex="-1"></a><span class="fu">library</span>(htmlwidgets)</span>
+<span id="cb20-2"><a href="data-statistics.html#cb20-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb20-3"><a href="data-statistics.html#cb20-3" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb20-4"><a href="data-statistics.html#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="data-statistics.html#cb20-5" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;../data/DMB0173_metadata.tsv.gz&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-6"><a href="data-statistics.html#cb20-6" tabindex="-1"></a>  <span class="fu">filter</span>(singlem_fraction <span class="sc">&gt;</span> <span class="dv">30</span> <span class="sc">&amp;</span> longitude <span class="sc">!=</span> <span class="st">&quot;None&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="data-statistics.html#cb20-7" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb20-8"><a href="data-statistics.html#cb20-8" tabindex="-1"></a>    <span class="at">latitude =</span> <span class="fu">as.numeric</span>(latitude),</span>
+<span id="cb20-9"><a href="data-statistics.html#cb20-9" tabindex="-1"></a>    <span class="at">longitude =</span> <span class="fu">as.numeric</span>(longitude)</span>
+<span id="cb20-10"><a href="data-statistics.html#cb20-10" tabindex="-1"></a>    )</span>
 <span id="cb20-11"><a href="data-statistics.html#cb20-11" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="data-statistics.html#cb20-12" tabindex="-1"></a><span class="co">#load(&quot;data/genome_gifts.Rdata&quot;)</span></span></code></pre></div>
+<span id="cb20-12"><a href="data-statistics.html#cb20-12" tabindex="-1"></a><span class="co"># n.b. missing GPS info for 3 samples:EHI02233, EHI02249, EHI02250 </span></span>
+<span id="cb20-13"><a href="data-statistics.html#cb20-13" tabindex="-1"></a><span class="co"># (z.borowski@ibles.waw.pl)</span></span>
+<span id="cb20-14"><a href="data-statistics.html#cb20-14" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="data-statistics.html#cb20-15" tabindex="-1"></a><span class="co">#set colour palette for samples</span></span>
+<span id="cb20-16"><a href="data-statistics.html#cb20-16" tabindex="-1"></a>colPal <span class="ot">&lt;-</span> <span class="fu">colorFactor</span>(</span>
+<span id="cb20-17"><a href="data-statistics.html#cb20-17" tabindex="-1"></a>  <span class="at">palette =</span> species_colours, </span>
+<span id="cb20-18"><a href="data-statistics.html#cb20-18" tabindex="-1"></a>  <span class="at">domain =</span> metadata<span class="sc">$</span>species</span>
+<span id="cb20-19"><a href="data-statistics.html#cb20-19" tabindex="-1"></a>  )</span>
+<span id="cb20-20"><a href="data-statistics.html#cb20-20" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="data-statistics.html#cb20-21" tabindex="-1"></a><span class="co">#set popup metadata</span></span>
+<span id="cb20-22"><a href="data-statistics.html#cb20-22" tabindex="-1"></a>metadata<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Sample: &quot;</span>, metadata<span class="sc">$</span>EHI_plaintext,<span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb20-23"><a href="data-statistics.html#cb20-23" tabindex="-1"></a>                      <span class="st">&quot;Species: &quot;</span>, metadata<span class="sc">$</span>species, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb20-24"><a href="data-statistics.html#cb20-24" tabindex="-1"></a>                      <span class="st">&quot;Region: &quot;</span>, metadata<span class="sc">$</span>region, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb20-25"><a href="data-statistics.html#cb20-25" tabindex="-1"></a>                      <span class="st">&quot;Sex: &quot;</span>, metadata<span class="sc">$</span>sex, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb20-26"><a href="data-statistics.html#cb20-26" tabindex="-1"></a>                      <span class="st">&quot;SMF: &quot;</span>, metadata<span class="sc">$</span>singlem_fraction</span>
+<span id="cb20-27"><a href="data-statistics.html#cb20-27" tabindex="-1"></a>                      )</span>
+<span id="cb20-28"><a href="data-statistics.html#cb20-28" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="data-statistics.html#cb20-29" tabindex="-1"></a><span class="co">#plot map</span></span>
+<span id="cb20-30"><a href="data-statistics.html#cb20-30" tabindex="-1"></a><span class="fu">leaflet</span>(metadata) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-31"><a href="data-statistics.html#cb20-31" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb20-32"><a href="data-statistics.html#cb20-32" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb20-33"><a href="data-statistics.html#cb20-33" tabindex="-1"></a>    <span class="at">lng =</span> <span class="sc">~</span>longitude, </span>
+<span id="cb20-34"><a href="data-statistics.html#cb20-34" tabindex="-1"></a>    <span class="at">lat =</span> <span class="sc">~</span>latitude,</span>
+<span id="cb20-35"><a href="data-statistics.html#cb20-35" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span>label,</span>
+<span id="cb20-36"><a href="data-statistics.html#cb20-36" tabindex="-1"></a>    <span class="at">color =</span> <span class="sc">~</span><span class="fu">colPal</span>(species),</span>
+<span id="cb20-37"><a href="data-statistics.html#cb20-37" tabindex="-1"></a>    <span class="at">stroke =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb20-38"><a href="data-statistics.html#cb20-38" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="fl">0.5</span>,</span>
+<span id="cb20-39"><a href="data-statistics.html#cb20-39" tabindex="-1"></a>    <span class="at">radius =</span> <span class="dv">5</span></span>
+<span id="cb20-40"><a href="data-statistics.html#cb20-40" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-9d2e48e7eff95eebb99e" style="width:1152px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-9d2e48e7eff95eebb99e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[-41.61,38.8,48.63,57.19,-41.62,-41.69,38.71,36.67,42.4,-41.21,38.72,38.77,57.19,42.09,48.81,42.84,42.35,35.93,48.63,43.86,45.68,-42.02,48.81,36.05,35.97,36.05,38.92,-41.03,42.67,57.19,38.81,40.86,36.05,38.81,38.92,46.55,42.83,48.63,48.81,40.86,40.91,48.63,42.84,57.19,41.77,47.77,42.84,47.77,-41.6,45.68,47.77,38.72,-41.59,42.83,38.81,40.86,47.77,48.81,40.93,42.93,42.92,57.19,42.09,48.63,57.19,42.84,42.06,36.67,43.86,57.19,36.77,38.72,-41.21,48.63,42.93,40.94,57.19,40.84,45.69,48.63,46.55,38.77,57.19,43.86,40.93,-41.09,45.68,42.83,36.77,42.93,42.83,42.35,40.86,38.71,42.67,42.93,-41.08,40.86,42.83,57.19,42.84,40.92,-41.61,-41.62,-41.62,36.8,47.77,42.93,45.69,48.78,38.71,43.86,-41.03,45.69,43.86,45.66,-41.21,35.97,36.67,42.93,38.92,40.84,42.4,45.69,42.4,45.74,43.86,36.76,36.05,45.8,-41.04,43.86,47.77,38.81,43.86,42.67,42.84,36.76,42.93,36.76,43.86,40.86,35.97,42.4,42.67,47.77,42.09,38.92,38.8,-42.01,38.77,36.67,46.55,42.67,42.67,40.93,43.86,57.04,38.81,40.95,-41.21,57.19,38.77,-41.21,38.72,38.72,38.71,48.81,38.77,57.19,46.55,-41.04,46.55,40.92,48.63,42.84,42.84,-41.03,48.63,47.77,42.92,36.77,42.09,47.77,40.94,38.71,42.67,40.95,42.84,-41.09,45.69,46.55,42.67,36.05,57.04,42.4,42.84,43.21,38.77,43.21,42.83,45.69,36.76,45.69,41.78,45.69,45.69,42.84,-41.61,45.68,42.84,45.68,38.92,38.92,42.33,36.8,57.19,38.8,40.86,38.92,38.71,-41.6,42.92,35.93,57.04,48.78,42.67,40.91,40.84,36.05,36.77,42.67,48.63,38.81,-41.59,-41.61,-41.6,-41.08,43.86,42.35],[145.66,24.53,-123.29,-3.68,145.67,147.25,1.43,24.43,14.05,146.24,1.46,1.43,-3.68,2.09,-123.46,-2.02,13.29,14.34,-123.29,18.45,9.460000000000001,148.28,-123.51,14.27,14.35,14.27,24.58,145.4,-2.03,-3.68,24.57,-8.25,14.27,24.57,24.58,1.32,0.86,-123.29,-123.46,-8.25,-7.1,-123.29,-2.02,-3.68,2.45,106.97,-2.02,107,146.24,9.460000000000001,106.97,1.46,146.24,0.88,24.57,-8.25,107,-123.51,-7.09,0.14,0.14,-3.68,2.09,-123.29,-3.68,-2.02,3.12,24.43,18.45,-3.68,24.58,1.46,146.24,-123.29,0.14,-7.08,-3.68,-8.16,8.66,-123.29,1.32,1.43,-3.68,18.45,-7.09,145.6,9.460000000000001,0.88,24.58,0.14,0.86,13.29,-8.25,1.43,-2.03,0.14,145.56,-8.25,0.88,-3.68,-2.02,-7.1,145.66,145.67,145.67,24.57,107,0.14,8.66,-123.15,1.43,18.45,145.4,8.66,18.45,8.779999999999999,146.24,14.35,24.43,0.14,24.58,-8.16,14.05,8.66,14.05,8.91,18.45,24.58,14.27,8.85,145.4,18.45,106.97,24.57,18.45,-2.03,-2.02,24.58,0.14,24.58,18.45,-8.25,14.35,14.05,-2.03,106.97,2.09,24.58,24.53,148.28,1.43,24.43,1.32,-2.03,-2.03,-7.09,18.45,-3.91,24.57,-7.07,146.24,-3.68,1.43,146.24,1.46,1.46,1.43,-123.51,1.43,-3.68,1.32,145.4,1.32,-7.1,-123.29,-2.02,0.86,145.4,-123.29,106.97,0.14,24.58,2.09,106.97,-7.08,1.43,-2.03,-7.07,-2.02,145.6,8.66,1.32,-2.03,14.27,-3.91,14.05,0.86,-1.79,1.43,-1.79,0.86,8.66,24.58,8.66,2.45,8.66,8.66,0.86,145.67,9.460000000000001,-2.02,9.460000000000001,24.58,24.58,13.38,24.57,-3.68,24.53,-8.25,24.58,1.43,146.24,0.14,14.34,-3.91,-123.15,-2.03,-7.09,-8.16,14.27,24.58,-2.03,-123.29,24.57,146.24,145.67,146.24,145.6,18.45,13.29],5,null,null,{"interactive":true,"className":"","stroke":false,"color":["#53E300","#797980","#843B9B","#9587FF","#53E300","#E1B58C","#CF8400","#FF241B","#E3603F","#E1B58C","#CF8400","#CF8400","#9587FF","#A3E0FF","#843B9B","#E3603F","#E3603F","#85C8F0","#843B9B","#5398FF","#FF5073","#E1B58C","#843B9B","#85C8F0","#85C8F0","#85C8F0","#797980","#E1B58C","#B39798","#A3E0FF","#797980","#00FF91","#85C8F0","#797980","#797980","#BEF7FF","#89C7FF","#843B9B","#843B9B","#00FF91","#BEDA00","#843B9B","#E3603F","#9587FF","#A3E0FF","#993FFF","#E3603F","#993FFF","#E1B58C","#FF5073","#993FFF","#CF8400","#53E300","#89C7FF","#797980","#00FF91","#993FFF","#843B9B","#BEDA00","#6EB0FF","#6EB0FF","#A3E0FF","#A3E0FF","#843B9B","#A3E0FF","#E3603F","#A3E0FF","#FF241B","#5398FF","#9587FF","#FF241B","#CF8400","#E1B58C","#843B9B","#6EB0FF","#BEDA00","#9587FF","#00FF91","#FF5073","#843B9B","#BEF7FF","#CF8400","#9587FF","#5398FF","#BEDA00","#E1B58C","#FF5073","#89C7FF","#FF241B","#6EB0FF","#89C7FF","#E3603F","#00FF91","#CF8400","#B39798","#6EB0FF","#E1B58C","#00FF91","#89C7FF","#9587FF","#E3603F","#BEDA00","#53E300","#53E300","#53E300","#FF241B","#993FFF","#6EB0FF","#FF5073","#843B9B","#CF8400","#5398FF","#53E300","#FF5073","#5398FF","#FF5073","#E1B58C","#85C8F0","#FF241B","#6EB0FF","#797980","#00FF91","#E3603F","#FF5073","#E3603F","#FF5073","#5398FF","#FF241B","#85C8F0","#FF5073","#53E300","#5398FF","#993FFF","#797980","#5398FF","#B39798","#E3603F","#FF241B","#6EB0FF","#FF241B","#5398FF","#00FF91","#85C8F0","#E3603F","#B39798","#993FFF","#A3E0FF","#797980","#797980","#E1B58C","#CF8400","#FF241B","#BEF7FF","#B39798","#B39798","#BEDA00","#5398FF","#A3E0FF","#797980","#BEDA00","#E1B58C","#9587FF","#CF8400","#E1B58C","#CF8400","#CF8400","#CF8400","#843B9B","#CF8400","#A3E0FF","#BEF7FF","#53E300","#BEF7FF","#BEDA00","#843B9B","#E3603F","#89C7FF","#E1B58C","#843B9B","#993FFF","#6EB0FF","#FF241B","#A3E0FF","#993FFF","#BEDA00","#CF8400","#B39798","#BEDA00","#E3603F","#E1B58C","#FF5073","#BEF7FF","#B39798","#85C8F0","#A3E0FF","#E3603F","#89C7FF","#E3603F","#CF8400","#E3603F","#89C7FF","#FF5073","#FF241B","#FF5073","#A3E0FF","#FF5073","#FF5073","#89C7FF","#53E300","#FF5073","#E3603F","#FF5073","#797980","#797980","#E3603F","#FF241B","#9587FF","#797980","#00FF91","#797980","#CF8400","#E1B58C","#6EB0FF","#85C8F0","#A3E0FF","#843B9B","#B39798","#BEDA00","#00FF91","#85C8F0","#FF241B","#B39798","#843B9B","#797980","#53E300","#53E300","#53E300","#E1B58C","#5398FF","#E3603F"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#53E300","#797980","#843B9B","#9587FF","#53E300","#E1B58C","#CF8400","#FF241B","#E3603F","#E1B58C","#CF8400","#CF8400","#9587FF","#A3E0FF","#843B9B","#E3603F","#E3603F","#85C8F0","#843B9B","#5398FF","#FF5073","#E1B58C","#843B9B","#85C8F0","#85C8F0","#85C8F0","#797980","#E1B58C","#B39798","#A3E0FF","#797980","#00FF91","#85C8F0","#797980","#797980","#BEF7FF","#89C7FF","#843B9B","#843B9B","#00FF91","#BEDA00","#843B9B","#E3603F","#9587FF","#A3E0FF","#993FFF","#E3603F","#993FFF","#E1B58C","#FF5073","#993FFF","#CF8400","#53E300","#89C7FF","#797980","#00FF91","#993FFF","#843B9B","#BEDA00","#6EB0FF","#6EB0FF","#A3E0FF","#A3E0FF","#843B9B","#A3E0FF","#E3603F","#A3E0FF","#FF241B","#5398FF","#9587FF","#FF241B","#CF8400","#E1B58C","#843B9B","#6EB0FF","#BEDA00","#9587FF","#00FF91","#FF5073","#843B9B","#BEF7FF","#CF8400","#9587FF","#5398FF","#BEDA00","#E1B58C","#FF5073","#89C7FF","#FF241B","#6EB0FF","#89C7FF","#E3603F","#00FF91","#CF8400","#B39798","#6EB0FF","#E1B58C","#00FF91","#89C7FF","#9587FF","#E3603F","#BEDA00","#53E300","#53E300","#53E300","#FF241B","#993FFF","#6EB0FF","#FF5073","#843B9B","#CF8400","#5398FF","#53E300","#FF5073","#5398FF","#FF5073","#E1B58C","#85C8F0","#FF241B","#6EB0FF","#797980","#00FF91","#E3603F","#FF5073","#E3603F","#FF5073","#5398FF","#FF241B","#85C8F0","#FF5073","#53E300","#5398FF","#993FFF","#797980","#5398FF","#B39798","#E3603F","#FF241B","#6EB0FF","#FF241B","#5398FF","#00FF91","#85C8F0","#E3603F","#B39798","#993FFF","#A3E0FF","#797980","#797980","#E1B58C","#CF8400","#FF241B","#BEF7FF","#B39798","#B39798","#BEDA00","#5398FF","#A3E0FF","#797980","#BEDA00","#E1B58C","#9587FF","#CF8400","#E1B58C","#CF8400","#CF8400","#CF8400","#843B9B","#CF8400","#A3E0FF","#BEF7FF","#53E300","#BEF7FF","#BEDA00","#843B9B","#E3603F","#89C7FF","#E1B58C","#843B9B","#993FFF","#6EB0FF","#FF241B","#A3E0FF","#993FFF","#BEDA00","#CF8400","#B39798","#BEDA00","#E3603F","#E1B58C","#FF5073","#BEF7FF","#B39798","#85C8F0","#A3E0FF","#E3603F","#89C7FF","#E3603F","#CF8400","#E3603F","#89C7FF","#FF5073","#FF241B","#FF5073","#A3E0FF","#FF5073","#FF5073","#89C7FF","#53E300","#FF5073","#E3603F","#FF5073","#797980","#797980","#E3603F","#FF241B","#9587FF","#797980","#00FF91","#797980","#CF8400","#E1B58C","#6EB0FF","#85C8F0","#A3E0FF","#843B9B","#B39798","#BEDA00","#00FF91","#85C8F0","#FF241B","#B39798","#843B9B","#797980","#53E300","#53E300","#53E300","#E1B58C","#5398FF","#E3603F"],"fillOpacity":0.5},null,null,["Sample: EHI02825<br>Species: Rattus lutreolus<br>Region: Mt Charter, Tasmania<br>Sex: Female<br>SMF: 56.24","Sample: EHI02288<br>Species: Podarcis gaigeae<br>Region: Meso Diavates<br>Sex: Male<br>SMF: 73.42","Sample: EHI01605<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Male<br>SMF: 65.93","Sample: EHI02226<br>Species: Myodes glareolus<br>Region: Scotland<br>Sex: Female<br>SMF: 68.58","Sample: EHI02803<br>Species: Rattus lutreolus<br>Region: Mt Charter, Tasmania<br>Sex: Female<br>SMF: 68.11","Sample: EHI02802<br>Species: Rattus rattus<br>Region: Northern Midlands, Tasmania<br>Sex: Unknown<br>SMF: 58.72","Sample: EHI02205<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Male<br>SMF: 74.09","Sample: EHI02173<br>Species: Podarcis milensis<br>Region: Paralia Kipos<br>Sex: Female<br>SMF: 66.81","Sample: EHI00720<br>Species: Podarcis muralis<br>Region: Pianelle<br>Sex: Female<br>SMF: 68.91","Sample: EHI02761<br>Species: Rattus rattus<br>Region: Forth, Tasmania<br>Sex: Male<br>SMF: 82.45","Sample: EHI02186<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Male<br>SMF: 76.23","Sample: EHI02183<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Male<br>SMF: 73.34","Sample: EHI02258<br>Species: Myodes glareolus<br>Region: Scotland<br>Sex: Male<br>SMF: 52.04","Sample: EHI02309<br>Species: Apodemus sylvaticus<br>Region: Catalonia<br>Sex: Female<br>SMF: 71.14","Sample: EHI00614<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Female<br>SMF: 67.74","Sample: EHI00766<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Male<br>SMF: 76.66","Sample: EHI00715<br>Species: Podarcis muralis<br>Region: Colle di Sassa<br>Sex: Female<br>SMF: 66.23","Sample: EHI02192<br>Species: Podarcis filfolensis<br>Region: Manikata<br>Sex: Male<br>SMF: 70.07","Sample: EHI01594<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Male<br>SMF: 57.57","Sample: EHI02355<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 68.89","Sample: EHI00405<br>Species: Sciurus vulgaris<br>Region: Lombardy, Calusco<br>Sex: Male<br>SMF: 79.68","Sample: EHI02813<br>Species: Rattus rattus<br>Region: Friendly Beaches, Tasmania<br>Sex: Male<br>SMF: 59.22","Sample: EHI00544<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Female<br>SMF: 64.16","Sample: EHI00689<br>Species: Podarcis filfolensis<br>Region: Ggantija<br>Sex: Female<br>SMF: 71.54","Sample: EHI02279<br>Species: Podarcis filfolensis<br>Region: Ghadira<br>Sex: Male<br>SMF: 77.87","Sample: EHI00690<br>Species: Podarcis filfolensis<br>Region: Ggantija<br>Sex: Male<br>SMF: 64.79","Sample: EHI02296<br>Species: Podarcis gaigeae<br>Region: Molos Islet<br>Sex: Female<br>SMF: 71.14","Sample: EHI02808<br>Species: Rattus rattus<br>Region: Dip River, Tasmania<br>Sex: Male<br>SMF: 59.87","Sample: EHI01850<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 71.01","Sample: EHI00970<br>Species: Apodemus sylvaticus<br>Region: Scotland<br>Sex: Male<br>SMF: 72.64","Sample: EHI00703<br>Species: Podarcis gaigeae<br>Region: Nifi<br>Sex: Male<br>SMF: 68.08","Sample: EHI01076<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Unknown<br>SMF: 76.16","Sample: EHI00692<br>Species: Podarcis filfolensis<br>Region: Ggantija<br>Sex: Female<br>SMF: 75.36","Sample: EHI00744<br>Species: Podarcis gaigeae<br>Region: Nifi<br>Sex: Female<br>SMF: 42.29","Sample: EHI02287<br>Species: Podarcis gaigeae<br>Region: Molos Islet<br>Sex: Male<br>SMF: 54.76","Sample: EHI00561<br>Species: Apodemus flavicollis<br>Region: Kent<br>Sex: Female<br>SMF: 69.41","Sample: EHI00954<br>Species: Iberolacerta aranica<br>Region: Occitanie, Sentein<br>Sex: Male<br>SMF: 34.03","Sample: EHI01607<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Female<br>SMF: 53.27","Sample: EHI00614<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Female<br>SMF: 43.02","Sample: EHI01078<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Female<br>SMF: 77.89","Sample: EHI01807<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Male<br>SMF: 53.91","Sample: EHI01602<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Female<br>SMF: 57.42","Sample: EHI00762<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Female<br>SMF: 75.22","Sample: EHI02225<br>Species: Myodes glareolus<br>Region: Scotland<br>Sex: Male<br>SMF: 65.42","Sample: EHI02261<br>Species: Apodemus sylvaticus<br>Region: Catalonia<br>Sex: Female<br>SMF: 72.85","Sample: EHI01595<br>Species: Myodes rufocanus<br>Region: Töv<br>Sex: Male<br>SMF: 80.31","Sample: EHI00772<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Male<br>SMF: 77.45","Sample: EHI01582<br>Species: Myodes rufocanus<br>Region: Töv<br>Sex: Female<br>SMF: 78.42","Sample: EHI02815<br>Species: Rattus rattus<br>Region: Lake Mackenzie Road, Tasmania<br>Sex: Female<br>SMF: 67.56","Sample: EHI00389<br>Species: Sciurus vulgaris<br>Region: Lombardy, Calusco<br>Sex: Female<br>SMF: 81.8","Sample: EHI01608<br>Species: Myodes rufocanus<br>Region: Töv<br>Sex: Female<br>SMF: 74.12","Sample: EHI02187<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Male<br>SMF: 69.77","Sample: EHI02782<br>Species: Rattus lutreolus<br>Region: Lake Mackenzie Road, Tasmania<br>Sex: Male<br>SMF: 75.59","Sample: EHI02359<br>Species: Iberolacerta aranica<br>Region: Occitanie, Sentein<br>Sex: Female<br>SMF: 59.34","Sample: EHI00667<br>Species: Podarcis gaigeae<br>Region: Nifi<br>Sex: Male<br>SMF: 74.84","Sample: EHI01059<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Unknown<br>SMF: 73.67","Sample: EHI01606<br>Species: Myodes rufocanus<br>Region: Töv<br>Sex: Female<br>SMF: 76.8","Sample: EHI00526<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Male<br>SMF: 62.87","Sample: EHI01825<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Female<br>SMF: 62.29","Sample: EHI02385<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Male<br>SMF: 53.76","Sample: EHI02357<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Female<br>SMF: 45.63","Sample: EHI00924<br>Species: Apodemus sylvaticus<br>Region: Scotland<br>Sex: Female<br>SMF: 69.78","Sample: EHI02229<br>Species: Apodemus sylvaticus<br>Region: Catalonia<br>Sex: Male<br>SMF: 73.26","Sample: EHI01593<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Female<br>SMF: 60.76","Sample: EHI01276<br>Species: Apodemus sylvaticus<br>Region: Scotland<br>Sex: Female<br>SMF: 70.06","Sample: EHI00765<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Male<br>SMF: 77.73","Sample: EHI02269<br>Species: Apodemus sylvaticus<br>Region: Catalonia<br>Sex: Male<br>SMF: 82.39","Sample: EHI02177<br>Species: Podarcis milensis<br>Region: Paralia Kipos<br>Sex: Male<br>SMF: 72.53","Sample: EHI02387<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 65.65","Sample: EHI02244<br>Species: Myodes glareolus<br>Region: Scotland<br>Sex: Male<br>SMF: 64.69","Sample: EHI02163<br>Species: Podarcis milensis<br>Region: Efstathios<br>Sex: Male<br>SMF: 70.88","Sample: EHI02185<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Male<br>SMF: 65.95","Sample: EHI02783<br>Species: Rattus rattus<br>Region: Forth, Tasmania<br>Sex: Male<br>SMF: 74.87","Sample: EHI01581<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Male<br>SMF: 68.58","Sample: EHI02364<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Male<br>SMF: 56.29","Sample: EHI01817<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Male<br>SMF: 52.68","Sample: EHI02245<br>Species: Myodes glareolus<br>Region: Scotland<br>Sex: Female<br>SMF: 59.45","Sample: EHI01077<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Unknown<br>SMF: 51.06","Sample: EHI00383<br>Species: Sciurus vulgaris<br>Region: Lombardy, Golasecca<br>Sex: Male<br>SMF: 71.75","Sample: EHI01597<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Male<br>SMF: 58.32","Sample: EHI02251<br>Species: Apodemus flavicollis<br>Region: Kent<br>Sex: Female<br>SMF: 69.84","Sample: EHI00196<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Male<br>SMF: 84.87","Sample: EHI00969<br>Species: Myodes glareolus<br>Region: Scotland<br>Sex: Male<br>SMF: 59.01","Sample: EHI02390<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 64.5","Sample: EHI01805<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Male<br>SMF: 70.27","Sample: EHI02827<br>Species: Rattus rattus<br>Region: Inglis River, Tasmania<br>Sex: Male<br>SMF: 61.89","Sample: EHI00394<br>Species: Sciurus vulgaris<br>Region: Lombardy, Calusco<br>Sex: Female<br>SMF: 76.57","Sample: EHI02367<br>Species: Iberolacerta aranica<br>Region: Occitanie, Sentein<br>Sex: Male<br>SMF: 67.05","Sample: EHI02294<br>Species: Podarcis milensis<br>Region: Efstathios<br>Sex: Male<br>SMF: 71.4","Sample: EHI02356<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Male<br>SMF: 65.88","Sample: EHI02368<br>Species: Iberolacerta aranica<br>Region: Occitanie, Sentein<br>Sex: Female<br>SMF: 52.45","Sample: EHI00717<br>Species: Podarcis muralis<br>Region: Colle di Sassa<br>Sex: Female<br>SMF: 71.16","Sample: EHI01055<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Unknown<br>SMF: 65.14","Sample: EHI02147<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Male<br>SMF: 60.86","Sample: EHI01855<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 52.52","Sample: EHI02369<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Male<br>SMF: 62.37","Sample: EHI02795<br>Species: Rattus rattus<br>Region: Preolenna, Tasmania<br>Sex: Female<br>SMF: 64.77","Sample: EHI01085<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Male<br>SMF: 76.64","Sample: EHI00984<br>Species: Iberolacerta aranica<br>Region: Occitanie, Sentein<br>Sex: Male<br>SMF: 52.1","Sample: EHI00932<br>Species: Myodes glareolus<br>Region: Scotland<br>Sex: Female<br>SMF: 64.77","Sample: EHI00763<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Female<br>SMF: 70.77","Sample: EHI01053<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Male<br>SMF: 61.24","Sample: EHI02798<br>Species: Rattus lutreolus<br>Region: Mt Charter, Tasmania<br>Sex: Male<br>SMF: 72.65","Sample: EHI02807<br>Species: Rattus lutreolus<br>Region: Mt Charter, Tasmania<br>Sex: Unknown<br>SMF: 74.88","Sample: EHI02820<br>Species: Rattus lutreolus<br>Region: Mt Charter, Tasmania<br>Sex: Female<br>SMF: 74.88","Sample: EHI02213<br>Species: Podarcis milensis<br>Region: Kimolos<br>Sex: Male<br>SMF: 66.72","Sample: EHI01604<br>Species: Myodes rufocanus<br>Region: Töv<br>Sex: Male<br>SMF: 76.75","Sample: EHI02361<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Male<br>SMF: 64.56","Sample: EHI01454<br>Species: Sciurus vulgaris<br>Region: Lombardy, Golasecca<br>Sex: Male<br>SMF: 80.56","Sample: EHI00543<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Male<br>SMF: 53.91","Sample: EHI02144<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Female<br>SMF: 76.4","Sample: EHI00219<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 77.31","Sample: EHI02787<br>Species: Rattus lutreolus<br>Region: Dip River, Tasmania<br>Sex: Female<br>SMF: 73.95","Sample: EHI01461<br>Species: Sciurus vulgaris<br>Region: Lombardy, Golasecca<br>Sex: Male<br>SMF: 77.38","Sample: EHI02365<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 66.89","Sample: EHI00410<br>Species: Sciurus vulgaris<br>Region: Lombardy, Gallarate<br>Sex: Male<br>SMF: 80.34","Sample: EHI02799<br>Species: Rattus rattus<br>Region: Forth, Tasmania<br>Sex: Male<br>SMF: 66.94","Sample: EHI02150<br>Species: Podarcis filfolensis<br>Region: Ghadira<br>Sex: Male<br>SMF: 76.14","Sample: EHI02295<br>Species: Podarcis milensis<br>Region: Paralia Kipos<br>Sex: Male<br>SMF: 61.64","Sample: EHI00979<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Female<br>SMF: 56.16","Sample: EHI02206<br>Species: Podarcis gaigeae<br>Region: Molos Islet<br>Sex: Male<br>SMF: 71.54","Sample: EHI01063<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Female<br>SMF: 69.94","Sample: EHI00722<br>Species: Podarcis muralis<br>Region: Pianelle<br>Sex: Male<br>SMF: 64.68","Sample: EHI00391<br>Species: Sciurus vulgaris<br>Region: Lombardy, Golasecca<br>Sex: Female<br>SMF: 79.71","Sample: EHI00723<br>Species: Podarcis muralis<br>Region: Pianelle<br>Sex: Male<br>SMF: 71.63","Sample: EHI01457<br>Species: Sciurus vulgaris<br>Region: Lombardy, Pineta<br>Sex: Female<br>SMF: 81.76","Sample: EHI02370<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 66.68","Sample: EHI02168<br>Species: Podarcis milensis<br>Region: Agios Georgios<br>Sex: Male<br>SMF: 65.61","Sample: EHI00693<br>Species: Podarcis filfolensis<br>Region: Ggantija<br>Sex: Female<br>SMF: 72.22","Sample: EHI01470<br>Species: Sciurus vulgaris<br>Region: Lombardy, Varese<br>Sex: Male<br>SMF: 78.84","Sample: EHI02759<br>Species: Rattus lutreolus<br>Region: Dip River, Tasmania<br>Sex: Female<br>SMF: 74.64","Sample: EHI02382<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 66.26","Sample: EHI01592<br>Species: Myodes rufocanus<br>Region: Töv<br>Sex: Female<br>SMF: 73.58","Sample: EHI00755<br>Species: Podarcis gaigeae<br>Region: Nifi<br>Sex: Male<br>SMF: 71.19","Sample: EHI02391<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 65.82","Sample: EHI01846<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 72.83","Sample: EHI00761<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Male<br>SMF: 78.12","Sample: EHI02212<br>Species: Podarcis milensis<br>Region: Agios Georgios<br>Sex: Female<br>SMF: 69.1","Sample: EHI00952<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Male<br>SMF: 46.39","Sample: EHI02200<br>Species: Podarcis milensis<br>Region: Agios Georgios<br>Sex: Female<br>SMF: 69.53","Sample: EHI02352<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 66.51","Sample: EHI01067<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Unknown<br>SMF: 76.62","Sample: EHI02215<br>Species: Podarcis filfolensis<br>Region: Ghadira<br>Sex: Male<br>SMF: 76.01","Sample: EHI00721<br>Species: Podarcis muralis<br>Region: Pianelle<br>Sex: Male<br>SMF: 70.42","Sample: EHI01844<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 54.17","Sample: EHI01603<br>Species: Myodes rufocanus<br>Region: Töv<br>Sex: Female<br>SMF: 86.64","Sample: EHI02232<br>Species: Apodemus sylvaticus<br>Region: Catalonia<br>Sex: Male<br>SMF: 70.24","Sample: EHI00727<br>Species: Podarcis gaigeae<br>Region: Molos Beach<br>Sex: Male<br>SMF: 53.46","Sample: EHI02148<br>Species: Podarcis gaigeae<br>Region: Meso Diavates<br>Sex: Female<br>SMF: 60.48","Sample: EHI02777<br>Species: Rattus rattus<br>Region: Friendly Beaches, Tasmania<br>Sex: Male<br>SMF: 64.6","Sample: EHI00228<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Female<br>SMF: 79.33","Sample: EHI02220<br>Species: Podarcis milensis<br>Region: Paralia Kipos<br>Sex: Male<br>SMF: 65.52","Sample: EHI02234<br>Species: Apodemus flavicollis<br>Region: Kent<br>Sex: Female<br>SMF: 67.53","Sample: EHI01838<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 68.53","Sample: EHI01847<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 67.7","Sample: EHI01814<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Male<br>SMF: 75.41","Sample: EHI02374<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Male<br>SMF: 65.43","Sample: EHI01361<br>Species: Apodemus sylvaticus<br>Region: Scotland<br>Sex: Female<br>SMF: 78.79","Sample: EHI00754<br>Species: Podarcis gaigeae<br>Region: Nifi<br>Sex: Female<br>SMF: 69.07","Sample: EHI01818<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Female<br>SMF: 69.21","Sample: EHI02765<br>Species: Rattus rattus<br>Region: Forth, Tasmania<br>Sex: Female<br>SMF: 62.86","Sample: EHI02257<br>Species: Myodes glareolus<br>Region: Scotland<br>Sex: Male<br>SMF: 64.65","Sample: EHI00244<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Male<br>SMF: 81.83","Sample: EHI02821<br>Species: Rattus rattus<br>Region: Forth, Tasmania<br>Sex: Female<br>SMF: 57.49","Sample: EHI02145<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Female<br>SMF: 75.23","Sample: EHI02188<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Female<br>SMF: 71.85","Sample: EHI02146<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Female<br>SMF: 81.74","Sample: EHI00562<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Male<br>SMF: 66.26","Sample: EHI00287<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Female<br>SMF: 79.46","Sample: EHI01022<br>Species: Apodemus sylvaticus<br>Region: Scotland<br>Sex: Male<br>SMF: 65.47","Sample: EHI02252<br>Species: Apodemus flavicollis<br>Region: Kent<br>Sex: Male<br>SMF: 69.72","Sample: EHI02788<br>Species: Rattus lutreolus<br>Region: Dip River, Tasmania<br>Sex: Male<br>SMF: 73.78","Sample: EHI00494<br>Species: Apodemus flavicollis<br>Region: Kent<br>Sex: Female<br>SMF: 70.94","Sample: EHI01084<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Female<br>SMF: 74.12","Sample: EHI01609<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Female<br>SMF: 59.8","Sample: EHI00764<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Male<br>SMF: 73.17","Sample: EHI02354<br>Species: Iberolacerta aranica<br>Region: Occitanie, Sentein<br>Sex: Female<br>SMF: 53.45","Sample: EHI02764<br>Species: Rattus rattus<br>Region: Dip River, Tasmania<br>Sex: Male<br>SMF: 67.64","Sample: EHI01598<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Female<br>SMF: 59.63","Sample: EHI01600<br>Species: Myodes rufocanus<br>Region: Töv<br>Sex: Male<br>SMF: 78.62","Sample: EHI02362<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Female<br>SMF: 62.4","Sample: EHI02224<br>Species: Podarcis milensis<br>Region: Efstathios<br>Sex: Female<br>SMF: 53.71","Sample: EHI02230<br>Species: Apodemus sylvaticus<br>Region: Catalonia<br>Sex: Female<br>SMF: 64.87","Sample: EHI01427<br>Species: Myodes rufocanus<br>Region: Töv<br>Sex: Male<br>SMF: 77.57","Sample: EHI01819<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Male<br>SMF: 74.37","Sample: EHI02189<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Female<br>SMF: 66.54","Sample: EHI01836<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 70.19","Sample: EHI01810<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Male<br>SMF: 62.94","Sample: EHI00773<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Male<br>SMF: 80.92","Sample: EHI02833<br>Species: Rattus rattus<br>Region: Inglis River, Tasmania<br>Sex: Male<br>SMF: 70.85","Sample: EHI00400<br>Species: Sciurus vulgaris<br>Region: Lombardy, Golasecca<br>Sex: Female<br>SMF: 79.21","Sample: EHI00565<br>Species: Apodemus flavicollis<br>Region: Kent<br>Sex: Female<br>SMF: 73.75","Sample: EHI01857<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 52.4","Sample: EHI00691<br>Species: Podarcis filfolensis<br>Region: Ggantija<br>Sex: Male<br>SMF: 70.56","Sample: EHI00987<br>Species: Apodemus sylvaticus<br>Region: Scotland<br>Sex: Male<br>SMF: 67.37","Sample: EHI00719<br>Species: Podarcis muralis<br>Region: Pianelle<br>Sex: Female<br>SMF: 77.98","Sample: EHI02384<br>Species: Iberolacerta aranica<br>Region: Occitanie, Sentein<br>Sex: Female<br>SMF: 32.05","Sample: EHI00768<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Male<br>SMF: 84.2","Sample: EHI02204<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Female<br>SMF: 59.48","Sample: EHI00769<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Female<br>SMF: 62.35","Sample: EHI02363<br>Species: Iberolacerta aranica<br>Region: Occitanie, Sentein<br>Sex: Male<br>SMF: 55.95","Sample: EHI01462<br>Species: Sciurus vulgaris<br>Region: Lombardy, Golasecca<br>Sex: Male<br>SMF: 90.74","Sample: EHI02175<br>Species: Podarcis milensis<br>Region: Agios Georgios<br>Sex: Female<br>SMF: 72","Sample: EHI01458<br>Species: Sciurus vulgaris<br>Region: Lombardy, Golasecca<br>Sex: Male<br>SMF: 87.71","Sample: EHI02248<br>Species: Apodemus sylvaticus<br>Region: Catalonia<br>Sex: Male<br>SMF: 64.87","Sample: EHI00418<br>Species: Sciurus vulgaris<br>Region: Lombardy, Golasecca<br>Sex: Female<br>SMF: 80.77","Sample: EHI01460<br>Species: Sciurus vulgaris<br>Region: Lombardy, Golasecca<br>Sex: Female<br>SMF: 85.05","Sample: EHI02366<br>Species: Iberolacerta aranica<br>Region: Occitanie, Sentein<br>Sex: Male<br>SMF: 69.22","Sample: EHI02763<br>Species: Rattus lutreolus<br>Region: Mt Charter, Tasmania<br>Sex: Female<br>SMF: 75.98","Sample: EHI00381<br>Species: Sciurus vulgaris<br>Region: Lombardy, Calusco<br>Sex: Female<br>SMF: 77.76","Sample: EHI00767<br>Species: Podarcis muralis<br>Region: Navarre<br>Sex: Female<br>SMF: 68.29","Sample: EHI00411<br>Species: Sciurus vulgaris<br>Region: Lombardy, Calusco<br>Sex: Male<br>SMF: 79.4","Sample: EHI00702<br>Species: Podarcis gaigeae<br>Region: Molos Beach<br>Sex: Female<br>SMF: 66.12","Sample: EHI00725<br>Species: Podarcis gaigeae<br>Region: Molos Beach<br>Sex: Male<br>SMF: 77.06","Sample: EHI00718<br>Species: Podarcis muralis<br>Region: Poggio di Roio<br>Sex: Female<br>SMF: 68.31","Sample: EHI02176<br>Species: Podarcis milensis<br>Region: Kimolos<br>Sex: Male<br>SMF: 65.08","Sample: EHI02227<br>Species: Myodes glareolus<br>Region: Scotland<br>Sex: Male<br>SMF: 60.97","Sample: EHI02149<br>Species: Podarcis gaigeae<br>Region: Meso Diavates<br>Sex: Male<br>SMF: 74.05","Sample: EHI01069<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Unknown<br>SMF: 80.68","Sample: EHI00701<br>Species: Podarcis gaigeae<br>Region: Molos Beach<br>Sex: Female<br>SMF: 72.61","Sample: EHI02190<br>Species: Podarcis pityusensis<br>Region: Formentera<br>Sex: Male<br>SMF: 75.31","Sample: EHI02810<br>Species: Rattus rattus<br>Region: Lake Mackenzie Road, Tasmania<br>Sex: Unknown<br>SMF: 66.96","Sample: EHI02371<br>Species: Iberolacerta bonnali<br>Region: Occitanie, Tourmalet<br>Sex: Female<br>SMF: 41.5","Sample: EHI02207<br>Species: Podarcis filfolensis<br>Region: Manikata<br>Sex: Male<br>SMF: 69.74","Sample: EHI01003<br>Species: Apodemus sylvaticus<br>Region: Scotland<br>Sex: Male<br>SMF: 74.27","Sample: EHI00505<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Female<br>SMF: 61.51","Sample: EHI01832<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 66.07","Sample: EHI01830<br>Species: Psammodromus manuelae<br>Region: Figueira de Castelo Rodrigo<br>Sex: Male<br>SMF: 52.24","Sample: EHI01061<br>Species: Timon lepidus<br>Region: Arouca<br>Sex: Unknown<br>SMF: 76.62","Sample: EHI00694<br>Species: Podarcis filfolensis<br>Region: Ggantija<br>Sex: Male<br>SMF: 72.42","Sample: EHI02181<br>Species: Podarcis milensis<br>Region: Efstathios<br>Sex: Male<br>SMF: 67.65","Sample: EHI01858<br>Species: Podarcis liolepis<br>Region: Nafarroa<br>Sex: Male<br>SMF: 61.63","Sample: EHI01431<br>Species: Peromyscus maniculatus<br>Region: British Columbia<br>Sex: Male<br>SMF: 64.08","Sample: EHI00734<br>Species: Podarcis gaigeae<br>Region: Nifi<br>Sex: Female<br>SMF: 74.26","Sample: EHI02794<br>Species: Rattus lutreolus<br>Region: Lake Mackenzie Road, Tasmania<br>Sex: Female<br>SMF: 62.79","Sample: EHI02757<br>Species: Rattus lutreolus<br>Region: Mt Charter, Tasmania<br>Sex: Male<br>SMF: 62.95","Sample: EHI02791<br>Species: Rattus lutreolus<br>Region: Lake Mackenzie Road, Tasmania<br>Sex: Male<br>SMF: 67.8","Sample: EHI02842<br>Species: Rattus rattus<br>Region: Inglis River, Tasmania<br>Sex: Unknown<br>SMF: 67.04","Sample: EHI00250<br>Species: Lacerta viridis<br>Region: Sarajevo<br>Sex: Female<br>SMF: 78.45","Sample: EHI00716<br>Species: Podarcis muralis<br>Region: Colle di Sassa<br>Sex: Female<br>SMF: 68.29"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-42.02,57.19],"lng":[-123.51,148.28]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="sequencing-reads-statistics" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Sequencing reads statistics<a href="data-statistics.html#sequencing-reads-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb21-1"><a href="data-statistics.html#cb21-1" tabindex="-1"></a>sample_metadata <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a href="data-statistics.html#cb21-2" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Total=</span><span class="fu">sum</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>), </span>
-<span id="cb21-3"><a href="data-statistics.html#cb21-3" tabindex="-1"></a>              <span class="at">mean=</span><span class="fu">mean</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>),</span>
-<span id="cb21-4"><a href="data-statistics.html#cb21-4" tabindex="-1"></a>              <span class="at">sd=</span><span class="fu">sd</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-5"><a href="data-statistics.html#cb21-5" tabindex="-1"></a>    <span class="fu">unite</span>(<span class="st">&quot;Average&quot;</span>,mean, sd, <span class="at">sep =</span> <span class="st">&quot; ± &quot;</span>, <span class="at">remove =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-6"><a href="data-statistics.html#cb21-6" tabindex="-1"></a>    <span class="fu">tt</span>()</span></code></pre></div>
+<div id="filter-samples-with-high-host-data" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> filter samples with high host data<a href="data-statistics.html#filter-samples-with-high-host-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb21-1"><a href="data-statistics.html#cb21-1" tabindex="-1"></a>read_counts <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="data-statistics.html#cb21-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, sample_metadata<span class="sc">$</span>sample))) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="data-statistics.html#cb21-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">rowSums</span>(. <span class="sc">!=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="data-statistics.html#cb21-4" tabindex="-1"></a>  <span class="fu">select_if</span>(<span class="sc">~!</span><span class="fu">all</span>(. <span class="sc">==</span> <span class="dv">0</span>))</span>
+<span id="cb21-5"><a href="data-statistics.html#cb21-5" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="data-statistics.html#cb21-6" tabindex="-1"></a>genome_metadata <span class="ot">&lt;-</span> genome_metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb21-7"><a href="data-statistics.html#cb21-7" tabindex="-1"></a>  <span class="fu">semi_join</span>(., read_counts, <span class="at">by =</span> <span class="st">&quot;genome&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-8"><a href="data-statistics.html#cb21-8" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">match</span>(genome,read_counts<span class="sc">$</span>genome))</span>
+<span id="cb21-9"><a href="data-statistics.html#cb21-9" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="data-statistics.html#cb21-10" tabindex="-1"></a>genome_tree <span class="ot">&lt;-</span> <span class="fu">keep.tip</span>(genome_tree, <span class="at">tip=</span>genome_metadata<span class="sc">$</span>genome) <span class="co"># keep only MAG tips</span></span>
+<span id="cb21-11"><a href="data-statistics.html#cb21-11" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="data-statistics.html#cb21-12" tabindex="-1"></a><span class="co">#load(&quot;data/genome_gifts.Rdata&quot;)</span></span></code></pre></div>
+</div>
+<div id="sequencing-reads-statistics" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Sequencing reads statistics<a href="data-statistics.html#sequencing-reads-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb22-1"><a href="data-statistics.html#cb22-1" tabindex="-1"></a>sample_metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="data-statistics.html#cb22-2" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Total=</span><span class="fu">sum</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>), </span>
+<span id="cb22-3"><a href="data-statistics.html#cb22-3" tabindex="-1"></a>              <span class="at">mean=</span><span class="fu">mean</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb22-4"><a href="data-statistics.html#cb22-4" tabindex="-1"></a>              <span class="at">sd=</span><span class="fu">sd</span>(reads_post_fastp <span class="sc">*</span> <span class="dv">150</span> <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="data-statistics.html#cb22-5" tabindex="-1"></a>    <span class="fu">unite</span>(<span class="st">&quot;Average&quot;</span>,mean, sd, <span class="at">sep =</span> <span class="st">&quot; ± &quot;</span>, <span class="at">remove =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="data-statistics.html#cb22-6" tabindex="-1"></a>    <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_mrso0z7gmw1gois6ace6(i, j, css_id) {
-          var table = document.getElementById("tinytable_mrso0z7gmw1gois6ace6");
+      function styleCell_3ibe0ew5dww4me9fmj9j(i, j, css_id) {
+          var table = document.getElementById("tinytable_3ibe0ew5dww4me9fmj9j");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -282,7 +335,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_mrso0z7gmw1gois6ace6');
+        var table = document.getElementById('tinytable_3ibe0ew5dww4me9fmj9j');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -290,8 +343,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_mrso0z7gmw1gois6ace6(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_mrso0z7gmw1gois6ace6");
+      function spanCell_3ibe0ew5dww4me9fmj9j(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_3ibe0ew5dww4me9fmj9j");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -321,14 +374,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_f3jfme243wdjy4cmxvmj',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_b4vae5n5hgzv81q9uecw',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_mcn1fq6scys18i7zydn1',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_ealhdcu329f7svs1kait',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_mrso0z7gmw1gois6ace6(cell.i, cell.j, group.css_id);
+                  styleCell_3ibe0ew5dww4me9fmj9j(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -336,11 +389,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_f3jfme243wdjy4cmxvmj, .table th.tinytable_css_f3jfme243wdjy4cmxvmj { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_b4vae5n5hgzv81q9uecw, .table th.tinytable_css_b4vae5n5hgzv81q9uecw { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_mcn1fq6scys18i7zydn1, .table th.tinytable_css_mcn1fq6scys18i7zydn1 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_ealhdcu329f7svs1kait, .table th.tinytable_css_ealhdcu329f7svs1kait { border-bottom: solid #d3d8dc 0.1em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_mrso0z7gmw1gois6ace6" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_3ibe0ew5dww4me9fmj9j" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -359,30 +412,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
 <!-- hack to avoid NA insertion in last line -->
 </div>
-<div id="dna-fractions" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> DNA fractions<a href="data-statistics.html#dna-fractions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb22-1"><a href="data-statistics.html#cb22-1" tabindex="-1"></a>sequence_fractions <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="data-statistics.html#cb22-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>genome, <span class="at">names_to =</span> <span class="st">&quot;sample&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="data-statistics.html#cb22-3" tabindex="-1"></a>  <span class="fu">group_by</span>(sample) <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="data-statistics.html#cb22-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mags =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-5"><a href="data-statistics.html#cb22-5" tabindex="-1"></a>    <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-6"><a href="data-statistics.html#cb22-6" tabindex="-1"></a>    <span class="fu">select</span>(sample, mags, metagenomic_bases, host_bases, bases_lost_fastp_percent) <span class="sc">%&gt;%</span></span>
-<span id="cb22-7"><a href="data-statistics.html#cb22-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_bases =</span> mags<span class="sc">*</span><span class="dv">146</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-8"><a href="data-statistics.html#cb22-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">lowqual_bases =</span> ((metagenomic_bases<span class="sc">+</span>host_bases)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>bases_lost_fastp_percent))<span class="sc">-</span>(metagenomic_bases<span class="sc">+</span>host_bases)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-9"><a href="data-statistics.html#cb22-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">unmapped_bases =</span> metagenomic_bases <span class="sc">-</span> mags_bases) <span class="sc">%&gt;%</span></span>
-<span id="cb22-10"><a href="data-statistics.html#cb22-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">unmapped_bases =</span> <span class="fu">ifelse</span>(unmapped_bases <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>, unmapped_bases)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-11"><a href="data-statistics.html#cb22-11" tabindex="-1"></a>    <span class="fu">select</span>(sample, lowqual_bases, host_bases, unmapped_bases, mags_bases)</span>
-<span id="cb22-12"><a href="data-statistics.html#cb22-12" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="data-statistics.html#cb22-13" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb22-14"><a href="data-statistics.html#cb22-14" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>sample), <span class="sc">~</span>.<span class="sc">/</span><span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-15"><a href="data-statistics.html#cb22-15" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;Sample&quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Low quality&quot;</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">&quot;Mapped to host&quot;</span><span class="ot">=</span><span class="dv">3</span>, <span class="st">&quot;Unmapped&quot;</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">&quot;Mapped to MAGs&quot;</span><span class="ot">=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-16"><a href="data-statistics.html#cb22-16" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div id="dna-fractions" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> DNA fractions<a href="data-statistics.html#dna-fractions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb23-1"><a href="data-statistics.html#cb23-1" tabindex="-1"></a>sequence_fractions <span class="ot">&lt;-</span> read_counts <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="data-statistics.html#cb23-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>genome, <span class="at">names_to =</span> <span class="st">&quot;sample&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="data-statistics.html#cb23-3" tabindex="-1"></a>  <span class="fu">group_by</span>(sample) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="data-statistics.html#cb23-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mags =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="data-statistics.html#cb23-5" tabindex="-1"></a>    <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="data-statistics.html#cb23-6" tabindex="-1"></a>    <span class="fu">select</span>(sample, mags, metagenomic_bases, host_bases, bases_lost_fastp_percent) <span class="sc">%&gt;%</span></span>
+<span id="cb23-7"><a href="data-statistics.html#cb23-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_bases =</span> mags<span class="sc">*</span><span class="dv">146</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="data-statistics.html#cb23-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">lowqual_bases =</span> ((metagenomic_bases<span class="sc">+</span>host_bases)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>bases_lost_fastp_percent))<span class="sc">-</span>(metagenomic_bases<span class="sc">+</span>host_bases)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-9"><a href="data-statistics.html#cb23-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">unmapped_bases =</span> metagenomic_bases <span class="sc">-</span> mags_bases) <span class="sc">%&gt;%</span></span>
+<span id="cb23-10"><a href="data-statistics.html#cb23-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">unmapped_bases =</span> <span class="fu">ifelse</span>(unmapped_bases <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>, unmapped_bases)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-11"><a href="data-statistics.html#cb23-11" tabindex="-1"></a>    <span class="fu">select</span>(sample, lowqual_bases, host_bases, unmapped_bases, mags_bases)</span>
+<span id="cb23-12"><a href="data-statistics.html#cb23-12" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="data-statistics.html#cb23-13" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb23-14"><a href="data-statistics.html#cb23-14" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>sample), <span class="sc">~</span>.<span class="sc">/</span><span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-15"><a href="data-statistics.html#cb23-15" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;Sample&quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Low quality&quot;</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">&quot;Mapped to host&quot;</span><span class="ot">=</span><span class="dv">3</span>, <span class="st">&quot;Unmapped&quot;</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">&quot;Mapped to MAGs&quot;</span><span class="ot">=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-16"><a href="data-statistics.html#cb23-16" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_nopm0indkr6ka14e5jz0(i, j, css_id) {
-          var table = document.getElementById("tinytable_nopm0indkr6ka14e5jz0");
+      function styleCell_yp9rumju23hqwncv5b97(i, j, css_id) {
+          var table = document.getElementById("tinytable_yp9rumju23hqwncv5b97");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -392,7 +445,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_nopm0indkr6ka14e5jz0');
+        var table = document.getElementById('tinytable_yp9rumju23hqwncv5b97');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -400,8 +453,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_nopm0indkr6ka14e5jz0(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_nopm0indkr6ka14e5jz0");
+      function spanCell_yp9rumju23hqwncv5b97(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_yp9rumju23hqwncv5b97");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -431,14 +484,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_a8fnz5l67mifzc2qctkb',}, 
-          { positions: [ { i: 242, j: 0 }, { i: 242, j: 1 }, { i: 242, j: 2 }, { i: 242, j: 3 }, { i: 242, j: 4 },  ], css_id: 'tinytable_css_2ayqp2ai1pnmfqnhgrpe',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_utl59eyzwdtm9gcbtj8u',}, 
+          { positions: [ { i: 242, j: 0 }, { i: 242, j: 1 }, { i: 242, j: 2 }, { i: 242, j: 3 }, { i: 242, j: 4 },  ], css_id: 'tinytable_css_rd35gqmhqnofbb9ehk3r',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_nopm0indkr6ka14e5jz0(cell.i, cell.j, group.css_id);
+                  styleCell_yp9rumju23hqwncv5b97(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -446,11 +499,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_a8fnz5l67mifzc2qctkb, .table th.tinytable_css_a8fnz5l67mifzc2qctkb { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_2ayqp2ai1pnmfqnhgrpe, .table th.tinytable_css_2ayqp2ai1pnmfqnhgrpe { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_utl59eyzwdtm9gcbtj8u, .table th.tinytable_css_utl59eyzwdtm9gcbtj8u { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_rd35gqmhqnofbb9ehk3r, .table th.tinytable_css_rd35gqmhqnofbb9ehk3r { border-bottom: solid #d3d8dc 0.1em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_nopm0indkr6ka14e5jz0" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_yp9rumju23hqwncv5b97" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2161,17 +2214,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb23"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb23-1"><a href="data-statistics.html#cb23-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="data-statistics.html#cb23-2" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>sample), <span class="sc">~</span>.<span class="sc">/</span><span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="data-statistics.html#cb23-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;Sample&quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Low quality&quot;</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">&quot;Mapped to host&quot;</span><span class="ot">=</span><span class="dv">3</span>, <span class="st">&quot;Unmapped&quot;</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">&quot;Mapped to MAGs&quot;</span><span class="ot">=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-4"><a href="data-statistics.html#cb23-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-5"><a href="data-statistics.html#cb23-5" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb24-1"><a href="data-statistics.html#cb24-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="data-statistics.html#cb24-2" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>sample), <span class="sc">~</span>.<span class="sc">/</span><span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="data-statistics.html#cb24-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;Sample&quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Low quality&quot;</span><span class="ot">=</span><span class="dv">2</span>, <span class="st">&quot;Mapped to host&quot;</span><span class="ot">=</span><span class="dv">3</span>, <span class="st">&quot;Unmapped&quot;</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">&quot;Mapped to MAGs&quot;</span><span class="ot">=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="data-statistics.html#cb24-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="data-statistics.html#cb24-5" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<pre><code>Warning: There was 1 warning in `summarise()`.
+ℹ In argument: `across(where(is.numeric), mean, na.rm = TRUE)`.
+Caused by warning:
+! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+Supply arguments directly to `.fns` through an anonymous function instead.
+
+  # Previously
+  across(a:b, mean, na.rm = TRUE)
+
+  # Now
+  across(a:b, \(x) mean(x, na.rm = TRUE))</code></pre>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_pxkevv4ol447yioiriwp(i, j, css_id) {
-          var table = document.getElementById("tinytable_pxkevv4ol447yioiriwp");
+      function styleCell_q5jr4ll8grmwjg6ff80y(i, j, css_id) {
+          var table = document.getElementById("tinytable_q5jr4ll8grmwjg6ff80y");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2181,7 +2245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_pxkevv4ol447yioiriwp');
+        var table = document.getElementById('tinytable_q5jr4ll8grmwjg6ff80y');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2189,8 +2253,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_pxkevv4ol447yioiriwp(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_pxkevv4ol447yioiriwp");
+      function spanCell_q5jr4ll8grmwjg6ff80y(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_q5jr4ll8grmwjg6ff80y");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2220,14 +2284,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 }, { i: 1, j: 2 }, { i: 1, j: 3 },  ], css_id: 'tinytable_css_j1ezublnm8o7zqguk5gi',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_1zyvk1c3nrcstm6k6bo4',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 }, { i: 1, j: 2 }, { i: 1, j: 3 },  ], css_id: 'tinytable_css_rxgbrf3ok8ya9mc6lhwf',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_91tvhcp6s4x1ojbypx9q',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_pxkevv4ol447yioiriwp(cell.i, cell.j, group.css_id);
+                  styleCell_q5jr4ll8grmwjg6ff80y(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2235,11 +2299,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_j1ezublnm8o7zqguk5gi, .table th.tinytable_css_j1ezublnm8o7zqguk5gi { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_1zyvk1c3nrcstm6k6bo4, .table th.tinytable_css_1zyvk1c3nrcstm6k6bo4 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_rxgbrf3ok8ya9mc6lhwf, .table th.tinytable_css_rxgbrf3ok8ya9mc6lhwf { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_91tvhcp6s4x1ojbypx9q, .table th.tinytable_css_91tvhcp6s4x1ojbypx9q { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_pxkevv4ol447yioiriwp" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_q5jr4ll8grmwjg6ff80y" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2261,62 +2325,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb24"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb24-1"><a href="data-statistics.html#cb24-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="data-statistics.html#cb24-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;fraction&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="data-statistics.html#cb24-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">value =</span> value <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-4"><a href="data-statistics.html#cb24-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fraction =</span> <span class="fu">factor</span>(fraction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>, <span class="st">&quot;host_bases&quot;</span>, <span class="st">&quot;unmapped_bases&quot;</span>, <span class="st">&quot;mags_bases&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb24-5"><a href="data-statistics.html#cb24-5" tabindex="-1"></a>  </span>
-<span id="cb24-6"><a href="data-statistics.html#cb24-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value, <span class="at">fill=</span>fraction)) <span class="sc">+</span></span>
-<span id="cb24-7"><a href="data-statistics.html#cb24-7" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb24-8"><a href="data-statistics.html#cb24-8" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;Sequence type&quot;</span>,</span>
-<span id="cb24-9"><a href="data-statistics.html#cb24-9" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>,<span class="st">&quot;host_bases&quot;</span>,<span class="st">&quot;unmapped_bases&quot;</span>,<span class="st">&quot;mags_bases&quot;</span>),</span>
-<span id="cb24-10"><a href="data-statistics.html#cb24-10" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Low quality&quot;</span>,<span class="st">&quot;Mapped to host&quot;</span>,<span class="st">&quot;Unmapped&quot;</span>,<span class="st">&quot;Mapped to MAGs&quot;</span>),</span>
-<span id="cb24-11"><a href="data-statistics.html#cb24-11" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#CCCCCC&quot;</span>, <span class="st">&quot;#bcdee1&quot;</span>, <span class="st">&quot;#d8b8a3&quot;</span>,<span class="st">&quot;#93655c&quot;</span>))<span class="sc">+</span></span>
-<span id="cb24-12"><a href="data-statistics.html#cb24-12" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Amount of data (GB)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb24-13"><a href="data-statistics.html#cb24-13" tabindex="-1"></a>        <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb24-14"><a href="data-statistics.html#cb24-14" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb26-1"><a href="data-statistics.html#cb26-1" tabindex="-1"></a>sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="data-statistics.html#cb26-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;fraction&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="data-statistics.html#cb26-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">value =</span> value <span class="sc">/</span> <span class="dv">1000000000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="data-statistics.html#cb26-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fraction =</span> <span class="fu">factor</span>(fraction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>, <span class="st">&quot;host_bases&quot;</span>, <span class="st">&quot;unmapped_bases&quot;</span>, <span class="st">&quot;mags_bases&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="data-statistics.html#cb26-5" tabindex="-1"></a>  </span>
+<span id="cb26-6"><a href="data-statistics.html#cb26-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value, <span class="at">fill=</span>fraction)) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="data-statistics.html#cb26-7" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="data-statistics.html#cb26-8" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;Sequence type&quot;</span>,</span>
+<span id="cb26-9"><a href="data-statistics.html#cb26-9" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;lowqual_bases&quot;</span>,<span class="st">&quot;host_bases&quot;</span>,<span class="st">&quot;unmapped_bases&quot;</span>,<span class="st">&quot;mags_bases&quot;</span>),</span>
+<span id="cb26-10"><a href="data-statistics.html#cb26-10" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Low quality&quot;</span>,<span class="st">&quot;Mapped to host&quot;</span>,<span class="st">&quot;Unmapped&quot;</span>,<span class="st">&quot;Mapped to MAGs&quot;</span>),</span>
+<span id="cb26-11"><a href="data-statistics.html#cb26-11" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#CCCCCC&quot;</span>, <span class="st">&quot;#bcdee1&quot;</span>, <span class="st">&quot;#d8b8a3&quot;</span>,<span class="st">&quot;#93655c&quot;</span>))<span class="sc">+</span></span>
+<span id="cb26-12"><a href="data-statistics.html#cb26-12" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Amount of data (GB)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-13"><a href="data-statistics.html#cb26-13" tabindex="-1"></a>        <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb26-14"><a href="data-statistics.html#cb26-14" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/dna_fractions_plot-1.png" width="960" /></p>
 </div>
-<div id="recovered-microbial-fraction" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Recovered microbial fraction<a href="data-statistics.html#recovered-microbial-fraction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb25-1"><a href="data-statistics.html#cb25-1" tabindex="-1"></a>singlem_table <span class="ot">&lt;-</span> sequence_fractions <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="data-statistics.html#cb25-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">round</span>((mags_bases <span class="sc">/</span> (mags_bases <span class="sc">+</span> unmapped_bases))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="data-statistics.html#cb25-3" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample))  <span class="sc">%&gt;%</span></span>
-<span id="cb25-4"><a href="data-statistics.html#cb25-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">round</span>(singlem_fraction,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-5"><a href="data-statistics.html#cb25-5" tabindex="-1"></a>    <span class="fu">select</span>(sample,mags_proportion,singlem_proportion) <span class="sc">%&gt;%</span></span>
-<span id="cb25-6"><a href="data-statistics.html#cb25-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, mags_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
-<span id="cb25-7"><a href="data-statistics.html#cb25-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
-<span id="cb25-8"><a href="data-statistics.html#cb25-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&lt;</span> mags_proportion, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#if singlem is smaller, then NA, to simplify plot</span></span>
-<span id="cb25-9"><a href="data-statistics.html#cb25-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">100</span>, singlem_proportion)) <span class="co">#simplify</span></span>
-<span id="cb25-10"><a href="data-statistics.html#cb25-10" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="data-statistics.html#cb25-11" tabindex="-1"></a>singlem_table <span class="sc">%&gt;%</span></span>
-<span id="cb25-12"><a href="data-statistics.html#cb25-12" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;proportion&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-13"><a href="data-statistics.html#cb25-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">factor</span>(proportion, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb25-14"><a href="data-statistics.html#cb25-14" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> sample, <span class="at">color=</span>proportion)) <span class="sc">+</span></span>
-<span id="cb25-15"><a href="data-statistics.html#cb25-15" tabindex="-1"></a>            <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> sample), <span class="at">color =</span> <span class="st">&quot;#f8a538&quot;</span>) <span class="sc">+</span></span>
-<span id="cb25-16"><a href="data-statistics.html#cb25-16" tabindex="-1"></a>            <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb25-17"><a href="data-statistics.html#cb25-17" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="st">&quot;Proportion&quot;</span>,</span>
-<span id="cb25-18"><a href="data-statistics.html#cb25-18" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>),</span>
-<span id="cb25-19"><a href="data-statistics.html#cb25-19" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Recovered&quot;</span>,<span class="st">&quot;Estimated&quot;</span>),</span>
-<span id="cb25-20"><a href="data-statistics.html#cb25-20" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#52e1e8&quot;</span>, <span class="st">&quot;#876b53&quot;</span>))<span class="sc">+</span></span>
-<span id="cb25-21"><a href="data-statistics.html#cb25-21" tabindex="-1"></a>            <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb25-22"><a href="data-statistics.html#cb25-22" tabindex="-1"></a>            <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Prokaryotic fraction (%)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb25-23"><a href="data-statistics.html#cb25-23" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<div id="recovered-microbial-fraction" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Recovered microbial fraction<a href="data-statistics.html#recovered-microbial-fraction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb27-1"><a href="data-statistics.html#cb27-1" tabindex="-1"></a>singlem_table <span class="ot">&lt;-</span> sequence_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="data-statistics.html#cb27-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">round</span>((mags_bases <span class="sc">/</span> (mags_bases <span class="sc">+</span> unmapped_bases))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="data-statistics.html#cb27-3" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample))  <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="data-statistics.html#cb27-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">round</span>(singlem_fraction,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="data-statistics.html#cb27-5" tabindex="-1"></a>    <span class="fu">select</span>(sample,mags_proportion,singlem_proportion) <span class="sc">%&gt;%</span></span>
+<span id="cb27-6"><a href="data-statistics.html#cb27-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mags_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, mags_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
+<span id="cb27-7"><a href="data-statistics.html#cb27-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#convert zeros to NA</span></span>
+<span id="cb27-8"><a href="data-statistics.html#cb27-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&lt;</span> mags_proportion, <span class="cn">NA</span>, singlem_proportion)) <span class="sc">%&gt;%</span> <span class="co">#if singlem is smaller, then NA, to simplify plot</span></span>
+<span id="cb27-9"><a href="data-statistics.html#cb27-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">singlem_proportion =</span> <span class="fu">ifelse</span>(singlem_proportion <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="dv">100</span>, singlem_proportion)) <span class="co">#simplify</span></span>
+<span id="cb27-10"><a href="data-statistics.html#cb27-10" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="data-statistics.html#cb27-11" tabindex="-1"></a>singlem_table <span class="sc">%&gt;%</span></span>
+<span id="cb27-12"><a href="data-statistics.html#cb27-12" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>sample, <span class="at">names_to =</span> <span class="st">&quot;proportion&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-13"><a href="data-statistics.html#cb27-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">factor</span>(proportion, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb27-14"><a href="data-statistics.html#cb27-14" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> sample, <span class="at">color=</span>proportion)) <span class="sc">+</span></span>
+<span id="cb27-15"><a href="data-statistics.html#cb27-15" tabindex="-1"></a>            <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> sample), <span class="at">color =</span> <span class="st">&quot;#f8a538&quot;</span>) <span class="sc">+</span></span>
+<span id="cb27-16"><a href="data-statistics.html#cb27-16" tabindex="-1"></a>            <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb27-17"><a href="data-statistics.html#cb27-17" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="st">&quot;Proportion&quot;</span>,</span>
+<span id="cb27-18"><a href="data-statistics.html#cb27-18" tabindex="-1"></a>                    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;mags_proportion&quot;</span>,<span class="st">&quot;singlem_proportion&quot;</span>),</span>
+<span id="cb27-19"><a href="data-statistics.html#cb27-19" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Recovered&quot;</span>,<span class="st">&quot;Estimated&quot;</span>),</span>
+<span id="cb27-20"><a href="data-statistics.html#cb27-20" tabindex="-1"></a>                    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#52e1e8&quot;</span>, <span class="st">&quot;#876b53&quot;</span>))<span class="sc">+</span></span>
+<span id="cb27-21"><a href="data-statistics.html#cb27-21" tabindex="-1"></a>            <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb27-22"><a href="data-statistics.html#cb27-22" tabindex="-1"></a>            <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Samples&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Prokaryotic fraction (%)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb27-23"><a href="data-statistics.html#cb27-23" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">6</span>),<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/data_estimations_plot-1.png" width="960" /></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb26-1"><a href="data-statistics.html#cb26-1" tabindex="-1"></a>damr <span class="ot">&lt;-</span> singlem_table <span class="sc">%&gt;%</span></span>
-<span id="cb26-2"><a href="data-statistics.html#cb26-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">damr=</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(singlem_proportion),<span class="dv">100</span>,mags_proportion<span class="sc">/</span>singlem_proportion<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="data-statistics.html#cb26-3" tabindex="-1"></a>  <span class="fu">select</span>(sample,damr)</span>
-<span id="cb26-4"><a href="data-statistics.html#cb26-4" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="data-statistics.html#cb26-5" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb26-6"><a href="data-statistics.html#cb26-6" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-7"><a href="data-statistics.html#cb26-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-8"><a href="data-statistics.html#cb26-8" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb28-1"><a href="data-statistics.html#cb28-1" tabindex="-1"></a>damr <span class="ot">&lt;-</span> singlem_table <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="data-statistics.html#cb28-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">damr=</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(singlem_proportion),<span class="dv">100</span>,mags_proportion<span class="sc">/</span>singlem_proportion<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="data-statistics.html#cb28-3" tabindex="-1"></a>  <span class="fu">select</span>(sample,damr)</span>
+<span id="cb28-4"><a href="data-statistics.html#cb28-4" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="data-statistics.html#cb28-5" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb28-6"><a href="data-statistics.html#cb28-6" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-7"><a href="data-statistics.html#cb28-7" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-8"><a href="data-statistics.html#cb28-8" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_flftbu7sqxey7j4f81yo(i, j, css_id) {
-          var table = document.getElementById("tinytable_flftbu7sqxey7j4f81yo");
+      function styleCell_j113pe21qs3ekig9a5tv(i, j, css_id) {
+          var table = document.getElementById("tinytable_j113pe21qs3ekig9a5tv");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2326,7 +2390,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_flftbu7sqxey7j4f81yo');
+        var table = document.getElementById('tinytable_j113pe21qs3ekig9a5tv');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2334,8 +2398,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_flftbu7sqxey7j4f81yo(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_flftbu7sqxey7j4f81yo");
+      function spanCell_j113pe21qs3ekig9a5tv(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_j113pe21qs3ekig9a5tv");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2365,14 +2429,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_xdthhpe46rgs6nf7atb4',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_3n9kw1vdsxu5m6je4ff9',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_pa5qzjub21pvqkq7kz1e',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_dko6ol85wbohz83tpawa',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_flftbu7sqxey7j4f81yo(cell.i, cell.j, group.css_id);
+                  styleCell_j113pe21qs3ekig9a5tv(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2380,11 +2444,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_xdthhpe46rgs6nf7atb4, .table th.tinytable_css_xdthhpe46rgs6nf7atb4 { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_3n9kw1vdsxu5m6je4ff9, .table th.tinytable_css_3n9kw1vdsxu5m6je4ff9 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_pa5qzjub21pvqkq7kz1e, .table th.tinytable_css_pa5qzjub21pvqkq7kz1e { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_dko6ol85wbohz83tpawa, .table th.tinytable_css_dko6ol85wbohz83tpawa { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_flftbu7sqxey7j4f81yo" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_j113pe21qs3ekig9a5tv" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2402,16 +2466,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb27"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb27-1"><a href="data-statistics.html#cb27-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a href="data-statistics.html#cb27-2" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="data-statistics.html#cb27-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-4"><a href="data-statistics.html#cb27-4" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb29-1"><a href="data-statistics.html#cb29-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="data-statistics.html#cb29-2" tabindex="-1"></a>  <span class="fu">left_join</span>(sample_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(sample <span class="sc">==</span> sample)) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="data-statistics.html#cb29-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-4"><a href="data-statistics.html#cb29-4" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_rm4vaxjjh62owsd4em1v(i, j, css_id) {
-          var table = document.getElementById("tinytable_rm4vaxjjh62owsd4em1v");
+      function styleCell_r55ztg38fbmz7otnug99(i, j, css_id) {
+          var table = document.getElementById("tinytable_r55ztg38fbmz7otnug99");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2421,7 +2485,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_rm4vaxjjh62owsd4em1v');
+        var table = document.getElementById('tinytable_r55ztg38fbmz7otnug99');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2429,8 +2493,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_rm4vaxjjh62owsd4em1v(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_rm4vaxjjh62owsd4em1v");
+      function spanCell_r55ztg38fbmz7otnug99(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_r55ztg38fbmz7otnug99");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2460,14 +2524,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_pu4usfssydx54ki4l6hc',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_bfzy3q8qbqudu0v2vj5k',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_awq6hv714d3hd9jt9t2z',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_70e1gxs9935wa4dvgxqc',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_rm4vaxjjh62owsd4em1v(cell.i, cell.j, group.css_id);
+                  styleCell_r55ztg38fbmz7otnug99(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2475,11 +2539,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_pu4usfssydx54ki4l6hc, .table th.tinytable_css_pu4usfssydx54ki4l6hc { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_bfzy3q8qbqudu0v2vj5k, .table th.tinytable_css_bfzy3q8qbqudu0v2vj5k { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_awq6hv714d3hd9jt9t2z, .table th.tinytable_css_awq6hv714d3hd9jt9t2z { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_70e1gxs9935wa4dvgxqc, .table th.tinytable_css_70e1gxs9935wa4dvgxqc { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_rm4vaxjjh62owsd4em1v" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_r55ztg38fbmz7otnug99" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -2497,14 +2561,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb28"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb28-1"><a href="data-statistics.html#cb28-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb28-2"><a href="data-statistics.html#cb28-2" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb30-1"><a href="data-statistics.html#cb30-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="data-statistics.html#cb30-2" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_iy6v9qjt8g8rt5sco93g(i, j, css_id) {
-          var table = document.getElementById("tinytable_iy6v9qjt8g8rt5sco93g");
+      function styleCell_159z2lzrzbsfjf4t1aal(i, j, css_id) {
+          var table = document.getElementById("tinytable_159z2lzrzbsfjf4t1aal");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -2514,7 +2578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_iy6v9qjt8g8rt5sco93g');
+        var table = document.getElementById('tinytable_159z2lzrzbsfjf4t1aal');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2522,8 +2586,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_iy6v9qjt8g8rt5sco93g(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_iy6v9qjt8g8rt5sco93g");
+      function spanCell_159z2lzrzbsfjf4t1aal(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_159z2lzrzbsfjf4t1aal");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2553,14 +2617,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 242, j: 0 }, { i: 242, j: 1 },  ], css_id: 'tinytable_css_id30x8xcxbsq6w7un3r8',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_8h6savelywg66igkzcuy',}, 
+          { positions: [ { i: 242, j: 0 }, { i: 242, j: 1 },  ], css_id: 'tinytable_css_e0vd94w5r4ou9kzwiw2i',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_3sg4bp71m909g5alz09o',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_iy6v9qjt8g8rt5sco93g(cell.i, cell.j, group.css_id);
+                  styleCell_159z2lzrzbsfjf4t1aal(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2568,11 +2632,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_id30x8xcxbsq6w7un3r8, .table th.tinytable_css_id30x8xcxbsq6w7un3r8 { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_8h6savelywg66igkzcuy, .table th.tinytable_css_8h6savelywg66igkzcuy { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_e0vd94w5r4ou9kzwiw2i, .table th.tinytable_css_e0vd94w5r4ou9kzwiw2i { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_3sg4bp71m909g5alz09o, .table th.tinytable_css_3sg4bp71m909g5alz09o { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_iy6v9qjt8g8rt5sco93g" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_159z2lzrzbsfjf4t1aal" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>
@@ -3554,19 +3618,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </table>
     </div>
 <!-- hack to avoid NA insertion in last line -->
-<div class="sourceCode" id="cb29"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb29-1"><a href="data-statistics.html#cb29-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb29-2"><a href="data-statistics.html#cb29-2" tabindex="-1"></a>  <span class="fu">filter</span>(damr<span class="sc">&gt;</span><span class="dv">95</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb29-3"><a href="data-statistics.html#cb29-3" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
-<pre class="script-output"><code>[1] 145</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb31-1"><a href="data-statistics.html#cb31-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
-<span id="cb31-2"><a href="data-statistics.html#cb31-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-3"><a href="data-statistics.html#cb31-3" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
+<span id="cb31-2"><a href="data-statistics.html#cb31-2" tabindex="-1"></a>  <span class="fu">filter</span>(damr<span class="sc">&gt;</span><span class="dv">95</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="data-statistics.html#cb31-3" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
+<pre class="script-output"><code>[1] 145</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r script-source"><code class="sourceCode r"><span id="cb33-1"><a href="data-statistics.html#cb33-1" tabindex="-1"></a>damr <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="data-statistics.html#cb33-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(damr),<span class="at">sd=</span><span class="fu">sd</span>(damr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="data-statistics.html#cb33-3" tabindex="-1"></a>  <span class="fu">tt</span>()</span></code></pre></div>
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_cue9z2yma59fy0noxwp0(i, j, css_id) {
-          var table = document.getElementById("tinytable_cue9z2yma59fy0noxwp0");
+      function styleCell_9dsbrpai5puva9n3c85v(i, j, css_id) {
+          var table = document.getElementById("tinytable_9dsbrpai5puva9n3c85v");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -3576,7 +3640,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_cue9z2yma59fy0noxwp0');
+        var table = document.getElementById('tinytable_9dsbrpai5puva9n3c85v');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -3584,8 +3648,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_cue9z2yma59fy0noxwp0(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_cue9z2yma59fy0noxwp0");
+      function spanCell_9dsbrpai5puva9n3c85v(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_9dsbrpai5puva9n3c85v");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -3615,14 +3679,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_xnxe9h01mc5qwe7rf47g',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_kalonpsfg98h5nfd1ats',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_uw7vuc5q5idtzsbo7ta8',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_kevvol7uyvni1gj1iyo4',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_cue9z2yma59fy0noxwp0(cell.i, cell.j, group.css_id);
+                  styleCell_9dsbrpai5puva9n3c85v(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -3630,11 +3694,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_xnxe9h01mc5qwe7rf47g, .table th.tinytable_css_xnxe9h01mc5qwe7rf47g { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_kalonpsfg98h5nfd1ats, .table th.tinytable_css_kalonpsfg98h5nfd1ats { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_uw7vuc5q5idtzsbo7ta8, .table th.tinytable_css_uw7vuc5q5idtzsbo7ta8 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_kevvol7uyvni1gj1iyo4, .table th.tinytable_css_kevvol7uyvni1gj1iyo4 { border-bottom: solid #d3d8dc 0.1em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_cue9z2yma59fy0noxwp0" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_9dsbrpai5puva9n3c85v" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>

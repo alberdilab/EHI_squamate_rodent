@@ -24,7 +24,7 @@
 <meta name="author" content="Antton Alberdi" />
 
 
-<meta name="date" content="2025-02-12" />
+<meta name="date" content="2025-02-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,10 +53,17 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 <script src="libs/plotly-binding-4.10.4/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
@@ -179,10 +186,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-statistics.html"><a href="data-statistics.html"><i class="fa fa-check"></i><b>3</b> Data statistics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-statistics.html"><a href="data-statistics.html#filter-samples-with-high-host-data"><i class="fa fa-check"></i><b>3.1</b> filter samples with high host data</a></li>
-<li class="chapter" data-level="3.2" data-path="data-statistics.html"><a href="data-statistics.html#sequencing-reads-statistics"><i class="fa fa-check"></i><b>3.2</b> Sequencing reads statistics</a></li>
-<li class="chapter" data-level="3.3" data-path="data-statistics.html"><a href="data-statistics.html#dna-fractions"><i class="fa fa-check"></i><b>3.3</b> DNA fractions</a></li>
-<li class="chapter" data-level="3.4" data-path="data-statistics.html"><a href="data-statistics.html#recovered-microbial-fraction"><i class="fa fa-check"></i><b>3.4</b> Recovered microbial fraction</a></li>
+<li class="chapter" data-level="3.1" data-path="data-statistics.html"><a href="data-statistics.html#interactive-map-of-samples"><i class="fa fa-check"></i><b>3.1</b> Interactive map of samples</a></li>
+<li class="chapter" data-level="3.2" data-path="data-statistics.html"><a href="data-statistics.html#filter-samples-with-high-host-data"><i class="fa fa-check"></i><b>3.2</b> filter samples with high host data</a></li>
+<li class="chapter" data-level="3.3" data-path="data-statistics.html"><a href="data-statistics.html#sequencing-reads-statistics"><i class="fa fa-check"></i><b>3.3</b> Sequencing reads statistics</a></li>
+<li class="chapter" data-level="3.4" data-path="data-statistics.html"><a href="data-statistics.html#dna-fractions"><i class="fa fa-check"></i><b>3.4</b> DNA fractions</a></li>
+<li class="chapter" data-level="3.5" data-path="data-statistics.html"><a href="data-statistics.html#recovered-microbial-fraction"><i class="fa fa-check"></i><b>3.5</b> Recovered microbial fraction</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mag-catalogue.html"><a href="mag-catalogue.html"><i class="fa fa-check"></i><b>4</b> MAG catalogue</a>
 <ul>
@@ -314,8 +322,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <script>
 
-      function styleCell_2ujg4syk2hpx2q707efz(i, j, css_id) {
-          var table = document.getElementById("tinytable_2ujg4syk2hpx2q707efz");
+      function styleCell_re2s0vb4tc5lmwkqayhu(i, j, css_id) {
+          var table = document.getElementById("tinytable_re2s0vb4tc5lmwkqayhu");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -325,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_2ujg4syk2hpx2q707efz');
+        var table = document.getElementById('tinytable_re2s0vb4tc5lmwkqayhu');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -333,8 +341,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_2ujg4syk2hpx2q707efz(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_2ujg4syk2hpx2q707efz");
+      function spanCell_re2s0vb4tc5lmwkqayhu(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_re2s0vb4tc5lmwkqayhu");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -364,14 +372,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 7, j: 0 }, { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 7, j: 3 }, { i: 7, j: 4 }, { i: 7, j: 5 }, { i: 7, j: 12 }, { i: 7, j: 6 }, { i: 7, j: 13 }, { i: 7, j: 7 }, { i: 7, j: 14 }, { i: 7, j: 8 }, { i: 7, j: 15 }, { i: 7, j: 9 }, { i: 7, j: 16 }, { i: 7, j: 10 }, { i: 7, j: 17 }, { i: 7, j: 11 }, { i: 7, j: 18 },  ], css_id: 'tinytable_css_jrgjev7gccxplkqlqryn',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 7 }, { i: 0, j: 1 }, { i: 0, j: 8 }, { i: 0, j: 2 }, { i: 0, j: 9 }, { i: 0, j: 3 }, { i: 0, j: 10 }, { i: 0, j: 4 }, { i: 0, j: 11 }, { i: 0, j: 5 }, { i: 0, j: 12 }, { i: 0, j: 6 }, { i: 0, j: 13 }, { i: 0, j: 14 }, { i: 0, j: 15 }, { i: 0, j: 16 }, { i: 0, j: 17 }, { i: 0, j: 18 },  ], css_id: 'tinytable_css_aglfnymp3htta0rk6bbi',}, 
+          { positions: [ { i: 7, j: 0 }, { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 7, j: 3 }, { i: 7, j: 4 }, { i: 7, j: 5 }, { i: 7, j: 12 }, { i: 7, j: 6 }, { i: 7, j: 13 }, { i: 7, j: 7 }, { i: 7, j: 14 }, { i: 7, j: 8 }, { i: 7, j: 15 }, { i: 7, j: 9 }, { i: 7, j: 16 }, { i: 7, j: 10 }, { i: 7, j: 17 }, { i: 7, j: 11 }, { i: 7, j: 18 },  ], css_id: 'tinytable_css_3gf0y5sg8o72qt1ju6qb',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 7 }, { i: 0, j: 1 }, { i: 0, j: 8 }, { i: 0, j: 2 }, { i: 0, j: 9 }, { i: 0, j: 3 }, { i: 0, j: 10 }, { i: 0, j: 4 }, { i: 0, j: 11 }, { i: 0, j: 5 }, { i: 0, j: 12 }, { i: 0, j: 6 }, { i: 0, j: 13 }, { i: 0, j: 14 }, { i: 0, j: 15 }, { i: 0, j: 16 }, { i: 0, j: 17 }, { i: 0, j: 18 },  ], css_id: 'tinytable_css_31v21pux2gujmlb4eibm',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_2ujg4syk2hpx2q707efz(cell.i, cell.j, group.css_id);
+                  styleCell_re2s0vb4tc5lmwkqayhu(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -379,11 +387,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_jrgjev7gccxplkqlqryn, .table th.tinytable_css_jrgjev7gccxplkqlqryn { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_aglfnymp3htta0rk6bbi, .table th.tinytable_css_aglfnymp3htta0rk6bbi { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_3gf0y5sg8o72qt1ju6qb, .table th.tinytable_css_3gf0y5sg8o72qt1ju6qb { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_31v21pux2gujmlb4eibm, .table th.tinytable_css_31v21pux2gujmlb4eibm { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_2ujg4syk2hpx2q707efz" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_re2s0vb4tc5lmwkqayhu" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         
               <tr>

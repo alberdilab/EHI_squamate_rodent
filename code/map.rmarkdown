@@ -15,7 +15,13 @@ format:
 editor: visual
 ---
 
+
+
+
 ## Load required data and packages
+
+
+
 
 ```{r}
 #| message: false
@@ -39,7 +45,13 @@ load("../data/data.Rdata")
 
 ```
 
+
+
+
 ## Map plot
+
+
+
 
 ```{r}
 #| message: false
@@ -74,3 +86,4 @@ leaflet(metadata) %>%
 
 
 ```
+
